@@ -4,7 +4,8 @@ import socket, pickle
 class Network:
     def __init__(self):
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.server = socket.gethostname()  # Gets the ipv4 address
+        self.server = socket.gethostbyname('John-Yu')  # Gets the ipv4 address
+        print(self.server)
         self.port = 5555
         self.addr = (self.server, self.port)
 

@@ -43,5 +43,4 @@ while run:
             run = False
     clock.tick(FPS)  # Pause the game until the FPS time is reached
     pygame.display.update()  # Updates the display
-    #pygame.display.flip() also updates the display
 pygame.quit()
