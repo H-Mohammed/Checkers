@@ -5,6 +5,7 @@ Date: 2019-04-08
 '''
 
 import pygame
+from Network import *
 
 pygame.init()  # Loads the pygame modules in the program
 
@@ -28,6 +29,10 @@ window = pygame.display.set_mode(SCREEN_DIMENSION)  # Creates the main surface w
 pygame.display.set_caption(TITLE)  # Updates the window title with TITLE
 window.fill(GREY)  # Fills the entire surface with the color
 clock = pygame.time.Clock()  # Starts a clock object to measure time
+
+# Network #
+network = Network()
+local_client_information = network.Make_Connection()
 
 # --- Code Starts Here --- #
 run = True
