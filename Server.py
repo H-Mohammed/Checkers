@@ -3,11 +3,11 @@ from Network import *
 
 n = Network()
 server = n.getServer()  # Set server to local IPv4 Address
-port = 5555
+port = 65432
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
-    s.bind((server, port))
+    s.bind(('127.0.0.1', port))
 except socket.error as e:
     print(e)
 

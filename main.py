@@ -10,7 +10,7 @@ from Network import *
 pygame.init()  # Loads the pygame modules in the program
 
 # Display Variables
-TITLE = 'Hello World'  # Appears in the window title
+TITLE = 'Checkers'  # Appears in the window title
 FPS = 60  # Frames per second
 WIDTH = 800
 HEIGHT = 600
