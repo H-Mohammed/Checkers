@@ -6,7 +6,8 @@ Date: 2019-04-08
 
 import pygame
 from Network import *
-from Classes import *
+from Objects import *
+from Containers import *
 
 pygame.init()  # Loads the pygame modules in the program
 
@@ -35,8 +36,7 @@ clock = pygame.time.Clock()  # Starts a clock object to measure time
 #network = Network()
 #local_client_information = network.Make_Connection()
 
-# Sprites #
-test = Checker(window, (255, 0, 0), (50, 50))
+test = Board(window)
 
 # --- Code Starts Here --- #
 run = True
