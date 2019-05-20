@@ -14,14 +14,11 @@ class Objects:  # This is the parent class used to make any objects
 class Checker(Objects):  # This is used to make the checker pieces
     def __init__(self, surface, color, pos):
         super().__init__(surface, color, pos)
-        self.radius1 = 30  # Radius of larger circle
-        self.radius2 = 25
-        pygame.draw.circle(self.surface, self.color, self.pos, self.radius1)
-        pygame.draw.circle(self.surface, (150, 0, 0), self.pos, self.radius2)
+        self.radius1 = 30
+        pygame.draw.circle(self.surface, self.color, (self.x + 30, self.y + 30), self.radius1)
 
     def draw(self):
-        pygame.draw.circle(self.surface, self.color, self.pos, self.radius1)
-        pygame.draw.circle(self.surface, (150, 0, 0), self.pos, self.radius2)
+        pygame.draw.circle(self.surface, self.color, (self.x + 30, self.y + 30), self.radius1)
 
 
 class Square(Objects):  # This is used to make the board

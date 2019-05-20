@@ -7,8 +7,6 @@
  - window
     - This is the main display where all of our assets are placed
 ## Classes
- - Board
-    - This is used to make the checker board
  - Checker
     - Use this to make checker pieces
  - Container
@@ -17,5 +15,7 @@
     - This class is responsible for all the networking
  - Objects 
     - The parent class used to make any items
+ - Player
+    - Stores pieces
  - Square
     - Use this to make the squares for the board
