@@ -36,6 +36,7 @@ clock = pygame.time.Clock()  # Starts a clock object to measure time
 network = Network()
 local_client_information = network.Make_Connection()
 data = network.send_and_receive('Hello World')
+print(data)
 
 # Build the Checker Board #
 checkerBoard = Container()
