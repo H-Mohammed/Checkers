@@ -17,19 +17,19 @@ s.listen(2)
 
 # functions #
 def ThreatedClient(conn, player):
-    conn.send(pickle.dumps(info[player]))  # Send the starting positions of pieces to client
+    #conn.send(pickle.dumps(info[player]))  # Send the starting positions of pieces to client
     while True:
         try:
             new_data = pickle.loads(conn.recv(2048))  # Get new positions made by the client
-            info[player] = new_data
+            #info[player] = new_data
             if not new_data:
                 print('Disconnected...')
                 break
-            else:
-                if player == 0:
-                    reply = pickle.dumps(info[1])  # Return Black Data
-                else:
-                    reply = pickle.dumps(info[0])
+            #else:
+                #if player == 0:
+                    #reply = pickle.dumps(info[1])  # Return Black Data
+                #else:
+                    #reply = pickle.dumps(info[0])
 
             conn.sendall(reply)  # Send reply to clients
         except:
@@ -44,5 +44,5 @@ while True:
     c, address = s.accept()  # Accepts connection from client
     print('Connected to:', address)
 
-    #start_new_thread(ThreatedClient, (c, current_player))
+    start_new_thread(ThreatedClient, (c, current_player))
     current_player += 1
