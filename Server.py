@@ -33,7 +33,7 @@ def ThreatedClient(conn, player):
                 else:
                     reply = pickle.dumps('This is Pi')
 
-            conn.sendall(pickle.dumps(reply))  # Send reply to clients
+            conn.sendall(reply)  # Send reply to clients
         except:
             break
 
