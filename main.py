@@ -66,9 +66,11 @@ while run:
             run = False
     mousePressed = pygame.mouse.get_pressed()
     
+    
     checkerBoard.draw()
     white.draw()
     black.draw()
+    white.CheckMousePos(pygame.mouse.get_pos(),mousePressed,black)
     clock.tick(FPS)  # Pause the game until the FPS time is reached
     pygame.display.update()  # Updates the display
 pygame.quit()

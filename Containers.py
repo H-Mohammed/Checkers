@@ -20,8 +20,8 @@ class Container:  # Parent class for all objects that aggregate other objects
     def CheckMousePos(self,MousePos,MousePressed,enemy):
         for item in self.list:
             if item.getX() <= MousePos[0] <=  item.getX()+item.getWidth() and item.getY() <= MousePos[1] <= item.getY()+item.getHeight():
-                if MousePressed[pygame.MOUSEBUTTONDOWN] == 1:
-                    item.posMovement(self.list,enemy)
+                if MousePressed[0] == 1:
+                    item.posMovement(self.list,enemy.getList())
 
                 
 

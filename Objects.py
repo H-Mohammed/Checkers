@@ -36,14 +36,25 @@ class Checker(Objects):  # This is used to make the checker pieces
         for item in pieces:
             if not item.getX() == self.getX()+60:
                 if not item.getY() == self.getY()+60:
-                    pass
-                if not item.getY() == self.getY()+60:
-                    pass
+                    Star('media/Star.png',(self.getX()+60,self.getY()+60))
+                if not item.getY() == self.getY()-60:
+                    Star('media/Star.png',(self.getX()+60,self.getY()-60)).draw()
             if not item.getX() == self.getX()-60:
                 if not item.getY() == self.getY()+60:
-                    pass
-                if not item.getY() == self.getY()+60:
-                    pass
+                    return Star('media/Star.png',(self.getX()-60,self.getY()+60))
+                if not item.getY() == self.getY()-60:
+                    Star('media/Star.png',(self.getX()-60,self.getY()-60)).draw()
+        for item in enemy:
+            if item.getX() == self.getX()+60:
+                if item.getY() == self.getY()+60:
+                    Star('media/Star.png',(self.getX()+120,self.getY()+120))
+                if item.getY() == self.getY()-60:
+                    Star('media/Star.png',(self.getX()+120,self.getY()-120))
+            if item.getX() == self.getX()-60:
+                if item.getY() == self.getY()+60:
+                    Star('media/Star.png',(self.getX()-120,self.getY()+120))
+                if item.getY() == self.getY()-60:
+                    Star('media/Star.png',(self.getX()-120,self.getY()-120))
             
                 
 
@@ -59,3 +70,12 @@ class Square(Objects):  # This is used to make the board
 
     def draw(self):
         pygame.draw.rect(self.surface, self.color, self.rect)
+
+class Star(Objects):
+    def __init__(self, fileName,pos):
+        super().__init__(pygame.image.load(fileName).convert_alpha(),0,pos)
+        self.fileName = fileName
+        self.pos = pos
+    
+    def draw(self):
+        return 
