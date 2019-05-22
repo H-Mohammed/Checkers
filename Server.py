@@ -18,6 +18,7 @@ s.listen(2)
 # functions #
 def ThreatedClient(conn, player):
     #conn.send(pickle.dumps(info[player]))  # Send the starting positions of pieces to client
+    conn.send(pickle.dumps('Connection Established'))
     while True:
         try:
             new_data = pickle.loads(conn.recv(2048))  # Get new positions made by the client
