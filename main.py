@@ -35,6 +35,7 @@ clock = pygame.time.Clock()  # Starts a clock object to measure time
 # Network #
 network = Network()
 local_client_information = network.Make_Connection()
+print(local_client_information)
 data = network.send_and_receive('Hello World')
 print(data)
 
