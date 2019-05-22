@@ -36,13 +36,24 @@ class Checker(Objects):  # This is used to make the checker pieces
         for item in pieces:
             if not item.getX() == self.getX()+60:
                 if not item.getY() == self.getY()+60:
-            
-                if not item.getY() == self.getY()+60:
+                    
+                if not item.getY() == self.getY()-60:
             
             if not item.getX() == self.getX()-60:
                 if not item.getY() == self.getY()+60:
                     
-                if not item.getY() == self.getY()+60:
+                if not item.getY() == self.getY()-60:
+            
+        for item in enemy:
+            if item.getX() == self.getX()+60:
+                if item.getY() == self.getY()+60:
+                    
+                if item.getY() == self.getY()-60:
+            
+            if item.getX() == self.getX()-60:
+                if item.getY() == self.getY()+60:
+                    
+                if item.getY() == self.getY()-60:
             
             
                 
@@ -59,3 +70,7 @@ class Square(Objects):  # This is used to make the board
 
     def draw(self):
         pygame.draw.rect(self.surface, self.color, self.rect)
+
+class Star(Objects):
+    def __init__(self, fileName,pos):
+        super().__init__(pygame.image.load(fileName).convert_alpha(),0,pos)
