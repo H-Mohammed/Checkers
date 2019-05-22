@@ -36,14 +36,14 @@ class Checker(Objects):  # This is used to make the checker pieces
         for item in pieces:
             if not item.getX() == self.getX()+60:
                 if not item.getY() == self.getY()+60:
-            
+                    pass
                 if not item.getY() == self.getY()+60:
-            
+                    pass
             if not item.getX() == self.getX()-60:
                 if not item.getY() == self.getY()+60:
-                    
+                    pass
                 if not item.getY() == self.getY()+60:
-            
+                    pass
             
                 
 
