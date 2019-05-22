@@ -9,16 +9,43 @@ class Objects:  # This is the parent class used to make any objects
         self.surface = surface
         self.x = pos[0]
         self.y = pos[1]
+    
+    def getX(self):
+        return self.x
+    
+    def getY(self):
+        return self.y
 
 
 class Checker(Objects):  # This is used to make the checker pieces
     def __init__(self, surface, color, pos):
         super().__init__(surface, color, pos)
-        self.radius1 = 30
-        pygame.draw.circle(self.surface, self.color, (self.x + 30, self.y + 30), self.radius1)
+        self.radius = 30
+        pygame.draw.circle(self.surface, self.color, (self.x + 30, self.y + 30), self.radius)
 
     def draw(self):
-        pygame.draw.circle(self.surface, self.color, (self.x + 30, self.y + 30), self.radius1)
+        pygame.draw.circle(self.surface, self.color, (self.x + 30, self.y + 30), self.radius)
+    
+    def getHeight(self):
+        return self.radius*2
+    
+    def getWidth(self):
+        return self.radius*2
+    
+    def posMovement(self,pieces,enemy):
+        for item in pieces:
+            if not item.getX() == self.getX()+60:
+                if not item.getY() == self.getY()+60:
+            
+                if not item.getY() == self.getY()+60:
+            
+            if not item.getX() == self.getX()-60:
+                if not item.getY() == self.getY()+60:
+                    
+                if not item.getY() == self.getY()+60:
+            
+            
+                
 
 
 class Square(Objects):  # This is used to make the board
