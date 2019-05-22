@@ -32,29 +32,38 @@ class Checker(Objects):  # This is used to make the checker pieces
     def getWidth(self):
         return self.radius*2
     
-    def posMovement(self,pieces,enemy):
+    def posMovement(self, pieces, enemy):
+        star = Star(self.surface, 'media/Star.png', (0, 0))  # Create the star
         for item in pieces:
             if not item.getX() == self.getX()+60:
                 if not item.getY() == self.getY()+60:
-                    Star('media/Star.png',(self.getX()+60,self.getY()+60))
+                    star.setPos((self.getX() + 60, self.getY() + 60))
+                    star.draw()
                 if not item.getY() == self.getY()-60:
-                    Star('media/Star.png',(self.getX()+60,self.getY()-60)).draw()
+                    star.setPos((self.getX() + 60, self.getY() - 60))
+                    star.draw()
             if not item.getX() == self.getX()-60:
                 if not item.getY() == self.getY()+60:
-                    return Star('media/Star.png',(self.getX()-60,self.getY()+60))
+                    star.setPos((self.getX() - 60, self.getY() + 60))
+                    star.draw()
                 if not item.getY() == self.getY()-60:
-                    Star('media/Star.png',(self.getX()-60,self.getY()-60)).draw()
+                    star.setPos((self.getX()-60,self.getY()-60))
+                    star.draw()
         for item in enemy:
             if item.getX() == self.getX()+60:
                 if item.getY() == self.getY()+60:
-                    Star('media/Star.png',(self.getX()+120,self.getY()+120))
+                    star.setPos((self.getX()+120,self.getY()+120))
+                    star.draw()
                 if item.getY() == self.getY()-60:
-                    Star('media/Star.png',(self.getX()+120,self.getY()-120))
+                    star.setPos((self.getX()+120,self.getY()-120))
+                    star.draw()
             if item.getX() == self.getX()-60:
                 if item.getY() == self.getY()+60:
-                    Star('media/Star.png',(self.getX()-120,self.getY()+120))
+                    star.setPos((self.getX()-120,self.getY()+120))
+                    star.draw()
                 if item.getY() == self.getY()-60:
-                    Star('media/Star.png',(self.getX()-120,self.getY()-120))
+                    star.setPos((self.getX()-120,self.getY()-120))
+                    star.draw()
             
                 
 
@@ -72,10 +81,13 @@ class Square(Objects):  # This is used to make the board
         pygame.draw.rect(self.surface, self.color, self.rect)
 
 class Star(Objects):
-    def __init__(self, fileName,pos):
-        super().__init__(pygame.image.load(fileName).convert_alpha(),0,pos)
-        self.fileName = fileName
+    def __init__(self, window, fileName, pos):
+        super().__init__(window, (0, 0, 0), pos)
+        self.sprite = pygame.image.load(fileName).convert_alpha()
         self.pos = pos
     
     def draw(self):
-        return 
+        self.surface.blit(self.sprite, self.pos)
+
+    def setPos(self, pos):
+        self.pos = pos
