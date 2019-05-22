@@ -2,7 +2,6 @@ from _thread import *
 from Network import *
 
 n = Network()
-server = n.getServer()  # Set server to local IPv4 Address
 port = 65432
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
