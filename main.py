@@ -33,8 +33,8 @@ window.fill(GREY)  # Fills the entire surface with the color
 clock = pygame.time.Clock()  # Starts a clock object to measure time
 
 # Network #
-#network = Network()
-#local_client_information = network.Make_Connection()
+network = Network()
+local_client_information = network.Make_Connection()
 
 # Build the Checker Board #
 checkerBoard = Container()
@@ -64,6 +64,8 @@ while run:
     for event in pygame.event.get():  # Returns all inputs and triggers into an array
         if event.type == pygame.QUIT:  # If the red X was clicked
             run = False
+    mousePressed = pygame.mouse.get_pressed()
+    
     checkerBoard.draw()
     white.draw()
     black.draw()

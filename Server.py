@@ -2,15 +2,14 @@ from _thread import *
 from Network import *
 
 n = Network()
-server = n.getServer()  # Set server to local IPv4 Address
-port = 65432
+server = n.getServer()
+port = 5555
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
     s.bind(('127.0.0.1', port))
 except socket.error as e:
     print(e)
-
 s.listen(2)
 
 # Starter Info #
@@ -45,5 +44,5 @@ while True:
     c, address = s.accept()  # Accepts connection from client
     print('Connected to:', address)
 
-    start_new_thread(ThreatedClient, (c, current_player))
+    #start_new_thread(ThreatedClient, (c, current_player))
     current_player += 1
