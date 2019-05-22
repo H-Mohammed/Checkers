@@ -6,11 +6,13 @@ Date: 2019-04-08
 
 import pygame
 from Network import *
+from Objects import *
+from Containers import *
 
 pygame.init()  # Loads the pygame modules in the program
 
 # Display Variables
-TITLE = 'Hello World'  # Appears in the window title
+TITLE = 'Checkers'  # Appears in the window title
 FPS = 60  # Frames per second
 WIDTH = 800
 HEIGHT = 600
@@ -31,8 +33,29 @@ window.fill(GREY)  # Fills the entire surface with the color
 clock = pygame.time.Clock()  # Starts a clock object to measure time
 
 # Network #
-network = Network()
-local_client_information = network.Make_Connection()
+#network = Network()
+#local_client_information = network.Make_Connection()
+
+# Build the Checker Board #
+checkerBoard = Container()
+for y in range(8):
+    for x in range(8):
+        if (x + y) % 2 == 0:
+            checkerBoard.add(Square(window, (255, 222, 173), (x * 60, y * 60), (60, 60)))
+        else:
+            checkerBoard.add(Square(window, (139, 69, 19), (x * 60, y * 60), (60, 60)))
+
+# Initial Setup for White #
+white = Container()
+for y in range(3):
+    for x in range(4):
+        white.add(Checker(window, (255, 255, 255), (((y % 2) * 60) + x * 120, 300 + (60 * y))))
+
+# Initial Setup for Black #
+black = Container()
+for y in range(3):
+    for x in range(4):
+        black.add(Checker(window, (0, 0, 0), ((((y + 1) % 2) * 60) + x * 120, 60 * y)))
 
 # --- Code Starts Here --- #
 run = True
@@ -41,6 +64,9 @@ while run:
     for event in pygame.event.get():  # Returns all inputs and triggers into an array
         if event.type == pygame.QUIT:  # If the red X was clicked
             run = False
+    checkerBoard.draw()
+    white.draw()
+    black.draw()
     clock.tick(FPS)  # Pause the game until the FPS time is reached
     pygame.display.update()  # Updates the display
 pygame.quit()
