@@ -3,7 +3,7 @@ from Network import *
 
 n = Network()
 server = n.getServer()
-port = 65432
+port = 5555
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
