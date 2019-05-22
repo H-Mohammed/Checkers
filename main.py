@@ -64,6 +64,8 @@ while run:
     for event in pygame.event.get():  # Returns all inputs and triggers into an array
         if event.type == pygame.QUIT:  # If the red X was clicked
             run = False
+    mousePressed = pygame.mouse.get_pressed()
+    
     checkerBoard.draw()
     white.draw()
     black.draw()
