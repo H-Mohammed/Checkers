@@ -33,30 +33,37 @@ class Checker(Objects):  # This is used to make the checker pieces
         return self.radius*2
     
     def posMovement(self, pieces, enemy):
-        Star(self.surface, 'media/Star.png', (0, 0))  # Create the star
+        star = Star(self.surface, 'media/Star.png', (0, 0))  # Create the star
         for item in pieces:
             if not item.getX() == self.getX()+60:
                 if not item.getY() == self.getY()+60:
-                    Star.setPos((self.getX() + 60, self.getY() + 60))
-                    Star.draw()
+                    star.setPos((self.getX() + 60, self.getY() + 60))
+                    star.draw()
                 if not item.getY() == self.getY()-60:
-                    Star('media/Star.png',(self.getX()+60,self.getY()-60)).draw()
+                    star.setPos((self.getX() + 60, self.getY() - 60))
+                    star.draw()
             if not item.getX() == self.getX()-60:
                 if not item.getY() == self.getY()+60:
-                    return Star('media/Star.png',(self.getX()-60,self.getY()+60))
+                    star.setPos((self.getX() - 60, self.getY() + 60))
+                    star.draw()
                 if not item.getY() == self.getY()-60:
-                    Star('media/Star.png',(self.getX()-60,self.getY()-60)).draw()
+                    star.setPos((self.getX()-60,self.getY()-60))
+                    star.draw()
         for item in enemy:
             if item.getX() == self.getX()+60:
                 if item.getY() == self.getY()+60:
-                    Star('media/Star.png',(self.getX()+120,self.getY()+120))
+                    star.setPos((self.getX()+120,self.getY()+120))
+                    star.draw()
                 if item.getY() == self.getY()-60:
-                    Star('media/Star.png',(self.getX()+120,self.getY()-120))
+                    star.setPos((self.getX()+120,self.getY()-120))
+                    star.draw()
             if item.getX() == self.getX()-60:
                 if item.getY() == self.getY()+60:
-                    Star('media/Star.png',(self.getX()-120,self.getY()+120))
+                    star.setPos((self.getX()-120,self.getY()+120))
+                    star.draw()
                 if item.getY() == self.getY()-60:
-                    Star('media/Star.png',(self.getX()-120,self.getY()-120))
+                    star.setPos((self.getX()-120,self.getY()-120))
+                    star.draw()
             
                 
 
