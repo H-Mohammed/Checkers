@@ -22,17 +22,18 @@ def ThreatedClient(conn, player):
     while True:
         try:
             new_data = pickle.loads(conn.recv(2048))  # Get new positions made by the client
+            print(new_data)
             #info[player] = new_data
             if not new_data:
                 print('Disconnected...')
                 break
-            #else:
-                #if player == 0:
-                    #reply = pickle.dumps(info[1])  # Return Black Data
-                #else:
-                    #reply = pickle.dumps(info[0])
+            else:
+                if player == 0:
+                    reply = pickle.dumps('This is John')  # Return Black Data
+                else:
+                    reply = pickle.dumps('This is Pi')
 
-            conn.sendall(new_data)  # Send reply to clients
+            conn.sendall(pickle.dumps(reply))  # Send reply to clients
         except:
             break
 
