@@ -12,12 +12,11 @@ class Network:
         return self.server
 
     def Make_Connection(self):
-        while True:
-            try:
-                self.client.connect(self.addr)  # Connect the client to the server
-                return pickle.loads(self.client.recv(2048))  # Return the initial info of pieces
-            except socket.error as e:
-                print(e)
+        try:
+            self.client.connect(self.addr)  # Connect the client to the server
+            return pickle.loads(self.client.recv(2048))  # Return the initial info of pieces
+        except socket.error as e:
+            print(e)
 
     def send_and_receive(self, data):
         try:
