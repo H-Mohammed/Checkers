@@ -25,12 +25,12 @@ class Player(Container):  # Stores pieces
 
     def check_mouse_pos(self, mouse_pos, mouse_pressed, enemy):
         try:
-            self.selection.pos_movement(self.list, enemy.get_list())
+            self.selection.pos_movement(self.list, enemy.get_list(),mouse_pos,mouse_pressed)
         except AttributeError:
             pass
         for item in self.list:
             if item.getx() <= mouse_pos[0] <= item.getx() + item.get_width() and item.gety() <= mouse_pos[1] <= item.gety() + item.get_height():
                 if mouse_pressed[0] == 1:
                     self.selection = item
-                    item.pos_movement(self.list, enemy.get_list())
+                    item.pos_movement(self.list, enemy.get_list(),mouse_pos,mouse_pressed)
 
