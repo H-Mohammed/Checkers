@@ -3,10 +3,13 @@ import socket
 import pickle
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-try:
-    s.bind(('', 5555))
-except socket.error as e:
-    print(e)
+while True:
+    try:
+        s.bind(('', 5555))
+        break
+    except socket.error as e:
+        print(e)
+
 s.listen(2)
 
 # Starter Info #

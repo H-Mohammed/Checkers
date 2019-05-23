@@ -8,7 +8,7 @@ You can play the game against a computer or another player.
  - You can only move diagonally one step forwards, never backwards (with the exception of the king).
  - You can only move onto black spaces.
  - You must capture a piece if you can.
-    - To capture a piece, you make two steps diagonally instead of one and the space beyond the target must be _unoccupied._
+    - To capture a piece, you make two steps diagonally instead of one and the space beyond the target must be __unoccupied.__
     - Upon capturing a piece, you receive an extra move with the piece that you captured with, allowing consecutive captures.
  - Upon reaching the opposite side of the board with a piece, you are able to crown that piece to be king.
     - Kings can move both backwards and forwards diagonally.
