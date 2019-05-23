@@ -35,5 +35,7 @@ You can play the game against a computer or another player.
     - The parent class used to make any items
  - Player
     - Stores pieces
+ - Star
+    - Use this to make the star which indicates where the player can move
  - Square
     - Use this to make the squares for the board
