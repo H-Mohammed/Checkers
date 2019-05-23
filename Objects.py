@@ -124,6 +124,10 @@ class Checker(Objects):  # This is used to make the checker pieces
         if top_right == 2:
             star.set_pos((self.getx() + 120, self.gety() - 120))
             star.draw()
+            if self.getx()+120 <= mouse_pos[0] <= self.getx()+180 and self.gety()-120 <= mouse_pos[1] <= self.gety()-60:
+                if mouse_pressed[0] == 1:
+                    self.setPos((self.getx()+120,self.gety()-120))
+                    self.draw()
         if bottom_left == 2:
             star.set_pos((self.getx() - 120, self.gety() + 120))
             star.draw()
