@@ -1,13 +1,10 @@
 from _thread import *
-from Network import *
-
-n = Network()
-server = n.getServer()
-port = 5555
+import socket
+import pickle
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
-    s.bind(('', port))
+    s.bind(('', 5555))
 except socket.error as e:
     print(e)
 s.listen(2)
