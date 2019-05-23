@@ -35,34 +35,34 @@ class Checker(Objects):  # This is used to make the checker pieces
     def pos_movement(self, pieces, enemy):
         star = Star(self.surface, 'media/Star.png', (0, 0))  # Create the star
         for item in pieces:
-            if not item.getX() == self.getx()+60:
-                if not item.getY() == self.gety()+60:
+            if not item.getx() == self.getx()+60:
+                if not item.gety() == self.gety()+60:
                     star.set_pos((self.getx() + 60, self.gety() + 60))
                     star.draw()
-                if not item.getY() == self.gety()-60:
+                if not item.gety() == self.gety()-60:
                     star.set_pos((self.getx() + 60, self.gety() - 60))
                     star.draw()
-            if not item.getX() == self.getx()-60:
-                if not item.getY() == self.gety()+60:
+            if not item.getx() == self.getx()-60:
+                if not item.gety() == self.gety()+60:
                     star.set_pos((self.getx() - 60, self.gety() + 60))
                     star.draw()
-                if not item.getY() == self.gety()-60:
-                    star.set_pos((self.getx()-60,self.gety()-60))
+                if not item.gety() == self.gety()-60:
+                    star.set_pos((self.getx()-60, self.gety()-60))
                     star.draw()
         for item in enemy:
-            if item.getX() == self.getx()+60:
-                if item.getY() == self.gety()+60:
-                    star.set_pos((self.getx()+120,self.gety()+120))
+            if item.getx() == self.getx()+60:
+                if item.gety() == self.gety()+60:
+                    star.set_pos((self.getx()+120, self.gety()+120))
                     star.draw()
-                if item.getY() == self.gety()-60:
-                    star.set_pos((self.getx()+120,self.gety()-120))
+                if item.gety() == self.gety()-60:
+                    star.set_pos((self.getx()+120, self.gety()-120))
                     star.draw()
-            if item.getX() == self.getx()-60:
-                if item.getY() == self.gety()+60:
-                    star.set_pos((self.getx()-120,self.gety()+120))
+            if item.getx() == self.getx()-60:
+                if item.gety() == self.gety()+60:
+                    star.set_pos((self.getx()-120, self.gety()+120))
                     star.draw()
-                if item.getY() == self.gety()-60:
-                    star.set_pos((self.getx()-120,self.gety()-120))
+                if item.gety() == self.gety()-60:
+                    star.set_pos((self.getx()-120, self.gety()-120))
                     star.draw()
             
 
