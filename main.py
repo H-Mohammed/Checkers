@@ -49,13 +49,13 @@ for y in range(8):
             checkerBoard.add(Square(window, (139, 69, 19), (x * 60, y * 60), (60, 60)))
 
 # Initial Setup for White #
-white = Container()
+white = Player()
 for y in range(3):
     for x in range(4):
         white.add(Checker(window, (255, 255, 255), (((y % 2) * 60) + x * 120, 300 + (60 * y))))
 
 # Initial Setup for Black #
-black = Container()
+black = Player()
 for y in range(3):
     for x in range(4):
         black.add(Checker(window, (0, 0, 0), ((((y + 1) % 2) * 60) + x * 120, 60 * y)))
@@ -68,12 +68,11 @@ while run:
         if event.type == pygame.QUIT:  # If the red X was clicked
             run = False
     mousePressed = pygame.mouse.get_pressed()
-    
-    
+
     checkerBoard.draw()
     white.draw()
     black.draw()
-    white.CheckMousePos(pygame.mouse.get_pos(),mousePressed,black)
+    white.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, black)
     clock.tick(FPS)  # Pause the game until the FPS time is reached
     pygame.display.update()  # Updates the display
 pygame.quit()

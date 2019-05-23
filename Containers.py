@@ -14,19 +14,18 @@ class Container:  # Parent class for all objects that aggregate other objects
         for item in self.list:
             item.draw()
     
-    def getList(self):
+    def get_list(self):
         return self.list
-    
-    def CheckMousePos(self,MousePos,MousePressed,enemy):
-        for item in self.list:
-            if item.getX() <= MousePos[0] <=  item.getX()+item.getWidth() and item.getY() <= MousePos[1] <= item.getY()+item.getHeight():
-                if MousePressed[0] == 1:
-                    item.posMovement(self.list,enemy.getList())
-
-                
 
 
 class Player(Container):  # Stores pieces
     def __init__(self):
         super().__init__()
+        self.selection = ''  # Stores the selected piece
+
+    def check_mouse_pos(self, mouse_pos, mouse_pressed, enemy):
+        for item in self.list:
+            if item.getX() <= mouse_pos[0] <= item.getX() + item.getWidth() and item.getY() <= mouse_pos[1] <= item.getY() + item.getHeight():
+                if mouse_pressed[0] == 1:
+                    item.posMovement(self.list, enemy.getList())
 
