@@ -17,6 +17,15 @@ You can play the game against a computer or another player.
     - You must still be able to make a move afterwards however, you cannot get yourself stuck.
     - The game ends in a draw if either sides can't force a win.
 
+## Development to-do list:
+ - [ ] Crowning
+ - [X] Piece Movement
+ - [X] Capturing
+    - [ ] Ensured capturing system
+ - [ ] Two player multiplayer
+    - [ ] Swapping the board
+ - [ ] A.I player
+
 ## Variables 
  - HEIGHT
     - The height of the display
