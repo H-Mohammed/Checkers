@@ -22,6 +22,7 @@ class Checker(Objects):  # This is used to make the checker pieces
         super().__init__(surface, color, pos)
         self.radius = 30
         pygame.draw.circle(self.surface, self.color, (self.x + 30, self.y + 30), self.radius)
+        self.crown = 0
 
     def draw(self):
         pygame.draw.circle(self.surface, self.color, (self.x + 30, self.y + 30), self.radius)
