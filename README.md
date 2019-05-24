@@ -29,8 +29,12 @@ You can play the game against a computer or another player.
 ## Variables 
  - checkerBoard
     - Represents the checkerboard object
+ - enemy
+    - Represents the object that stores the enemy pieces
  - HEIGHT
     - The height of the display
+ - local
+    -Represents the object that stores the local pieces
  - turn
     - Represents the player turn
     - 1 denotes YOUR turn
