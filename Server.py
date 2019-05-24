@@ -40,5 +40,5 @@ while True:
     c, address = s.accept()  # Accepts connection from client
     print('Connected to:', address)
 
-    start_new_thread(threaded_client(c, current_player))
+    start_new_thread(threaded_client, (c, current_player))
     current_player += 1
