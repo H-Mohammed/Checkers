@@ -35,7 +35,6 @@ class Player(Container):  # Stores pieces
         if self.test == 1:
             return self.selection.pos_movement(self.list, enemy.get_list(),mouse_pos,mouse_pressed)
 
-
     def set_selection(self, var):
         self.selection = var
 
