@@ -32,12 +32,14 @@ pygame.display.set_caption(TITLE)  # Updates the window title with TITLE
 window.fill(GREY)  # Fills the entire surface with the color
 clock = pygame.time.Clock()  # Starts a clock object to measure time
 
+'''
 # Network #
 network = Network()
 local_client_information = network.make_connection()
 print(local_client_information)
 data = network.send_and_receive('Hello World')
 print(data)
+'''
 
 # Build the Checker Board #
 checkerBoard = Container()
@@ -75,10 +77,14 @@ while run:
     if turn == 1:
         if white.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, black) == 1:
             turn = 2
+            white.set_selection('')
+            white.set_test(0)
         
     if turn == 2:
         if black.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, white) == 1:
             turn = 1
+            black.set_selection('')
+            black.set_test(0)
         
     clock.tick(FPS)  # Pause the game until the FPS time is reached
     pygame.display.update()  # Updates the display
