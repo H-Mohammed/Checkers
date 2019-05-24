@@ -31,14 +31,16 @@ window = pygame.display.set_mode(SCREEN_DIMENSION)  # Creates the main surface w
 pygame.display.set_caption(TITLE)  # Updates the window title with TITLE
 window.fill(GREY)  # Fills the entire surface with the color
 clock = pygame.time.Clock()  # Starts a clock object to measure time
+
 '''
 # Network #
 network = Network()
-local_client_information = network.Make_Connection()
+local_client_information = network.make_connection()
 print(local_client_information)
 data = network.send_and_receive('Hello World')
 print(data)
 '''
+
 # Build the Checker Board #
 checkerBoard = Container()
 for y in range(8):
@@ -62,7 +64,7 @@ for y in range(3):
 
 # --- Code Starts Here --- #
 run = True
-
+turn = 1
 while run:
     for event in pygame.event.get():  # Returns all inputs and triggers into an array
         if event.type == pygame.QUIT:  # If the red X was clicked
@@ -72,7 +74,18 @@ while run:
     checkerBoard.draw()
     white.draw()
     black.draw()
-    white.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, black)
+    if turn == 1:
+        if white.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, black) == 1:
+            turn = 2
+            white.set_selection('')
+            white.set_test(0)
+        
+    if turn == 2:
+        if black.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, white) == 1:
+            turn = 1
+            black.set_selection('')
+            black.set_test(0)
+        
     clock.tick(FPS)  # Pause the game until the FPS time is reached
     pygame.display.update()  # Updates the display
 pygame.quit()
