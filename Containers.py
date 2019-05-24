@@ -23,6 +23,7 @@ class Player(Container):  # Stores pieces
         super().__init__()
         self.selection = ''  # Stores the selected piece
         self.test = 0
+
     def check_mouse_pos(self, mouse_pos, mouse_pressed, enemy):
         for item in self.list:
             if item.getx() <= mouse_pos[0] <= item.getx() + item.get_width() and item.gety() <= mouse_pos[1] <= item.gety() + item.get_height():
