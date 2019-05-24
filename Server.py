@@ -27,7 +27,7 @@ def threaded_client(conn, player):
                     reply = pickle.dumps('This is Pi')
 
             conn.sendall(reply)  # Send reply to clients
-        except:
+        except socket.error:
             break
 
     print('Connection Lost ... ')

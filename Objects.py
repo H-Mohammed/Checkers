@@ -88,8 +88,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                 if item.gety() == self.gety() - 120:
                     if item.getx() == self.getx() + 120:
                         top_right = 3
-            
-        
+
         if top_left == 0:
             star.set_pos((self.getx() - 60, self.gety() - 60))
             star.draw()
@@ -175,10 +174,6 @@ class Checker(Objects):  # This is used to make the checker pieces
                     del star
                     return 1
         
-                    
-
-
-            
 
 class Square(Objects):  # This is used to make the board
     def __init__(self, surface, color, pos, size):
