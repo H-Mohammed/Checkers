@@ -104,14 +104,14 @@ class Checker(Objects):  # This is used to make the checker pieces
             star.draw()
             if self.getx()-60 <= mouse_pos[0] <= self.getx() and self.gety()+60 <= mouse_pos[1] <= self.gety()+120:
                 if mouse_pressed[0] == 1:
-                    self.setPos((self.getx()-60,self.gety()-60))
+                    self.setPos((self.getx()-60,self.gety()+60))
                     self.draw()
         if bottom_right == 0:
             star.set_pos((self.getx() + 60, self.gety() + 60))
             star.draw()
             if self.getx()+60 <= mouse_pos[0] <= self.getx()+120 and self.gety()+60 <= mouse_pos[1] <= self.gety()+120:
                 if mouse_pressed[0] == 1:
-                    self.setPos((self.getx()+60,self.gety()-60))
+                    self.setPos((self.getx()+60,self.gety()+60))
                     self.draw()
         
         if top_left == 2:
@@ -131,9 +131,17 @@ class Checker(Objects):  # This is used to make the checker pieces
         if bottom_left == 2:
             star.set_pos((self.getx() - 120, self.gety() + 120))
             star.draw()
+            if self.getx()-120 <= mouse_pos[0] <= self.getx()-60 and self.gety()+120 <= mouse_pos[1] <= self.gety()+180:
+                if mouse_pressed[0] == 1:
+                    self.setPos((self.getx()-120,self.gety()+120))
+                    self.draw()
         if bottom_right == 2:
             star.set_pos((self.getx() + 120, self.gety() + 120))
             star.draw()
+            if self.getx()+120 <= mouse_pos[0] <= self.getx()+180 and self.gety()+120 <= mouse_pos[1] <= self.gety()+180:
+                if mouse_pressed[0] == 1:
+                    self.setPos((self.getx()+120,self.gety()+120))
+                    self.draw()
 
             
 
