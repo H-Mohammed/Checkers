@@ -10,18 +10,12 @@ except socket.error as e:
 
 s.listen(2)
 
-# Starter Info #
-
-
 # functions #
 def ThreatedClient(conn, player):
-    #conn.send(pickle.dumps(info[player]))  # Send the starting positions of pieces to client
-    conn.send(pickle.dumps('Connection Established'))
+    conn.send(pickle.dumps(player))
     while True:
         try:
             new_data = pickle.loads(conn.recv(2048))  # Get new positions made by the client
-            #print(new_data)
-            #info[player] = new_data
             if not new_data:
                 print('Disconnected...')
                 break
@@ -39,7 +33,7 @@ def ThreatedClient(conn, player):
     conn.close()
 
 # Thread Starts Here #
-current_player = 0
+current_player = 1
 while True:
     c, address = s.accept()  # Accepts connection from client
     print('Connected to:', address)
