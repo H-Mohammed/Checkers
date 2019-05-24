@@ -58,14 +58,18 @@ class Checker(Objects):  # This is used to make the checker pieces
             if item.gety() == self.gety() + 60:
                 if item.getx() == self.getx() + 60:
                     bottom_right = 2
+                    enemy1 = item
                         
                 if item.getx() == self.getx() - 60:
                     bottom_left = 2
+                    enemy2 = item
             if item.gety() == self.gety() - 60:
                 if item.getx() == self.getx() + 60:
                     top_right = 2
+                    enemy3 = item
                 if item.getx() == self.getx() - 60:
                     top_left = 2
+                    enemy4 = item
         for item in enemy:
             if bottom_right == 2:
                 if item.gety() == self.gety() + 120:
@@ -92,6 +96,8 @@ class Checker(Objects):  # This is used to make the checker pieces
                 if mouse_pressed[0] == 1:
                     self.setPos((self.getx()-60,self.gety()-60))
                     self.draw()
+                    del star
+                    return 1
         if top_right == 0:
             star.set_pos((self.getx() + 60, self.gety() - 60))
             star.draw()
@@ -99,6 +105,8 @@ class Checker(Objects):  # This is used to make the checker pieces
                 if mouse_pressed[0] == 1:
                     self.setPos((self.getx()+60,self.gety()-60))
                     self.draw()
+                    del star
+                    return 1
         if bottom_left == 0:
             star.set_pos((self.getx() - 60, self.gety() + 60))
             star.draw()
@@ -106,6 +114,8 @@ class Checker(Objects):  # This is used to make the checker pieces
                 if mouse_pressed[0] == 1:
                     self.setPos((self.getx()-60,self.gety()+60))
                     self.draw()
+                    del star
+                    return 1
         if bottom_right == 0:
             star.set_pos((self.getx() + 60, self.gety() + 60))
             star.draw()
@@ -113,6 +123,8 @@ class Checker(Objects):  # This is used to make the checker pieces
                 if mouse_pressed[0] == 1:
                     self.setPos((self.getx()+60,self.gety()+60))
                     self.draw()
+                    del star
+                    return 1
         
         if top_left == 2:
             star.set_pos((self.getx() - 120, self.gety() - 120))
@@ -121,6 +133,11 @@ class Checker(Objects):  # This is used to make the checker pieces
                 if mouse_pressed[0] == 1:
                     self.setPos((self.getx()-120,self.gety()-120))
                     self.draw()
+                    
+                    enemy.pop(enemy.index(enemy4))
+                    del enemy4
+                    del star
+                    return 1
         if top_right == 2:
             star.set_pos((self.getx() + 120, self.gety() - 120))
             star.draw()
@@ -128,6 +145,11 @@ class Checker(Objects):  # This is used to make the checker pieces
                 if mouse_pressed[0] == 1:
                     self.setPos((self.getx()+120,self.gety()-120))
                     self.draw()
+                    
+                    enemy.pop(enemy.index(enemy3))
+                    del enemy3
+                    del star
+                    return 1
         if bottom_left == 2:
             star.set_pos((self.getx() - 120, self.gety() + 120))
             star.draw()
@@ -135,6 +157,11 @@ class Checker(Objects):  # This is used to make the checker pieces
                 if mouse_pressed[0] == 1:
                     self.setPos((self.getx()-120,self.gety()+120))
                     self.draw()
+                    
+                    enemy.pop(enemy.index(enemy2))
+                    del enemy2
+                    del star
+                    return 1
         if bottom_right == 2:
             star.set_pos((self.getx() + 120, self.gety() + 120))
             star.draw()
@@ -142,6 +169,13 @@ class Checker(Objects):  # This is used to make the checker pieces
                 if mouse_pressed[0] == 1:
                     self.setPos((self.getx()+120,self.gety()+120))
                     self.draw()
+                    enemy.pop(enemy.index(enemy1))
+                    del enemy1
+                    del star
+                    return 1
+        
+                    
+
 
             
 

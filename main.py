@@ -62,7 +62,7 @@ for y in range(3):
 
 # --- Code Starts Here --- #
 run = True
-
+turn = 1
 while run:
     for event in pygame.event.get():  # Returns all inputs and triggers into an array
         if event.type == pygame.QUIT:  # If the red X was clicked
@@ -72,7 +72,14 @@ while run:
     checkerBoard.draw()
     white.draw()
     black.draw()
-    white.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, black)
+    if turn == 1:
+        if white.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, black) == 1:
+            turn = 2
+        
+    if turn == 2:
+        if black.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, white) == 1:
+            turn = 1
+        
     clock.tick(FPS)  # Pause the game until the FPS time is reached
     pygame.display.update()  # Updates the display
 pygame.quit()
