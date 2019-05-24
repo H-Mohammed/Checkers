@@ -8,10 +8,7 @@ class Network:
         self.port = 5555
         self.addr = (self.server, self.port)
 
-    def getServer(self):
-        return self.server
-
-    def Make_Connection(self):
+    def make_connection(self):
         try:
             self.client.connect(self.addr)  # Connect the client to the server
             return pickle.loads(self.client.recv(2048))  # Return the initial info of pieces

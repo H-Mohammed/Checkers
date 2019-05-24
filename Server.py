@@ -20,7 +20,7 @@ def ThreatedClient(conn, player):
     while True:
         try:
             new_data = pickle.loads(conn.recv(2048))  # Get new positions made by the client
-            print(new_data)
+            #print(new_data)
             #info[player] = new_data
             if not new_data:
                 print('Disconnected...')
