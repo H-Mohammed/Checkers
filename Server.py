@@ -10,9 +10,10 @@ except socket.error as e:
 
 s.listen(2)
 
+
 # functions #
-def ThreatedClient(conn, player):
-    conn.send(pickle.dumps(player))
+def threaded_client(conn, player):
+    conn.send(pickle.dumps(player))  # Sends the player id to the client
     while True:
         try:
             new_data = pickle.loads(conn.recv(2048))  # Get new positions made by the client
@@ -20,7 +21,7 @@ def ThreatedClient(conn, player):
                 print('Disconnected...')
                 break
             else:
-                if player == 0:
+                if player == 1:
                     reply = pickle.dumps('This is John')  # Return Black Data
                 else:
                     reply = pickle.dumps('This is Pi')
@@ -32,11 +33,12 @@ def ThreatedClient(conn, player):
     print('Connection Lost ... ')
     conn.close()
 
+
 # Thread Starts Here #
 current_player = 1
 while True:
     c, address = s.accept()  # Accepts connection from client
     print('Connected to:', address)
 
-    start_new_thread(ThreatedClient, (c, current_player))
+    start_new_thread(threaded_client(c, current_player))
     current_player += 1

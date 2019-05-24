@@ -27,8 +27,14 @@ You can play the game against a computer or another player.
  - [ ] A.I player
 
 ## Variables 
+ - checkerBoard
+    - Represents the checkerboard object
  - HEIGHT
     - The height of the display
+ - turn
+    - Represents the player turn
+    - 1 denotes YOUR turn
+    - 2 denotes ENEMY turn
  - WIDTH
     - The width of the display
  - window

@@ -35,8 +35,8 @@ clock = pygame.time.Clock()  # Starts a clock object to measure time
 
 # Network #
 network = Network()
-local_client_information = network.make_connection()
-print(local_client_information)
+turn = network.make_connection()
+print(turn)
 data = network.send_and_receive('Hello World')
 print(data)
 
@@ -64,7 +64,6 @@ for y in range(3):
 
 # --- Code Starts Here --- #
 run = True
-turn = 1
 while run:
     for event in pygame.event.get():  # Returns all inputs and triggers into an array
         if event.type == pygame.QUIT:  # If the red X was clicked
