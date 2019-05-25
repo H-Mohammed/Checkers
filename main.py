@@ -34,14 +34,14 @@ pygame.display.set_caption(TITLE)  # Updates the window title with TITLE
 window.fill(color[3])  # Fills the entire surface with the color
 clock = pygame.time.Clock()  # Starts a clock object to measure time
 
-'''
+
 # Network #
 network = Network()
 player = network.make_connection()
 print(player)
 data = network.send_and_receive('Hello World')
 print(data)
-'''
+
 
 # Build the Checker Board #
 checkerBoard = Container()
@@ -73,6 +73,7 @@ while run:
             run = False
     mousePressed = pygame.mouse.get_pressed()
 
+    window.fill(color[3])
     checkerBoard.draw()
     local.draw()
     enemy.draw()

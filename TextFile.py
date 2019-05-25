@@ -1,7 +1,7 @@
 import pygame
 
 
-# This is used to create text #
+# This is used to create text objects #
 class Text:
     def __init__(self, text, color=(255, 255, 255), size=28, pos=(0, 0)):
         self.text = text
