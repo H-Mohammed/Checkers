@@ -11,6 +11,9 @@ class Container:  # Parent class for all objects that aggregate other objects
     def draw(self):
         for item in self.list:
             item.draw()
+
+    def get_item(self, index):
+        return self.list[index]
     
     def get_list(self):
         return self.list

@@ -62,11 +62,14 @@ for y in range(3):
         enemy.add(Checker(window, color[(player_id * 2) % 3], ((((y + 1) % 2) * 60) + x * 120, 60 * y), (y*4+x)+1))
 
 # User Interface #
+    # Backgrounds #
 ui = Container()
 ui.add(Background((240, 240, 240), (320, 600), (480, 0), window))  # Add the main background for the user interface
-ui.add(Background((0, 0, 0), (300, 60), (490, 10), window))  # Displays turn
+ui.add(Background((255, 255, 255), (300, 60), (490, 10), window))  # Displays turn
 ui.add(Background((255, 255, 255), (300, 450), (490, 80), window))  # Chat room
-ui.add(Background((0, 0, 0), (300, 50), (490, 540), window))  # Chat box
+ui.add(Background((255, 255, 255), (300, 50), (490, 540), window))  # Chat box
+    # Text #
+ui.add(Text('', window))
 
 # --- Code Starts Here --- #
 run = True
@@ -97,9 +100,18 @@ while run:
     local.draw()
     enemy.draw()
     if turn == player_id:
+        ui.get_item(4).set_text('YOUR TURN')
+        ui.get_item(4).set_pos((ui.get_item(1).get_pos()[0] + (
+                (ui.get_item(1).get_size()[0] - ui.get_item(4).get_size()[0]) / 2), ui.get_item(1).get_pos()[1] + (
+                                        (ui.get_item(1).get_size()[1] - ui.get_item(4).get_size()[1]) / 2)))
         if local.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, enemy) == 1:
             turn = (turn * 2) % 3  # Switch turns
             local.set_test(0)
+    else:
+        ui.get_item(4).set_text('PLEASE WAIT')
+        ui.get_item(4).set_pos((ui.get_item(1).get_pos()[0] + (
+                    (ui.get_item(1).get_size()[0] - ui.get_item(4).get_size()[0]) / 2), ui.get_item(1).get_pos()[1] + (
+                                            (ui.get_item(1).get_size()[1] - ui.get_item(4).get_size()[1]) / 2)))
 
     # User Interface #
     ui.draw()
