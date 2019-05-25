@@ -59,7 +59,7 @@ for y in range(3):
 enemy = Player()
 for y in range(3):
     for x in range(4):
-        enemy.add(Checker(window, color[(player * 2) % 3], ((((y + 1) % 2) * 60) + x * 120, 60 * y),(y*4+x)))
+        enemy.add(Checker(window, color[(player * 2) % 3], ((((y + 1) % 2) * 60) + x * 120, 60 * y),(y*4+x)+1))
 
 # --- Code Starts Here --- #
 run = True
@@ -77,9 +77,10 @@ while run:
     if not output == '':
         for item in enemy.get_list():
             if output[0] == item.get_id():
-                if item.pos_movement(enemy.get_list(), local.get_list(), output[1], (1, 0, 0)) == 1:
-                    turn = (turn * 2) % 3  # Switch turns
-                    break
+                item.setPos((420-output[1][0],420-output[1][1]))
+                item.draw()
+                turn = (turn * 2) % 3  # Switch turns
+                break
 
     mousePressed = pygame.mouse.get_pressed()
 
