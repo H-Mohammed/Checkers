@@ -34,8 +34,8 @@ class Checker(Objects):  # This is used to make the checker pieces
     def get_width(self):
         return self.radius*2
     
-    def getNum(self):
-        return self.num
+    def get_id(self):
+        return self.id
     
     def setPos(self,pos):
         self.x = pos[0]
