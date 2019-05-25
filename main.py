@@ -63,7 +63,10 @@ for y in range(3):
 
 # User Interface #
 ui = Container()
-ui.add(Background((240, 240, 240), (320, 600), (490, 0), window))
+ui.add(Background((240, 240, 240), (320, 600), (480, 0), window))  # Add the main background for the user interface
+ui.add(Background((0, 0, 0), (300, 60), (490, 10), window))  # Displays turn
+ui.add(Background((255, 255, 255), (300, 450), (490, 80), window))  # Chat room
+ui.add(Background((0, 0, 0), (300, 50), (490, 540), window))  # Chat box
 
 # --- Code Starts Here --- #
 run = True
