@@ -37,7 +37,7 @@ class Checker(Objects):  # This is used to make the checker pieces
         self.x = pos[0]
         self.y = pos[1]
     
-    def pos_movement(self, pieces, enemy,mouse_pos,mouse_pressed):
+    def pos_movement(self, pieces, enemy, mouse_pos, mouse_pressed):
         star = Star(self.surface, 'media/Star.png', (0, 0))  # Create the star
         top_right = 0
         top_left = 0
@@ -191,10 +191,6 @@ class Checker(Objects):  # This is used to make the checker pieces
                     del star
                     return 1
         
-                    
-
-
-            
 
 class Square(Objects):  # This is used to make the board
     def __init__(self, surface, color, pos, size):

@@ -4,10 +4,10 @@ Author: John Yu
 Date: 2019-04-08
 '''
 
-import pygame
 from Network import *
-from Objects import *
 from Containers import *
+from TextFile import *
+from Objects import *
 
 pygame.init()  # Loads the pygame modules in the program
 
@@ -19,24 +19,26 @@ HEIGHT = 600
 SCREEN_DIMENSION = (WIDTH, HEIGHT)
 
 # Color Variables
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-GREY = (150, 150, 150)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
+color = {
+    1: (255, 255, 255),
+    2: (0, 0, 0),
+    3: (150, 150, 150),
+    4: (255, 0, 0),
+    5: (0, 255, 0),
+    6: (0, 0, 255)
+}
 
 # Create the window
 window = pygame.display.set_mode(SCREEN_DIMENSION)  # Creates the main surface where all other assets are placed on top
 pygame.display.set_caption(TITLE)  # Updates the window title with TITLE
-window.fill(GREY)  # Fills the entire surface with the color
+window.fill(color[3])  # Fills the entire surface with the color
 clock = pygame.time.Clock()  # Starts a clock object to measure time
 
 '''
 # Network #
 network = Network()
-local_client_information = network.make_connection()
-print(local_client_information)
+player = network.make_connection()
+print(player)
 data = network.send_and_receive('Hello World')
 print(data)
 '''
@@ -50,17 +52,17 @@ for y in range(8):
         else:
             checkerBoard.add(Square(window, (139, 69, 19), (x * 60, y * 60), (60, 60)))
 
-# Initial Setup for White #
-white = Player()
+# Initial Setup for Local #
+local = Player()
 for y in range(3):
     for x in range(4):
-        white.add(Checker(window, (255, 255, 255), (((y % 2) * 60) + x * 120, 300 + (60 * y))))
+        local.add(Checker(window, color[player], (((y % 2) * 60) + x * 120, 300 + (60 * y))))
 
-# Initial Setup for Black #
-black = Player()
+# Initial Setup for Enemy #
+enemy = Player()
 for y in range(3):
     for x in range(4):
-        black.add(Checker(window, (0, 0, 0), ((((y + 1) % 2) * 60) + x * 120, 60 * y)))
+        enemy.add(Checker(window, color[(player * 2) % 3], ((((y + 1) % 2) * 60) + x * 120, 60 * y)))
 
 # --- Code Starts Here --- #
 run = True
@@ -72,19 +74,13 @@ while run:
     mousePressed = pygame.mouse.get_pressed()
 
     checkerBoard.draw()
-    white.draw()
-    black.draw()
-    if turn == 1:
-        if white.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, black) == 1:
-            turn = 2
-            white.set_selection('')
-            white.set_test(0)
-        
-    if turn == 2:
-        if black.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, white) == 1:
-            turn = 1
-            black.set_selection('')
-            black.set_test(0)
+    local.draw()
+    enemy.draw()
+    if turn == player:
+        if local.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, enemy) == 1:
+            turn = (turn * 2) % 3  # Switch turns
+            local.set_selection('')
+            local.set_test(0)
         
     clock.tick(FPS)  # Pause the game until the FPS time is reached
     pygame.display.update()  # Updates the display

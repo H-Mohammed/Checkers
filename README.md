@@ -27,8 +27,20 @@ You can play the game against a computer or another player.
  - [ ] A.I player
 
 ## Variables 
+ - checkerBoard
+    - Represents the checkerboard object
+ - enemy
+    - Represents the object that stores the enemy pieces
  - HEIGHT
     - The height of the display
+ - local
+    -Represents the object that stores the local pieces
+ - player
+    - Stores the player id of client
+ - turn
+    - Represents the player turn
+    - 1 denotes YOUR turn
+    - 2 denotes ENEMY turn
  - WIDTH
     - The width of the display
  - window

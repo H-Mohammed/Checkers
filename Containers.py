@@ -1,6 +1,4 @@
 # This file contains objects that aggregate other objects #
-from Objects import *
-import pygame
 
 
 class Container:  # Parent class for all objects that aggregate other objects
@@ -30,10 +28,13 @@ class Player(Container):  # Stores pieces
                 if mouse_pressed[0] == 1:
                     self.selection = item
                     self.test = 1
-                    return item.pos_movement(self.list, enemy.get_list(),mouse_pos,mouse_pressed)
+                    return item.pos_movement(self.list, enemy.get_list(), mouse_pos, mouse_pressed)
 
         if self.test == 1:
-            return self.selection.pos_movement(self.list, enemy.get_list(),mouse_pos,mouse_pressed)
+            return self.selection.pos_movement(self.list, enemy.get_list(), mouse_pos, mouse_pressed)
+
+    def get_selection(self):
+        return self.selection
 
     def set_selection(self, var):
         self.selection = var
