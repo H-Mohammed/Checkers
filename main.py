@@ -61,6 +61,10 @@ for y in range(3):
     for x in range(4):
         enemy.add(Checker(window, color[(player_id * 2) % 3], ((((y + 1) % 2) * 60) + x * 120, 60 * y), (y*4+x)+1))
 
+# User Interface #
+ui = Container()
+ui.add(Background((240, 240, 240), (320, 600), (490, 0), window))
+
 # --- Code Starts Here --- #
 run = True
 turn = 1
@@ -82,6 +86,7 @@ while run:
                 turn = (turn * 2) % 3  # Switch turns
                 break
 
+    # Checker Board #
     mousePressed = pygame.mouse.get_pressed()
 
     window.fill(color[3])
@@ -92,6 +97,9 @@ while run:
         if local.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, enemy) == 1:
             turn = (turn * 2) % 3  # Switch turns
             local.set_test(0)
+
+    # User Interface #
+    ui.draw()
         
     clock.tick(FPS)  # Pause the game until the FPS time is reached
     pygame.display.update()  # Updates the display

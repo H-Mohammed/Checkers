@@ -44,6 +44,8 @@ You can play the game against a computer or another player.
     - Represents the player turn
     - 1 denotes YOUR turn
     - 2 denotes ENEMY turn
+ - ui
+    - This is the main object for the user interface
  - WIDTH
     - The width of the display
  - window

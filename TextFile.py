@@ -3,7 +3,7 @@ import pygame
 
 # This is used to create text objects #
 class Parent:
-    def __init__(self, color, size, pos):
+    def __init__(self, color, size, pos, window):
         self.color = color
         self.size = size
         self.width = size[0]
@@ -11,15 +11,19 @@ class Parent:
         self.pos = pos
         self.x = pos[0]
         self.y = pos[1]
+        self.window = window
 
 
 class Text(Parent):
-    def __init__(self, text, color=(255, 255, 255), size=28, pos=(0, 0)):
-        super().__init__(color, size, pos)
+    def __init__(self, text, window, color=(255, 255, 255), size=28, pos=(0, 0)):
+        super().__init__(color, size, pos, window)
         self.text = text
         self.font_family = 'Bookman Old Style'
         self.font = pygame.font.SysFont(self.font_family, self.size)
         self.surface = self.font.render(self.text, 1, self.color)
+
+    def draw(self):
+        self.window.blit(self.surface, self.pos)
 
     def get_text(self):
         return self.surface
@@ -50,9 +54,8 @@ class Text(Parent):
 
 class Background(Parent):
     def __init__(self, color, size, pos, surface):
-        super().__init__(color, size, pos)
-        self.surface = surface
+        super().__init__(color, size, pos, surface)
         self.rect = (self.x, self.y, self.width, self.height)
 
     def draw(self):
-        pygame.draw.rect(self.surface, self.color, self.rect)
+        pygame.draw.rect(self.window, self.color, self.rect)
