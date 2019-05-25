@@ -53,6 +53,8 @@ You can play the game against a computer or another player.
 ## Classes
  - Background
     - Use this to make the background for text
+ - Chat
+    - Used to create the text for chat box
  - Checker
     - Use this to make checker pieces
  - Container

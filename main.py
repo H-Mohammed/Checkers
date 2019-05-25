@@ -70,6 +70,7 @@ ui.add(Background((255, 255, 255), (300, 450), (490, 80), window))  # Chat room
 ui.add(Background((255, 255, 255), (300, 50), (490, 540), window))  # Chat box
     # Text #
 ui.add(Text('', window))
+chatbox = Chat()
 
 # --- Code Starts Here --- #
 run = True
