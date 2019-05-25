@@ -7,6 +7,7 @@ Date: 2019-04-08
 from Network import *
 from Containers import *
 from TextFile import *
+from Objects import *
 
 pygame.init()  # Loads the pygame modules in the program
 
