@@ -9,12 +9,20 @@ class Objects:  # This is the parent class used to make any objects
         self.surface = surface
         self.x = pos[0]
         self.y = pos[1]
+
+    def get_pos(self):
+        return self.pos
     
     def getx(self):
         return self.x
     
     def gety(self):
         return self.y
+
+    def setPos(self, pos):
+        self.x = pos[0]
+        self.y = pos[1]
+        self.pos = pos
 
 
 class Checker(Objects):  # This is used to make the checker pieces
@@ -35,10 +43,6 @@ class Checker(Objects):  # This is used to make the checker pieces
     
     def get_id(self):
         return self.id
-    
-    def setPos(self,pos):
-        self.x = pos[0]
-        self.y = pos[1]
 
     def pos_movement(self, pieces, enemy, mouse_pos, mouse_pressed):
         star = Star(self.surface, 'media/Star.png', (0, 0))  # Create the star

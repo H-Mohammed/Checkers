@@ -84,10 +84,10 @@ while run:
     else:
         output = network.send_and_receive((local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety())))
 
-    if not output == '':
+    if not output == '' and output is not None:
         for item in enemy.get_list():
-            if output[0] == item.get_id():
-                item.setPos((420-output[1][0], 420-output[1][1]))
+            if output[0] == item.get_id() and not output[1] == (420 - item.get_pos()[0], 420 - item.get_pos()[1]):
+                item.setPos((420 - output[1][0], 420 - output[1][1]))
                 item.draw()
                 turn = (turn * 2) % 3  # Switch turns
                 break
