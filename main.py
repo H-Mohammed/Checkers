@@ -4,10 +4,9 @@ Author: John Yu
 Date: 2019-04-08
 '''
 
-import pygame
 from Network import *
-from Objects import *
 from Containers import *
+from TextFile import *
 
 pygame.init()  # Loads the pygame modules in the program
 

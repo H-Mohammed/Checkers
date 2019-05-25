@@ -1,6 +1,4 @@
 # This file contains objects that aggregate other objects #
-from Objects import *
-import pygame
 
 
 class Container:  # Parent class for all objects that aggregate other objects
