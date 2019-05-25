@@ -37,8 +37,8 @@ clock = pygame.time.Clock()  # Starts a clock object to measure time
 
 # Network #
 network = Network()
-turn = network.make_connection()
-print(turn)
+player = network.make_connection()
+print(player)
 data = network.send_and_receive('Hello World')
 print(data)
 
@@ -56,16 +56,17 @@ for y in range(8):
 local = Player()
 for y in range(3):
     for x in range(4):
-        local.add(Checker(window, color[turn], (((y % 2) * 60) + x * 120, 300 + (60 * y))))
+        local.add(Checker(window, color[player], (((y % 2) * 60) + x * 120, 300 + (60 * y))))
 
 # Initial Setup for Enemy #
 enemy = Player()
 for y in range(3):
     for x in range(4):
-        enemy.add(Checker(window, color[(turn * 2) % 3], ((((y + 1) % 2) * 60) + x * 120, 60 * y)))
+        enemy.add(Checker(window, color[(player * 2) % 3], ((((y + 1) % 2) * 60) + x * 120, 60 * y)))
 
 # --- Code Starts Here --- #
 run = True
+turn = 1
 while run:
     for event in pygame.event.get():  # Returns all inputs and triggers into an array
         if event.type == pygame.QUIT:  # If the red X was clicked
@@ -75,15 +76,9 @@ while run:
     checkerBoard.draw()
     local.draw()
     enemy.draw()
-    if turn == 1:
+    if turn == player:
         if local.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, enemy) == 1:
-            turn = 2
-            local.set_selection('')
-            local.set_test(0)
-        
-    if turn == 2:
-        if enemy.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, enemy) == 1:
-            turn = 1
+            turn = (turn * 2) % 3  # Switch turns
             local.set_selection('')
             local.set_test(0)
         
