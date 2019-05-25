@@ -38,9 +38,6 @@ clock = pygame.time.Clock()  # Starts a clock object to measure time
 # Network #
 network = Network()
 player = network.make_connection()
-print(player)
-data = network.send_and_receive('Hello World')
-print(data)
 
 
 # Build the Checker Board #
@@ -71,6 +68,19 @@ while run:
     for event in pygame.event.get():  # Returns all inputs and triggers into an array
         if event.type == pygame.QUIT:  # If the red X was clicked
             run = False
+    # Network #
+    if local.get_selection() == '':
+        output = network.send_and_receive('')
+    else:
+        output = network.send_and_receive((local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety())))
+
+    if not output == '':
+        for item in enemy.get_list():
+            if output[0] == item.get_id():
+                if item.pos_movement(enemy.get_list(), local.get_list(), output[1], (1, 0, 0)) == 1:
+                    turn = (turn * 2) % 3  # Switch turns
+                    break
+
     mousePressed = pygame.mouse.get_pressed()
 
     window.fill(color[3])
@@ -80,7 +90,6 @@ while run:
     if turn == player:
         if local.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, enemy) == 1:
             turn = (turn * 2) % 3  # Switch turns
-            local.set_selection('')
             local.set_test(0)
         
     clock.tick(FPS)  # Pause the game until the FPS time is reached

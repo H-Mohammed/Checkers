@@ -34,7 +34,9 @@ You can play the game against a computer or another player.
  - HEIGHT
     - The height of the display
  - local
-    -Represents the object that stores the local pieces
+    - Represents the object that stores the local pieces
+ - output
+    - This is the id of the selected piece for the enemy
  - player
     - Stores the player id of client
  - turn

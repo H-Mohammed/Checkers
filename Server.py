@@ -10,23 +10,18 @@ except socket.error as e:
 
 s.listen(2)
 
+selection = ['', '']  # Stores the selected pieces of each client
+
 
 # functions #
 def threaded_client(conn, player):
     conn.send(pickle.dumps(player))  # Sends the player id to the client
     while True:
+        print(selection)
         try:
             new_data = pickle.loads(conn.recv(2048))  # Get new positions made by the client
-            if not new_data:
-                print('Disconnected...')
-                break
-            else:
-                if player == 1:
-                    reply = pickle.dumps('This is John')  # Return Black Data
-                else:
-                    reply = pickle.dumps('This is Pi')
-
-            conn.sendall(reply)  # Send reply to clients
+            selection[player - 1] = new_data  # Update the selection of player
+            conn.sendall(pickle.dumps(selection[player % 2]))  # Send reply to client
         except socket.error:
             break
 
