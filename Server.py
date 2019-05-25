@@ -17,11 +17,10 @@ selection = ['', '']  # Stores the selected pieces of each client
 def threaded_client(conn, player):
     conn.send(pickle.dumps(player))  # Sends the player id to the client
     while True:
-        print(selection)
         try:
             new_data = pickle.loads(conn.recv(2048))  # Get new positions made by the client
             selection[player - 1] = new_data  # Update the selection of player
-            conn.sendall(pickle.dumps(selection[player % 2]))  # Send reply to client
+            conn.sendall(pickle.dumps(selection[player % 2]))  # Send enemy info to client
         except socket.error:
             break
 

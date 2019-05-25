@@ -30,13 +30,14 @@ You can play the game against a computer or another player.
  - checkerBoard
     - Represents the checkerboard object
  - enemy
-    - Represents the object that stores the enemy pieces
+    - This is the player object that stores the enemy pieces
  - HEIGHT
     - The height of the display
  - local
-    - Represents the object that stores the local pieces
+    - This is the player object that stores the local pieces
  - output
-    - This is the id of the selected piece for the enemy
+    - This is a tuple of the selected piece for the enemy
+    - (id, pos)
  - player
     - Stores the player id of client
  - turn
@@ -48,6 +49,8 @@ You can play the game against a computer or another player.
  - window
     - This is the main display where all of our assets are placed
 ## Classes
+ - Background
+    - Use this to make the background for text
  - Checker
     - Use this to make checker pieces
  - Container
@@ -56,9 +59,13 @@ You can play the game against a computer or another player.
     - This class is responsible for all the networking
  - Objects 
     - The parent class used to make any items
+ - Parent
+    - Just a generic parent class
  - Player
-    - Stores pieces
+    - Stores the client's friendly pieces
  - Star
     - Use this to make the star which indicates where the player can move
  - Square
     - Use this to make the squares for the board
+ - Text
+    - Use this to make text
