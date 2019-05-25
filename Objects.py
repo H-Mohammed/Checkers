@@ -89,7 +89,23 @@ class Checker(Objects):  # This is used to make the checker pieces
                     if item.getx() == self.getx() + 120:
                         top_right = 3
             
-        
+        if self.getx()+60 >= 8*60 and top_right == 0:
+            top_right = 1
+        if self.getx()+120 >= 8*60 and top_right == 2:
+            top_right = 3
+        if self.getx()-60 >= 8*60 and top_left == 0:
+            top_left = 1
+        if self.getx()-120 >= 8*60 and top_left == 2:
+            top_left = 3
+        if self.getx()-60 < 0 and bottom_left == 0:
+            bottom_left = 1
+        if self.getx()-120 < 0 and bottom_left == 2:
+            bottom_left = 3
+        if self.getx()+60 < 0 and bottom_right == 0:
+            bottom_right = 1
+        if self.getx()+120 < 0 and bottom_right == 2:
+            bottom_right = 3
+
         if top_left == 0:
             star.set_pos((self.getx() - 60, self.gety() - 60))
             star.draw()
