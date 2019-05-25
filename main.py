@@ -108,7 +108,7 @@ while run:
             turn = (turn * 2) % 3  # Switch turns
             local.set_test(0)
     else:
-        ui.get_item(4).set_text('PLEASE WAIT')
+        ui.get_item(4).set_text('OPPONENT TURN')
         ui.get_item(4).set_pos((ui.get_item(1).get_pos()[0] + (
                     (ui.get_item(1).get_size()[0] - ui.get_item(4).get_size()[0]) / 2), ui.get_item(1).get_pos()[1] + (
                                             (ui.get_item(1).get_size()[1] - ui.get_item(4).get_size()[1]) / 2)))
