@@ -18,11 +18,12 @@ class Objects:  # This is the parent class used to make any objects
 
 
 class Checker(Objects):  # This is used to make the checker pieces
-    def __init__(self, surface, color, pos):
+    def __init__(self, surface, color, pos, num):
         super().__init__(surface, color, pos)
         self.radius = 30
         pygame.draw.circle(self.surface, self.color, (self.x + 30, self.y + 30), self.radius)
         self.crown = 0
+        self.num = num
 
     def draw(self):
         pygame.draw.circle(self.surface, self.color, (self.x + 30, self.y + 30), self.radius)
@@ -33,10 +34,13 @@ class Checker(Objects):  # This is used to make the checker pieces
     def get_width(self):
         return self.radius*2
     
+    def getNum(self):
+        return self.num
+    
     def setPos(self,pos):
         self.x = pos[0]
         self.y = pos[1]
-    
+
     def pos_movement(self, pieces, enemy, mouse_pos, mouse_pressed):
         star = Star(self.surface, 'media/Star.png', (0, 0))  # Create the star
         top_right = 0
@@ -72,6 +76,23 @@ class Checker(Objects):  # This is used to make the checker pieces
                     top_left = 2
                     enemy4 = item
         for item in enemy:
+            if bottom_right == 2:
+                if item.gety() == self.gety() + 120:
+                    if item.getx() == self.getx() + 120:
+                        bottom_right = 3
+            if bottom_left == 2:
+                if item.gety() == self.gety() + 120:
+                    if item.getx() == self.getx() - 120:
+                        bottom_left = 3
+            if top_left == 2:
+                if item.gety() == self.gety() - 120:
+                    if item.getx() == self.getx() - 120:
+                        top_left = 3
+            if top_right == 2:
+                if item.gety() == self.gety() - 120:
+                    if item.getx() == self.getx() + 120:
+                        top_right = 3
+        for item in pieces:
             if bottom_right == 2:
                 if item.gety() == self.gety() + 120:
                     if item.getx() == self.getx() + 120:

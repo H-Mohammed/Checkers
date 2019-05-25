@@ -56,13 +56,13 @@ for y in range(8):
 local = Player()
 for y in range(3):
     for x in range(4):
-        local.add(Checker(window, color[player], (((y % 2) * 60) + x * 120, 300 + (60 * y))))
+        local.add(Checker(window, color[player], (((y % 2) * 60) + x * 120, 300 + (60 * y)),(12-(y*4+x))))
 
 # Initial Setup for Enemy #
 enemy = Player()
 for y in range(3):
     for x in range(4):
-        enemy.add(Checker(window, color[(player * 2) % 3], ((((y + 1) % 2) * 60) + x * 120, 60 * y)))
+        enemy.add(Checker(window, color[(player * 2) % 3], ((((y + 1) % 2) * 60) + x * 120, 60 * y),(y*4+x)))
 
 # --- Code Starts Here --- #
 run = True
