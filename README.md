@@ -38,7 +38,7 @@ You can play the game against a computer or another player.
  - output
     - This is a tuple of the selected piece for the enemy
     - (id, pos)
- - player
+ - player_id
     - Stores the player id of client
  - turn
     - Represents the player turn
