@@ -106,5 +106,4 @@ class Chat(Container):
                 121: 'y',
                 122: 'z'
             }
-            print('it goes here')
             self.list.append(letters[key])

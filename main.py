@@ -70,9 +70,12 @@ ui.add(Background((255, 255, 255), (300, 450), (490, 80), window))  # Chat room
 ui.add(Background((255, 255, 255), (300, 50), (490, 540), window))  # Chat box
     # Text #
 ui.add(Text('', window))
-chatbox = Chat()
+ui.add(Text('', window))  # Displays chat in text box
+
+chat_box = Chat()
 
 # --- Code Starts Here --- #
+iteration = 0
 run = True
 turn = 1
 while run:
@@ -115,6 +118,14 @@ while run:
                                             (ui.get_item(1).get_size()[1] - ui.get_item(4).get_size()[1]) / 2)))
 
     # User Interface #
+    if iteration >= 4:
+        chat_box.edit_characters(chat_box.get_key_input())
+        iteration = 0
+    else:
+        iteration += 1
+    ui.get_item(5).set_text(''.join(chat_box.get_list()))
+    ui.get_item(5).set_size(20)
+    ui.get_item(5).set_pos((495, 540 + (ui.get_item(3).get_size()[1] - ui.get_item(5).get_size()[1])/2))
     ui.draw()
         
     clock.tick(FPS)  # Pause the game until the FPS time is reached

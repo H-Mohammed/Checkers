@@ -33,6 +33,8 @@ You can play the game against a computer or another player.
     - This is the player object that stores the enemy pieces
  - HEIGHT
     - The height of the display
+ - iteration
+    - Keeps track of the number of times program loops
  - local
     - This is the player object that stores the local pieces
  - output
