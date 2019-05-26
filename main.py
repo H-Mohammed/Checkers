@@ -78,7 +78,6 @@ chat_box = Chat()
 # --- Code Starts Here --- #
 chat_to_send = []
 iteration = 0
-iteration2 = 0
 run = True
 turn = 1
 while run:
@@ -131,14 +130,12 @@ while run:
             chat_box.reset_characters()
         iteration = 0
     else:
+        chat_to_send = []
         iteration += 1
 
-    if len(output[2]) > 0 and iteration2 >= 2:
+    if len(output[2]) > 0:
         chat_room.offset_all((0, -20))
         chat_room.add(Text(output[2], window, (500, 500), (0, 0, 0), 20))
-        iteration2 = 0
-    else:
-        iteration2 += 1
 
     ui.get_item(5).set_text(chat_box.get_text())
     ui.get_item(5).set_size(20)
