@@ -83,7 +83,7 @@ class Chat(Container):
             self.list.append(' ')
         elif key == pygame.K_RETURN and not self.list == []:
             return True
-        elif 97 <= key <= 122 or 1097 <= key <= 122:
+        elif 97 <= key <= 122 or 1097 <= key <= 1122:
             letters = {
                 97: 'a',
                 98: 'b',

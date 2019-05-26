@@ -132,6 +132,7 @@ while run:
     else:
         iteration += 1
 
+    print(output[2])
     if len(output[2]) > 0:
         chat_room.offset_all((0, -20))
         chat_room.add(Text(output[2], window, (500, 500), (0, 0, 0), 20))
