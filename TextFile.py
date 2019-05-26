@@ -16,7 +16,7 @@ class Text(Parent):
         super().__init__(color, pos, window)
         self.size = size
         self.text = text
-        self.font_family = 'Bookman Old Style'
+        self.font_family = 'Times New Roman'
         self.font = pygame.font.SysFont(self.font_family, self.size)
         self.surface = self.font.render(self.text, 1, self.color)
 

@@ -53,7 +53,6 @@ class Chat(Container):
         self.keys = pygame.key.get_pressed()
 
     def get_key_input(self):
-        print(pygame.K_LSHIFT)
         self.keys = pygame.key.get_pressed()
         if self.keys[pygame.K_BACKSPACE]:
             return pygame.K_BACKSPACE

@@ -84,11 +84,12 @@ while run:
             run = False
     # Network #
     if local.get_selection() == '':  # No selection
-        output = network.send_and_receive('')
+        output = network.send_and_receive(('', '', chat_box.get_list()))
     else:
-        output = network.send_and_receive((local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety())))
+        output = network.send_and_receive((local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()), chat_box.get_list()))
+    print(output)
 
-    if not output == '' and output is not None:
+    if not output[0] == '':
         for item in enemy.get_list():
             if output[0] == item.get_id() and not output[1] == (420 - item.get_pos()[0], 420 - item.get_pos()[1]):
                 item.pos_movement(enemy.get_list(), local.get_list(), (420 - output[1][0], 420 - output[1][1]), (1, 0, 0))

@@ -39,7 +39,7 @@ You can play the game against a computer or another player.
     - This is the player object that stores the local pieces
  - output
     - This is a tuple of the selected piece for the enemy
-    - (id, pos)
+    - (id, pos, list)
  - player_id
     - Stores the player id of client
  - turn
