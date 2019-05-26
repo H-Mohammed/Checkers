@@ -136,8 +136,7 @@ class Chat(Container):
                 1119: 'W',
                 1120: 'X',
                 1121: 'Y',
-                1122: 'Z',
-
+                1122: 'Z'
             }
             self.list.append(letters[key])
         else:
