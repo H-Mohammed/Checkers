@@ -19,7 +19,7 @@ class Objects:  # This is the parent class used to make any objects
     def gety(self):
         return self.y
 
-    def setPos(self, pos):
+    def set_pos(self, pos):
         self.x = pos[0]
         self.y = pos[1]
         self.pos = pos
@@ -135,7 +135,7 @@ class Checker(Objects):  # This is used to make the checker pieces
             star.draw()
             if self.getx()-60 <= mouse_pos[0] <= self.getx() and self.gety()-60 <= mouse_pos[1] <= self.gety():
                 if mouse_pressed[0] == 1:
-                    self.setPos((self.getx()-60,self.gety()-60))
+                    self.set_pos((self.getx()-60,self.gety()-60))
                     self.draw()
                     del star
                     return 1
@@ -144,7 +144,7 @@ class Checker(Objects):  # This is used to make the checker pieces
             star.draw()
             if self.getx()+60 <= mouse_pos[0] <= self.getx()+120 and self.gety()-60 <= mouse_pos[1] <= self.gety():
                 if mouse_pressed[0] == 1:
-                    self.setPos((self.getx()+60,self.gety()-60))
+                    self.set_pos((self.getx()+60,self.gety()-60))
                     self.draw()
                     del star
                     return 1
@@ -153,7 +153,7 @@ class Checker(Objects):  # This is used to make the checker pieces
             star.draw()
             if self.getx()-60 <= mouse_pos[0] <= self.getx() and self.gety()+60 <= mouse_pos[1] <= self.gety()+120:
                 if mouse_pressed[0] == 1:
-                    self.setPos((self.getx()-60,self.gety()+60))
+                    self.set_pos((self.getx()-60,self.gety()+60))
                     self.draw()
                     del star
                     return 1
@@ -162,7 +162,7 @@ class Checker(Objects):  # This is used to make the checker pieces
             star.draw()
             if self.getx()+60 <= mouse_pos[0] <= self.getx()+120 and self.gety()+60 <= mouse_pos[1] <= self.gety()+120:
                 if mouse_pressed[0] == 1:
-                    self.setPos((self.getx()+60,self.gety()+60))
+                    self.set_pos((self.getx()+60,self.gety()+60))
                     self.draw()
                     del star
                     return 1
@@ -172,7 +172,7 @@ class Checker(Objects):  # This is used to make the checker pieces
             star.draw()
             if self.getx()-120 <= mouse_pos[0] <= self.getx()-60 and self.gety()-120 <= mouse_pos[1] <= self.gety()-60:
                 if mouse_pressed[0] == 1:
-                    self.setPos((self.getx()-120,self.gety()-120))
+                    self.set_pos((self.getx()-120,self.gety()-120))
                     self.draw()
                     
                     enemy.pop(enemy.index(enemy4))
@@ -184,7 +184,7 @@ class Checker(Objects):  # This is used to make the checker pieces
             star.draw()
             if self.getx()+120 <= mouse_pos[0] <= self.getx()+180 and self.gety()-120 <= mouse_pos[1] <= self.gety()-60:
                 if mouse_pressed[0] == 1:
-                    self.setPos((self.getx()+120,self.gety()-120))
+                    self.set_pos((self.getx()+120,self.gety()-120))
                     self.draw()
                     
                     enemy.pop(enemy.index(enemy3))
@@ -196,7 +196,7 @@ class Checker(Objects):  # This is used to make the checker pieces
             star.draw()
             if self.getx()-120 <= mouse_pos[0] <= self.getx()-60 and self.gety()+120 <= mouse_pos[1] <= self.gety()+180:
                 if mouse_pressed[0] == 1:
-                    self.setPos((self.getx()-120,self.gety()+120))
+                    self.set_pos((self.getx()-120,self.gety()+120))
                     self.draw()
                     
                     enemy.pop(enemy.index(enemy2))
@@ -208,7 +208,7 @@ class Checker(Objects):  # This is used to make the checker pieces
             star.draw()
             if self.getx()+120 <= mouse_pos[0] <= self.getx()+180 and self.gety()+120 <= mouse_pos[1] <= self.gety()+180:
                 if mouse_pressed[0] == 1:
-                    self.setPos((self.getx()+120,self.gety()+120))
+                    self.set_pos((self.getx()+120,self.gety()+120))
                     self.draw()
                     enemy.pop(enemy.index(enemy1))
                     del enemy1

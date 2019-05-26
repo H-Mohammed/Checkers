@@ -19,6 +19,10 @@ class Container:  # Parent class for all objects that aggregate other objects
     def get_list(self):
         return self.list
 
+    def offset_all(self, offset):
+        for item in self.list:
+            item.set_pos((item.get_pos()[0] + offset[0], item.get_pos()[1] + offset[1]))
+
 
 class Player(Container):  # Stores pieces
     def __init__(self):
@@ -58,8 +62,8 @@ class Chat(Container):
             return pygame.K_BACKSPACE
         elif self.keys[pygame.K_SPACE]:
             return pygame.K_SPACE
-        elif self.keys[pygame.K_KP_ENTER]:
-            return pygame.K_KP_ENTER
+        elif self.keys[pygame.K_RETURN]:
+            return pygame.K_RETURN
         else:
             for x in range(pygame.K_a, pygame.K_z + 1):
                 if self.keys[x]:
@@ -71,16 +75,15 @@ class Chat(Container):
 
     def edit_characters(self, key):
         if key is False:
-            return
+            return False
         if key == pygame.K_BACKSPACE:
             if len(self.list) > 0:
                 self.list.pop()
         elif key == pygame.K_SPACE:
             self.list.append(' ')
-        elif key == pygame.K_KP_ENTER:
-            # Submit characters
-            pass
-        else:
+        elif key == pygame.K_RETURN and not self.list == []:
+            return True
+        elif 97 <= key <= 122 or 1097 <= key <= 122:
             letters = {
                 97: 'a',
                 98: 'b',
@@ -137,3 +140,12 @@ class Chat(Container):
 
             }
             self.list.append(letters[key])
+        else:
+            return False
+        return False
+
+    def reset_characters(self):
+        self.list.clear()
+
+    def get_text(self):
+        return ''.join(self.list)

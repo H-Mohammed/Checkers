@@ -64,6 +64,7 @@ for y in range(3):
 # User Interface #
     # Backgrounds #
 ui = Container()
+chat_room = Container()
 ui.add(Background((240, 240, 240), (320, 600), (480, 0), window))  # Add the main background for the user interface
 ui.add(Background((255, 255, 255), (300, 60), (490, 10), window))  # Displays turn
 ui.add(Background((255, 255, 255), (300, 450), (490, 80), window))  # Chat room
@@ -87,7 +88,6 @@ while run:
         output = network.send_and_receive(('', '', chat_box.get_list()))
     else:
         output = network.send_and_receive((local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()), chat_box.get_list()))
-    print(output)
 
     if not output[0] == '':
         for item in enemy.get_list():
@@ -120,14 +120,20 @@ while run:
 
     # User Interface #
     if iteration >= 3:
-        chat_box.edit_characters(chat_box.get_key_input())
+        if chat_box.edit_characters(chat_box.get_key_input()):
+            chat_room.offset_all((0, -20))
+            chat_room.add(Text(chat_box.get_text(), window, (500, 500), (0, 0, 0), 20))
+            chat_box.reset_characters()
         iteration = 0
     else:
+
+
         iteration += 1
-    ui.get_item(5).set_text(''.join(chat_box.get_list()))
+    ui.get_item(5).set_text(chat_box.get_text())
     ui.get_item(5).set_size(20)
     ui.get_item(5).set_pos((495, 540 + (ui.get_item(3).get_size()[1] - ui.get_item(5).get_size()[1])/2))
     ui.draw()
+    chat_room.draw()
         
     clock.tick(FPS)  # Pause the game until the FPS time is reached
     pygame.display.update()  # Updates the display

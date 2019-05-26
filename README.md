@@ -27,6 +27,8 @@ You can play the game against a computer or another player.
  - [ ] A.I player
 
 ## Variables 
+ - chat_room
+    - Container object that stores player comments
  - checkerBoard
     - Represents the checkerboard object
  - enemy
