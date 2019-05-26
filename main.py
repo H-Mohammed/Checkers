@@ -76,6 +76,7 @@ ui.add(Text('', window))  # Displays chat in text box
 chat_box = Chat()
 
 # --- Code Starts Here --- #
+chat_to_send = []
 iteration = 0
 run = True
 turn = 1
@@ -85,9 +86,11 @@ while run:
             run = False
     # Network #
     if local.get_selection() == '':  # No selection
-        output = network.send_and_receive(('', '', chat_box.get_list()))
+        output = network.send_and_receive(('', '', chat_to_send))
     else:
-        output = network.send_and_receive((local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()), chat_box.get_list()))
+        output = network.send_and_receive((local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()), chat_to_send))
+
+    chat_to_send = []
 
     if not output[0] == '':
         for item in enemy.get_list():
@@ -121,14 +124,18 @@ while run:
     # User Interface #
     if iteration >= 3:
         if chat_box.edit_characters(chat_box.get_key_input()):
+            chat_to_send = chat_box.get_text()
             chat_room.offset_all((0, -20))
             chat_room.add(Text(chat_box.get_text(), window, (500, 500), (0, 0, 0), 20))
             chat_box.reset_characters()
         iteration = 0
     else:
-
-
         iteration += 1
+
+    if len(output[2]) > 0:
+        chat_room.offset_all((0, -20))
+        chat_room.add(Text(output[2], window, (500, 500), (0, 0, 0), 20))
+
     ui.get_item(5).set_text(chat_box.get_text())
     ui.get_item(5).set_size(20)
     ui.get_item(5).set_pos((495, 540 + (ui.get_item(3).get_size()[1] - ui.get_item(5).get_size()[1])/2))
