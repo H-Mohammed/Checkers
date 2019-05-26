@@ -53,6 +53,7 @@ class Chat(Container):
         self.keys = pygame.key.get_pressed()
 
     def get_key_input(self):
+        print(pygame.K_LSHIFT)
         self.keys = pygame.key.get_pressed()
         if self.keys[pygame.K_BACKSPACE]:
             return pygame.K_BACKSPACE
@@ -63,7 +64,10 @@ class Chat(Container):
         else:
             for x in range(pygame.K_a, pygame.K_z + 1):
                 if self.keys[x]:
-                    return x
+                    if self.keys[pygame.K_LSHIFT] or self.keys[pygame.K_RSHIFT] or self.keys[pygame.K_CAPSLOCK]:
+                        return x + 1000
+                    else:
+                        return x
         return False
 
     def edit_characters(self, key):
@@ -104,6 +108,33 @@ class Chat(Container):
                 119: 'w',
                 120: 'x',
                 121: 'y',
-                122: 'z'
+                122: 'z',
+                1097: 'A',
+                1098: 'B',
+                1099: 'C',
+                1100: 'D',
+                1101: 'E',
+                1102: 'F',
+                1103: 'G',
+                1104: 'H',
+                1105: 'I',
+                1106: 'J',
+                1107: 'K',
+                1108: 'L',
+                1109: 'M',
+                1110: 'N',
+                1111: 'O',
+                1112: 'P',
+                1113: 'Q',
+                1114: 'R',
+                1115: 'S',
+                1116: 'T',
+                1117: 'U',
+                1118: 'V',
+                1119: 'W',
+                1120: 'X',
+                1121: 'Y',
+                1122: 'Z',
+
             }
             self.list.append(letters[key])

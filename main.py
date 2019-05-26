@@ -118,7 +118,7 @@ while run:
                                             (ui.get_item(1).get_size()[1] - ui.get_item(4).get_size()[1]) / 2)))
 
     # User Interface #
-    if iteration >= 4:
+    if iteration >= 3:
         chat_box.edit_characters(chat_box.get_key_input())
         iteration = 0
     else:
