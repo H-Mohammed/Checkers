@@ -133,7 +133,7 @@ while run:
         chat_to_send = []
         iteration += 1
 
-    if len(output[2]) > 0:
+    if not output[2] == []:
         chat_room.offset_all((0, -20))
         chat_room.add(Text(output[2], window, (500, 500), (0, 0, 0), 20))
 
