@@ -43,6 +43,35 @@ class Checker(Objects):  # This is used to make the checker pieces
     
     def get_id(self):
         return self.id
+    
+    def checkCapture(self,enemy):
+        test = 0
+        for item in enemy:
+            if self.crown == 1:
+                if item.gety() == self.gety() + 60:
+                    if item.getx() == self.getx() + 60:
+                        if item.gety() == self.gety() + 120:
+                            if item.getx() == self.getx() + 120:
+                                test = 1
+                    if item.getx() == self.getx() - 60:
+                        if item.gety() == self.gety() + 120:
+                            if item.getx() == self.getx() - 120:    
+                                test = 1
+            if item.gety() == self.gety() - 60:
+                if item.getx() == self.getx() + 60:
+                    if item.gety() == self.gety() - 120:
+                        if item.getx() == self.getx() - 120:
+                            test = 1
+                if item.getx() == self.getx() - 60:
+                    if item.gety() == self.gety() - 120:
+                        if item.getx() == self.getx() + 120:
+                            test = 1
+        if test == 0:
+            return True
+        
+        else:
+            return False
+
 
     def pos_movement(self, pieces, enemy, mouse_pos, mouse_pressed,color):
         star = Star(self.surface, 'media/Star.png', (0, 0))  # Create the star
@@ -50,6 +79,7 @@ class Checker(Objects):  # This is used to make the checker pieces
         top_left = 0
         bottom_right = 0
         bottom_left = 0
+        capture = 0
         for item in pieces:
             if item.gety() == self.gety() + 60:
                 if item.getx() == self.getx() + 60:
@@ -112,6 +142,11 @@ class Checker(Objects):  # This is used to make the checker pieces
                 if item.gety() == self.gety() - 120:
                     if item.getx() == self.getx() + 120:
                         top_right = 3
+        
+        for item in pieces:
+            if item.checkCapture(enemy):
+                capture = 1
+                break
             
         if self.getx()+60 >= 8*60 and top_right == 0:
             top_right = 1
@@ -151,43 +186,44 @@ class Checker(Objects):  # This is used to make the checker pieces
         if color == 0:
             if self.gety() == 0:
                 self.crown = 1
-            if top_left == 0:
-                star.set_pos((self.getx() - 60, self.gety() - 60))
-                star.draw()
-                if self.getx()-60 <= mouse_pos[0] <= self.getx() and self.gety()-60 <= mouse_pos[1] <= self.gety():
-                    if mouse_pressed[0] == 1:
-                        self.set_pos((self.getx()-60,self.gety()-60))
-                        self.draw()
-                        del star
-                        return 1
-            if top_right == 0:
-                star.set_pos((self.getx() + 60, self.gety() - 60))
-                star.draw()
-                if self.getx()+60 <= mouse_pos[0] <= self.getx()+120 and self.gety()-60 <= mouse_pos[1] <= self.gety():
-                    if mouse_pressed[0] == 1:
-                        self.set_pos((self.getx()+60,self.gety()-60))
-                        self.draw()
-                        del star
-                        return 1
-            if self.crown == 1:
-                if bottom_left == 0:
-                    star.set_pos((self.getx() - 60, self.gety() + 60))
+            if not (top_left == 2 or top_right == 2 or bottom_left == 2 or bottom_right == 2) and capture == 0:
+                if top_left == 0:
+                    star.set_pos((self.getx() - 60, self.gety() - 60))
                     star.draw()
-                    if self.getx()-60 <= mouse_pos[0] <= self.getx() and self.gety()+60 <= mouse_pos[1] <= self.gety()+120:
+                    if self.getx()-60 <= mouse_pos[0] <= self.getx() and self.gety()-60 <= mouse_pos[1] <= self.gety():
                         if mouse_pressed[0] == 1:
-                            self.set_pos((self.getx()-60,self.gety()+60))
+                            self.set_pos((self.getx()-60,self.gety()-60))
                             self.draw()
                             del star
                             return 1
-                if bottom_right == 0:
-                    star.set_pos((self.getx() + 60, self.gety() + 60))
+                if top_right == 0:
+                    star.set_pos((self.getx() + 60, self.gety() - 60))
                     star.draw()
-                    if self.getx()+60 <= mouse_pos[0] <= self.getx()+120 and self.gety()+60 <= mouse_pos[1] <= self.gety()+120:
+                    if self.getx()+60 <= mouse_pos[0] <= self.getx()+120 and self.gety()-60 <= mouse_pos[1] <= self.gety():
                         if mouse_pressed[0] == 1:
-                            self.set_pos((self.getx()+60,self.gety()+60))
+                            self.set_pos((self.getx()+60,self.gety()-60))
                             self.draw()
                             del star
                             return 1
+                if self.crown == 1:
+                    if bottom_left == 0:
+                        star.set_pos((self.getx() - 60, self.gety() + 60))
+                        star.draw()
+                        if self.getx()-60 <= mouse_pos[0] <= self.getx() and self.gety()+60 <= mouse_pos[1] <= self.gety()+120:
+                            if mouse_pressed[0] == 1:
+                                self.set_pos((self.getx()-60,self.gety()+60))
+                                self.draw()
+                                del star
+                                return 1
+                    if bottom_right == 0:
+                        star.set_pos((self.getx() + 60, self.gety() + 60))
+                        star.draw()
+                        if self.getx()+60 <= mouse_pos[0] <= self.getx()+120 and self.gety()+60 <= mouse_pos[1] <= self.gety()+120:
+                            if mouse_pressed[0] == 1:
+                                self.set_pos((self.getx()+60,self.gety()+60))
+                                self.draw()
+                                del star
+                                return 1
             
             if top_left == 2:
                 star.set_pos((self.getx() - 120, self.gety() - 120))
@@ -240,45 +276,46 @@ class Checker(Objects):  # This is used to make the checker pieces
                     
         if color == 1:
             if self.gety() == 7*60:
-                self.crown = 1
-            if self.crown == 1:
-                if top_left == 0:
-                    star.set_pos((self.getx() - 60, self.gety() - 60))
+                    self.crown = 1
+            if not (top_left == 2 or top_right == 2 or bottom_left == 2 or bottom_right == 2) and capture == 0:
+                if self.crown == 1:
+                    if top_left == 0:
+                        star.set_pos((self.getx() - 60, self.gety() - 60))
+                        star.draw()
+                        if self.getx()-60 <= mouse_pos[0] <= self.getx() and self.gety()-60 <= mouse_pos[1] <= self.gety():
+                            if mouse_pressed[0] == 1:
+                                self.set_pos((self.getx()-60,self.gety()-60))
+                                self.draw()
+                                del star
+                                return 1
+                    
+                    if top_right == 0:
+                        star.set_pos((self.getx() + 60, self.gety() - 60))
+                        star.draw()
+                        if self.getx()+60 <= mouse_pos[0] <= self.getx()+120 and self.gety()-60 <= mouse_pos[1] <= self.gety():
+                            if mouse_pressed[0] == 1:
+                                self.set_pos((self.getx()+60,self.gety()-60))
+                                self.draw()
+                                del star
+                                return 1
+                if bottom_left == 0:
+                    star.set_pos((self.getx() - 60, self.gety() + 60))
                     star.draw()
-                    if self.getx()-60 <= mouse_pos[0] <= self.getx() and self.gety()-60 <= mouse_pos[1] <= self.gety():
+                    if self.getx()-60 <= mouse_pos[0] <= self.getx() and self.gety()+60 <= mouse_pos[1] <= self.gety()+120:
                         if mouse_pressed[0] == 1:
-                            self.set_pos((self.getx()-60,self.gety()-60))
+                            self.set_pos((self.getx()-60,self.gety()+60))
                             self.draw()
                             del star
                             return 1
-                
-                if top_right == 0:
-                    star.set_pos((self.getx() + 60, self.gety() - 60))
+                if bottom_right == 0:
+                    star.set_pos((self.getx() + 60, self.gety() + 60))
                     star.draw()
-                    if self.getx()+60 <= mouse_pos[0] <= self.getx()+120 and self.gety()-60 <= mouse_pos[1] <= self.gety():
+                    if self.getx()+60 <= mouse_pos[0] <= self.getx()+120 and self.gety()+60 <= mouse_pos[1] <= self.gety()+120:
                         if mouse_pressed[0] == 1:
-                            self.set_pos((self.getx()+60,self.gety()-60))
+                            self.set_pos((self.getx()+60,self.gety()+60))
                             self.draw()
                             del star
                             return 1
-            if bottom_left == 0:
-                star.set_pos((self.getx() - 60, self.gety() + 60))
-                star.draw()
-                if self.getx()-60 <= mouse_pos[0] <= self.getx() and self.gety()+60 <= mouse_pos[1] <= self.gety()+120:
-                    if mouse_pressed[0] == 1:
-                        self.set_pos((self.getx()-60,self.gety()+60))
-                        self.draw()
-                        del star
-                        return 1
-            if bottom_right == 0:
-                star.set_pos((self.getx() + 60, self.gety() + 60))
-                star.draw()
-                if self.getx()+60 <= mouse_pos[0] <= self.getx()+120 and self.gety()+60 <= mouse_pos[1] <= self.gety()+120:
-                    if mouse_pressed[0] == 1:
-                        self.set_pos((self.getx()+60,self.gety()+60))
-                        self.draw()
-                        del star
-                        return 1
             if self.crown == 1:
                 if top_left == 2:
                     star.set_pos((self.getx() - 120, self.gety() - 120))
