@@ -148,7 +148,7 @@ class Checker(Objects):  # This is used to make the checker pieces
             top_right = 3
         
         
-        if self.color == 0:
+        if color == 0:
             if self.gety() == 0:
                 self.crown = 1
             if top_left == 0:
@@ -241,10 +241,10 @@ class Checker(Objects):  # This is used to make the checker pieces
         if color == 1:
             if self.gety() == 7*60:
                 self.crown = 1
-            self.crown == 1:
+            if self.crown == 1:
                 if top_left == 0:
-                star.set_pos((self.getx() - 60, self.gety() - 60))
-                star.draw()
+                    star.set_pos((self.getx() - 60, self.gety() - 60))
+                    star.draw()
                     if self.getx()-60 <= mouse_pos[0] <= self.getx() and self.gety()-60 <= mouse_pos[1] <= self.gety():
                         if mouse_pressed[0] == 1:
                             self.set_pos((self.getx()-60,self.gety()-60))
