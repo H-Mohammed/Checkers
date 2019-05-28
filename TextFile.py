@@ -11,6 +11,7 @@ class Parent:
         self.window = window
 
 
+# Method creates text objects #
 class Text(Parent):
     def __init__(self, text, window, pos=(0, 0), color=(0, 0, 0), size=28):
         super().__init__(color, pos, window)
@@ -55,6 +56,7 @@ class Text(Parent):
         self.surface = self.font.render(self.text, 1, self.color)
 
 
+# Method creates background for text objects #
 class Background(Parent):
     def __init__(self, color, size, pos, surface):
         super().__init__(color, pos, surface)

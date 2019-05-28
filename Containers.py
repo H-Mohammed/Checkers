@@ -2,6 +2,7 @@
 import pygame
 
 
+# Class creates container objects
 class Container:  # Parent class for all objects that aggregate other objects
     def __init__(self):
         self.list = []
@@ -24,6 +25,7 @@ class Container:  # Parent class for all objects that aggregate other objects
             item.set_pos((item.get_pos()[0] + offset[0], item.get_pos()[1] + offset[1]))
 
 
+# Class creates player objects
 class Player(Container):  # Stores pieces
     def __init__(self):
         super().__init__()
@@ -51,6 +53,7 @@ class Player(Container):  # Stores pieces
         self.test = num
 
 
+# Class creates chat box #
 class Chat(Container):
     def __init__(self):
         super().__init__()
