@@ -8,6 +8,7 @@ class Network:
         self.port = 5555
         self.addr = (self.server, self.port)
 
+    # Method tries to connect with server and return information sent by the server #
     def make_connection(self):
         try:
             self.client.connect(self.addr)  # Connect the client to the server
@@ -15,6 +16,7 @@ class Network:
         except socket.error as e:
             print(e)
 
+    # Method sends input and receives output #
     def send_and_receive(self, data):
         try:
             self.client.send(pickle.dumps(data))  # Sends friendly piece information to the server
