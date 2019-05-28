@@ -95,7 +95,7 @@ while run:
     if not output[0] == '':
         for item in enemy.get_list():
             if output[0] == item.get_id() and not output[1] == (420 - item.get_pos()[0], 420 - item.get_pos()[1]):
-                item.pos_movement(enemy.get_list(), local.get_list(), (420 - output[1][0], 420 - output[1][1]), (1, 0, 0))
+                item.pos_movement(enemy.get_list(), local.get_list(), (420 - output[1][0], 420 - output[1][1]), (1, 0, 0),1)
                 item.draw()
                 turn = (turn * 2) % 3  # Switch turns
                 break
@@ -112,7 +112,7 @@ while run:
         ui.get_item(4).set_pos((ui.get_item(1).get_pos()[0] + (
                 (ui.get_item(1).get_size()[0] - ui.get_item(4).get_size()[0]) / 2), ui.get_item(1).get_pos()[1] + (
                                         (ui.get_item(1).get_size()[1] - ui.get_item(4).get_size()[1]) / 2)))
-        if local.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, enemy) == 1:
+        if local.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, enemy,0) == 1:
             turn = (turn * 2) % 3  # Switch turns
             local.set_test(0)
     else:
