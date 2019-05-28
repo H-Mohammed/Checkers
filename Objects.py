@@ -68,7 +68,6 @@ class Checker(Objects):  # This is used to make the checker pieces
                             test = 1
         if test == 0:
             return True
-        
         else:
             return False
 
