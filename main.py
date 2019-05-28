@@ -8,6 +8,7 @@ from Network import *
 from Containers import *
 from TextFile import *
 from Objects import *
+from Mixer import *
 
 pygame.init()  # Loads the pygame modules in the program
 
