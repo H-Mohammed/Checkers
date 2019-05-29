@@ -45,28 +45,37 @@ class Checker(Objects):  # This is used to make the checker pieces
         return self.id
     
     def checkCapture(self,enemy):
-        test = 0
+        testBR = 0
+        testBL = 0
+        testTR = 0
+        testTL = 0
         for item in enemy:
             if self.crown == 1:
                 if item.gety() == self.gety() + 60:
                     if item.getx() == self.getx() + 60:
-                        if item.gety() == self.gety() + 120:
-                            if item.getx() == self.getx() + 120:
-                                test = 1
+                        testBR = 1
                     if item.getx() == self.getx() - 60:
-                        if item.gety() == self.gety() + 120:
-                            if item.getx() == self.getx() - 120:    
-                                test = 1
+                        testBL = 1
             if item.gety() == self.gety() - 60:
                 if item.getx() == self.getx() + 60:
-                    if item.gety() == self.gety() - 120:
-                        if item.getx() == self.getx() - 120:
-                            test = 1
+                    testTR = 1
                 if item.getx() == self.getx() - 60:
-                    if item.gety() == self.gety() - 120:
-                        if item.getx() == self.getx() + 120:
-                            test = 1
-        if test == 0:
+                    testTL = 1
+        for item in enemy:
+            if item.gety() == self.gety() + 120 and testBR == 1:
+                if item.getx() == self.getx() + 120:
+                    testBR = 0
+            
+            if item.gety() == self.gety() + 120 and testBL == 1:
+                if item.getx() == self.getx() - 120:
+                    testBL = 0
+            if item.gety() == self.gety() - 120 and testTL == 1:
+                if item.getx() == self.getx() - 120:
+                    testTL = 0
+            if item.gety() == self.gety() - 120 and testTR == 1:
+                if item.getx() == self.getx() + 120:
+                    testTR = 0
+        if testBL == 1 or testBR == 1 or testTL == 1 or testTR == 1:
             return True
         else:
             return False
