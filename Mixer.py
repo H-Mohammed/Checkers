@@ -2,7 +2,7 @@
 import pygame
 
 
-class Sound:
+class Music:
     def __init__(self):
         self.music_directory = 'music'
         self.music = ""
@@ -28,7 +28,7 @@ class Sound:
 
     # Method sets music to be played
     def set_sound(self, name):
-        self.music = 'sound/' + name + '.mp3'
+        self.music = 'music/' + name + '.mp3'
 
     # Method sets the volume of music player
     @staticmethod
