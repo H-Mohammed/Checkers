@@ -10,6 +10,9 @@ class Parent:
         self.y = pos[1]
         self.window = window
 
+    def get_pos(self):
+        return self.pos
+
 
 # Method creates text objects #
 class Text(Parent):
@@ -26,9 +29,6 @@ class Text(Parent):
 
     def get_text(self):
         return self.surface
-
-    def get_pos(self):
-        return self.pos
 
     def get_size(self):
         return self.font.size(self.text)
@@ -67,9 +67,6 @@ class Background(Parent):
 
     def draw(self):
         pygame.draw.rect(self.window, self.color, self.rect)
-
-    def get_pos(self):
-        return self.pos
 
     def get_size(self):
         return self.size

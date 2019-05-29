@@ -374,7 +374,6 @@ class Checker(Objects):  # This is used to make the checker pieces
                     del star
                     return 1
         
-        
 
 class Square(Objects):  # This is used to make the board
     def __init__(self, surface, color, pos, size):

@@ -144,6 +144,11 @@ while run:
         chat_room.offset_all((0, -20))
         chat_room.add(Text(output[2], window, (500, 500), (0, 0, 0), 20))
 
+    for index, word in enumerate(chat_room.get_list()):
+        if word.get_pos()[1] <= 80:
+            chat_room.get_list().pop(index)
+            del word
+
     ui.get_item(5).set_text(chat_box.get_text())
     ui.get_item(5).set_size(20)
     ui.get_item(5).set_pos((495, 540 + (ui.get_item(3).get_size()[1] - ui.get_item(5).get_size()[1])/2))
