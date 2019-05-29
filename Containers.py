@@ -59,12 +59,6 @@ class Chat(Container):
         super().__init__()
         self.keys = pygame.key.get_pressed()
 
-    def check_out_of_bounds(self):
-        for index, word in enumerate(self.list):
-            if word.get_pos() >= 80:
-                self.list.pop(index)
-                del word
-
     def get_key_input(self):
         self.keys = pygame.key.get_pressed()
         if self.keys[pygame.K_BACKSPACE]:
