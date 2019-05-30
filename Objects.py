@@ -265,7 +265,6 @@ class Checker(Objects):  # This is used to make the checker pieces
                     if mouse_pressed[0] == 1:
                         self.set_pos((self.getx()-120,self.gety()-120))
                         self.draw()
-                        
                         enemy.pop(enemy.index(enemy4))
                         del enemy4
                         del star
@@ -277,7 +276,6 @@ class Checker(Objects):  # This is used to make the checker pieces
                     if mouse_pressed[0] == 1:
                         self.set_pos((self.getx()+120,self.gety()-120))
                         self.draw()
-                        
                         enemy.pop(enemy.index(enemy3))
                         del enemy3
                         del star
@@ -290,7 +288,6 @@ class Checker(Objects):  # This is used to make the checker pieces
                         if mouse_pressed[0] == 1:
                             self.set_pos((self.getx()-120,self.gety()+120))
                             self.draw()
-                            
                             enemy.pop(enemy.index(enemy2))
                             del enemy2
                             del star
@@ -357,7 +354,6 @@ class Checker(Objects):  # This is used to make the checker pieces
                         if mouse_pressed[0] == 1:
                             self.set_pos((self.getx()-120,self.gety()-120))
                             self.draw()
-                            
                             enemy.pop(enemy.index(enemy4))
                             del enemy4
                             del star
@@ -369,7 +365,6 @@ class Checker(Objects):  # This is used to make the checker pieces
                         if mouse_pressed[0] == 1:
                             self.set_pos((self.getx()+120,self.gety()-120))
                             self.draw()
-                            
                             enemy.pop(enemy.index(enemy3))
                             del enemy3
                             del star
