@@ -79,7 +79,7 @@ ui.add(Background((255, 255, 255), (300, 50), (490, 540), window))  # Chat box
 ui.add(Text('', window))
 ui.add(Text('', window))  # Displays chat in text box
 
-chat_box = Chat()
+input_box = Chat()
 
 # Music #
 music = Music()
@@ -88,12 +88,15 @@ music.set_sound('checker_sound_effect')
 # --- Code Starts Here --- #
 chat_to_send = []
 iteration = 0
+action = ''
 run = True
 turn = 1
 while run:
     for event in pygame.event.get():  # Returns all inputs and triggers into an array
         if event.type == pygame.QUIT:  # If the red X was clicked
             run = False
+        elif event.type == pygame.KEYDOWN:
+            action = event
     # Network #
     if local.get_selection() == '':  # No selection
         output = network.send_and_receive(('', '', chat_to_send))
@@ -134,14 +137,15 @@ while run:
                                             (ui.get_item(1).get_size()[1] - ui.get_item(4).get_size()[1]) / 2)))
 
     # User Interface #
-    if chat_box.edit_characters():
-        chat_to_send = chat_box.get_text()
-        chat_room.offset_all((0, -20))
-        chat_room.add(Text(chat_box.get_text(), window, (500, 500), (0, 0, 0), 20))
-        chat_box.reset_characters()
+    if not action == '':
+        if input_box.edit_characters(action):
+            chat_to_send = input_box.get_text()
+            chat_room.offset_all((0, -20))
+            chat_room.add(Text(input_box.get_text(), window, (500, 500), (0, 0, 0), 20))
+            input_box.reset_characters()
+        action = ''
     else:
         chat_to_send = []
-        iteration += 1
 
     if not output[2] == []:
         chat_room.offset_all((0, -20))
@@ -152,7 +156,7 @@ while run:
             chat_room.get_list().pop(index)
             del word
 
-    ui.get_item(5).set_text(chat_box.get_text())
+    ui.get_item(5).set_text(input_box.get_text())
     ui.get_item(5).set_size(20)
     ui.get_item(5).set_pos((495, 540 + (ui.get_item(3).get_size()[1] - ui.get_item(5).get_size()[1])/2))
     ui.draw()

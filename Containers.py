@@ -61,18 +61,15 @@ class Chat(Container):
         self.keys = pygame.key.get_pressed()
         self.user_input = ''
 
-    def edit_characters(self):
-        for x in pygame.event.get():
-            if x.type == pygame.KEYDOWN:
-                if x.key == pygame.K_BACKSPACE:
-                    self.user_input = self.user_input[:-1]
-                    return False
-                elif x.key == pygame.K_RETURN:
-                    return True
-                else:
-                    self.user_input += x.unicode
-                    return False
-        return False
+    def edit_characters(self, event):
+        if event.key == pygame.K_BACKSPACE:
+            self.user_input = self.user_input[:-1]
+            return False
+        elif event.key == pygame.K_RETURN:
+            return True
+        else:
+            self.user_input += event.unicode
+            return False
 
     def reset_characters(self):
         self.user_input = ''
