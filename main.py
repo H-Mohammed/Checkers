@@ -35,13 +35,24 @@ pygame.display.set_caption(TITLE)  # Updates the window title with TITLE
 window.fill(color[3])  # Fills the entire surface with the color
 clock = pygame.time.Clock()  # Starts a clock object to measure time
 
-# Menu #
-menu = Menu()
-ipv4 = menu.run_menu()
+connected = False
+connection_failed = False
+while not connected:
+    # Menu #
+    menu = Menu()
+    ipv4 = menu.run_menu(connection_failed)
 
-# Network #
-network = Network(ipv4)
-player_id = network.make_connection()
+    # Network #
+    try:
+        network = Network(ipv4)
+        player_id = network.make_connection()
+        if player_id in [1, 2]:
+            connected = True
+        else:
+            connection_failed = True
+
+    except socket.error as e:
+        connection_failed = True
 
 
 # Build the Checker Board #

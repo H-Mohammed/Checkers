@@ -13,8 +13,9 @@ class Menu:
         self.user_input = ''
         self.input_box = Chat()
         self.input_text = Text('', self.display)
+        self.connection_failed_text = Text('', self.display)
 
-    def run_menu(self):
+    def run_menu(self, connection_failed):
         pygame.init()
         action = ''  # Stores the event
         run = True
@@ -39,6 +40,13 @@ class Menu:
             self.instruction.draw()
             self.input_box_back.draw()
             self.input_text.draw()
+
+            if connection_failed:
+                self.connection_failed_text.set_text("Connection Failed. Try Again.")
+                self.connection_failed_text.set_color((255, 0, 0))
+                self.connection_failed_text.set_size(24)
+                self.connection_failed_text.set_pos((400 - (self.connection_failed_text.get_size()[0]/2), 270))
+                self.connection_failed_text.draw()
 
             pygame.display.update()
         pygame.quit()
