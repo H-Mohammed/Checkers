@@ -23,7 +23,7 @@ def threaded_client(conn, player):
             selection[player - 1][0] = new_data[0]
             selection[player - 1][1] = new_data[1]
             if not new_data[2] == '':
-                selection[player - 1][2].append(new_data[2])
+                selection[player - 1][2].append(new_data[2])  # Queues text to be sent
             # Send enemy info to client #
             conn.sendall(pickle.dumps(selection[player % 2]))
             if not selection[player % 2][2] == []:
