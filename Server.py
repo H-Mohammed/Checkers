@@ -10,7 +10,7 @@ except socket.error as e:
 
 s.listen(2)
 
-selection = [('', '', []), ('', '', [])]  # Stores the selected piece information of each client
+selection = [['', '', []], ['', '', []]]  # Stores the selected piece information of each client
 
 
 # functions #
@@ -21,6 +21,8 @@ def threaded_client(conn, player):
             new_data = pickle.loads(conn.recv(2048))  # Get new positions made by the client
             selection[player - 1] = new_data  # Update the selection of player
             conn.sendall(pickle.dumps(selection[player % 2]))  # Send enemy info to client
+            if not selection[player % 2][2] == []:
+                selection[player % 2][2].clear()
         except socket.error:
             break
 

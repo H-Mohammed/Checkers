@@ -108,9 +108,9 @@ while run:
             action = event
     # Network #
     if local.get_selection() == '':  # No selection
-        output = network.send_and_receive(('', '', chat_to_send))
+        output = network.send_and_receive(['', '', chat_to_send])
     else:
-        output = network.send_and_receive((local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()), chat_to_send))
+        output = network.send_and_receive([local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()), chat_to_send])
 
     chat_to_send = []
 
