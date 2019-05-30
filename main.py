@@ -35,9 +35,8 @@ pygame.display.set_caption(TITLE)  # Updates the window title with TITLE
 window.fill(color[3])  # Fills the entire surface with the color
 clock = pygame.time.Clock()  # Starts a clock object to measure time
 
-
-# Menu #
 """
+# Menu #
 menu = Menu()
 menu.run_menu()
 """
@@ -135,13 +134,11 @@ while run:
                                             (ui.get_item(1).get_size()[1] - ui.get_item(4).get_size()[1]) / 2)))
 
     # User Interface #
-    if iteration >= 3:
-        if chat_box.edit_characters(chat_box.get_key_input()):
-            chat_to_send = chat_box.get_text()
-            chat_room.offset_all((0, -20))
-            chat_room.add(Text(chat_box.get_text(), window, (500, 500), (0, 0, 0), 20))
-            chat_box.reset_characters()
-        iteration = 0
+    if chat_box.edit_characters():
+        chat_to_send = chat_box.get_text()
+        chat_room.offset_all((0, -20))
+        chat_room.add(Text(chat_box.get_text(), window, (500, 500), (0, 0, 0), 20))
+        chat_box.reset_characters()
     else:
         chat_to_send = []
         iteration += 1
