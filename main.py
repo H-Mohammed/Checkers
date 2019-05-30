@@ -80,10 +80,10 @@ for y in range(3):
     # Backgrounds #
 ui = Container()
 chat_room = Container()
-ui.add(Background((240, 240, 240), (320, 600), (480, 0), window))  # Add the main background for the user interface
-ui.add(Background((255, 255, 255), (300, 60), (490, 10), window))  # Background for turn display
-ui.add(Background((255, 255, 255), (300, 450), (490, 80), window))  # Chat room
-ui.add(Background((255, 255, 255), (300, 50), (490, 540), window))  # Input box
+ui.add(Background((85, 67, 46), (320, 600), (480, 0), window))  # Add the main background for the user interface
+ui.add(Background((239, 229, 217), (300, 60), (490, 10), window))  # Background for turn display
+ui.add(Background((239, 229, 217), (300, 450), (490, 80), window))  # Chat room
+ui.add(Background((239, 229, 217), (300, 50), (490, 540), window))  # Input box
     # Text #
 ui.add(Text('', window))  # Displays turn
 ui.add(Text('', window))  # Displays text in input box
