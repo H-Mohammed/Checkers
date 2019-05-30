@@ -26,7 +26,7 @@ def threaded_client(conn, player):
                 selection[player - 1][2].append(new_data[2])  # Queues text to be sent
             # Send enemy info to client #
             conn.sendall(pickle.dumps(selection[player % 2]))
-            if not selection[player % 2][2] == []:
+            if len(selection[player % 2][2]) > 0:
                 selection[player % 2][2].pop(0)
         except socket.error:
             break
