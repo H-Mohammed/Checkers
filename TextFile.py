@@ -83,7 +83,10 @@ class Chat:
             self.user_input = self.user_input[:-1]
             return False
         elif event.key == pygame.K_RETURN:
-            return True
+            if self.user_input == '':
+                return False
+            else:
+                return True
         else:
             self.user_input += event.unicode
             return False
