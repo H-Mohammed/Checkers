@@ -1,5 +1,6 @@
 # This file contains objects that aggregate other objects #
 import pygame
+from Mixer import *
 
 
 # Class creates container objects
@@ -32,15 +33,19 @@ class Player(Container):  # Stores pieces
         self.selection = ''  # Stores the selected piece
         self.test = 0
 
-    def check_mouse_pos(self, mouse_pos, mouse_pressed, enemy,color):
+    def check_mouse_pos(self, mouse_pos, mouse_pressed, enemy, color):
+        music = Music()
+        music.set_sound('checker_sound_effect')
         for item in self.list:
             if item.getx() <= mouse_pos[0] <= item.getx() + item.get_width() and item.gety() <= mouse_pos[1] <= item.gety() + item.get_height():
                 if mouse_pressed[0] == 1:
                     self.selection = item
                     self.test = 1
+                    music.play()
                     return item.pos_movement(self.list, enemy.get_list(), mouse_pos, mouse_pressed,color)
 
         if self.test == 1:
+            music.play()
             return self.selection.pos_movement(self.list, enemy.get_list(), mouse_pos, mouse_pressed,color)
 
     def get_selection(self):
