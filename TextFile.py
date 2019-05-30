@@ -13,6 +13,11 @@ class Parent:
     def get_pos(self):
         return self.pos
 
+    def set_pos(self, pos):
+        self.x = pos[0]
+        self.y = pos[1]
+        self.pos = pos
+
 
 # Method creates text objects #
 class Text(Parent):
@@ -40,11 +45,6 @@ class Text(Parent):
         self.color = color
         self.surface = self.font.render(self.text, 1, self.color)
 
-    def set_pos(self, pos=(0, 0)):
-        self.x = pos[0]
-        self.y = pos[1]
-        self.pos = (self.x, self.y)
-
     def set_size(self, size):
         self.size = size
         self.font = pygame.font.SysFont(self.font_family, self.size)
@@ -70,6 +70,9 @@ class Background(Parent):
 
     def get_size(self):
         return self.size
+
+    def set_color(self, color):
+        self.color = color
 
 
 # Class creates chat box #

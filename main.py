@@ -132,6 +132,7 @@ while run:
     enemy.draw()
     if turn == player_id:
         ui.get_item(4).set_text('YOUR TURN')
+        ui.get_item(1).set_color((0, 255, 0))
         ui.get_item(4).set_pos((ui.get_item(1).get_pos()[0] + (
                 (ui.get_item(1).get_size()[0] - ui.get_item(4).get_size()[0]) / 2), ui.get_item(1).get_pos()[1] + (
                                         (ui.get_item(1).get_size()[1] - ui.get_item(4).get_size()[1]) / 2)))
@@ -141,6 +142,7 @@ while run:
             local.set_test(0)
     else:
         ui.get_item(4).set_text('OPPONENT TURN')
+        ui.get_item(1).set_color((255, 0, 0))
         ui.get_item(4).set_pos((ui.get_item(1).get_pos()[0] + (
                     (ui.get_item(1).get_size()[0] - ui.get_item(4).get_size()[0]) / 2), ui.get_item(1).get_pos()[1] + (
                                             (ui.get_item(1).get_size()[1] - ui.get_item(4).get_size()[1]) / 2)))
