@@ -6,9 +6,9 @@ Date: 2019-04-08
 
 from Network import *
 from Containers import *
-from TextFile import *
 from Objects import *
 from Mixer import *
+from Menu import *
 
 pygame.init()  # Loads the pygame modules in the program
 
@@ -35,10 +35,24 @@ pygame.display.set_caption(TITLE)  # Updates the window title with TITLE
 window.fill(color[3])  # Fills the entire surface with the color
 clock = pygame.time.Clock()  # Starts a clock object to measure time
 
+connected = False
+connection_failed = False
+while not connected:
+    # Menu #
+    menu = Menu()
+    ipv4 = menu.run_menu(connection_failed)
 
-# Network #
-network = Network()
-player_id = network.make_connection()
+    # Network #
+    try:
+        network = Network(ipv4)
+        player_id = network.make_connection()
+        if player_id in [1, 2]:
+            connected = True
+        else:
+            connection_failed = True
+
+    except socket.error as e:
+        connection_failed = True
 
 
 # Build the Checker Board #
@@ -66,36 +80,39 @@ for y in range(3):
     # Backgrounds #
 ui = Container()
 chat_room = Container()
-ui.add(Background((240, 240, 240), (320, 600), (480, 0), window))  # Add the main background for the user interface
-ui.add(Background((255, 255, 255), (300, 60), (490, 10), window))  # Displays turn
-ui.add(Background((255, 255, 255), (300, 450), (490, 80), window))  # Chat room
-ui.add(Background((255, 255, 255), (300, 50), (490, 540), window))  # Chat box
+ui.add(Background((85, 67, 46), (320, 600), (480, 0), window))  # Add the main background for the user interface
+ui.add(Background((239, 229, 217), (300, 60), (490, 10), window))  # Background for turn display
+ui.add(Background((239, 229, 217), (300, 450), (490, 80), window))  # Chat room
+ui.add(Background((239, 229, 217), (300, 50), (490, 540), window))  # Input box
     # Text #
-ui.add(Text('', window))
-ui.add(Text('', window))  # Displays chat in text box
+ui.add(Text('', window))  # Displays turn
+ui.add(Text('', window))  # Displays text in input box
 
-chat_box = Chat()
+input_box = Chat()
 
 # Music #
 music = Music()
 music.set_sound('checker_sound_effect')
 
 # --- Code Starts Here --- #
-chat_to_send = []
+chat_to_send = ''
 iteration = 0
+action = ''
 run = True
 turn = 1
 while run:
     for event in pygame.event.get():  # Returns all inputs and triggers into an array
         if event.type == pygame.QUIT:  # If the red X was clicked
             run = False
+        elif event.type == pygame.KEYDOWN:
+            action = event
     # Network #
     if local.get_selection() == '':  # No selection
-        output = network.send_and_receive(('', '', chat_to_send))
+        output = network.send_and_receive(['', '', chat_to_send])
     else:
-        output = network.send_and_receive((local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()), chat_to_send))
+        output = network.send_and_receive([local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()), chat_to_send])
 
-    chat_to_send = []
+    chat_to_send = ''
 
     if not output[0] == '':
         for item in enemy.get_list():
@@ -129,27 +146,26 @@ while run:
                                             (ui.get_item(1).get_size()[1] - ui.get_item(4).get_size()[1]) / 2)))
 
     # User Interface #
-    if iteration >= 3:
-        if chat_box.edit_characters(chat_box.get_key_input()):
-            chat_to_send = chat_box.get_text()
+    if not action == '':
+        if input_box.edit_characters(action):
+            chat_to_send = input_box.get_text()
             chat_room.offset_all((0, -20))
-            chat_room.add(Text(chat_box.get_text(), window, (500, 500), (0, 0, 0), 20))
-            chat_box.reset_characters()
-        iteration = 0
+            chat_room.add(Text(input_box.get_text(), window, (500, 500), (0, 0, 0), 20))
+            input_box.reset_characters()
+        action = ''
     else:
-        chat_to_send = []
-        iteration += 1
+        chat_to_send = ''
 
-    if not output[2] == []:
+    if len(output[2]) > 0:
         chat_room.offset_all((0, -20))
-        chat_room.add(Text(output[2], window, (500, 500), (0, 0, 0), 20))
+        chat_room.add(Text(output[2][0], window, (500, 500), (0, 0, 0), 20))
 
     for index, word in enumerate(chat_room.get_list()):
         if word.get_pos()[1] <= 80:
             chat_room.get_list().pop(index)
             del word
 
-    ui.get_item(5).set_text(chat_box.get_text())
+    ui.get_item(5).set_text(input_box.get_text())
     ui.get_item(5).set_size(20)
     ui.get_item(5).set_pos((495, 540 + (ui.get_item(3).get_size()[1] - ui.get_item(5).get_size()[1])/2))
     ui.draw()

@@ -70,3 +70,26 @@ class Background(Parent):
 
     def get_size(self):
         return self.size
+
+
+# Class creates chat box #
+class Chat:
+    def __init__(self):
+        self.keys = pygame.key.get_pressed()
+        self.user_input = ''
+
+    def edit_characters(self, event):
+        if event.key == pygame.K_BACKSPACE:
+            self.user_input = self.user_input[:-1]
+            return False
+        elif event.key == pygame.K_RETURN:
+            return True
+        else:
+            self.user_input += event.unicode
+            return False
+
+    def reset_characters(self):
+        self.user_input = ''
+
+    def get_text(self):
+        return self.user_input
