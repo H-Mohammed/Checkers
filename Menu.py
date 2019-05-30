@@ -7,7 +7,7 @@ class Menu:
     def __init__(self):
         self.screen_dim = (800, 600)
         self.display = pygame.display.set_mode(self.screen_dim)
-        self.instruction = Text("Type the Server IPv4 Address:", self.display)
+        self.instruction = Text("Enter the Server IPv4 Address:", self.display)
         self.instruction.set_pos((400 - self.instruction.get_size()[0]/2, 150))
         self.input_box_back = Background((200, 200, 200), (400, 55), (200, 160 + self.instruction.get_size()[1]), self.display)
         self.user_input = ''
