@@ -90,7 +90,7 @@ class Checker(Objects):  # This is used to make the checker pieces
             if item.gety() == self.gety() - 120 and testTR == 1:
                 if item.getx() == self.getx() + 120:
                     testTR = 0
-                    
+
         
         if (self.gety()+120 >= 8*60 or self.getx()+120 >=8*60) and testBR == 1:
             testBR = 0
@@ -258,55 +258,55 @@ class Checker(Objects):  # This is used to make the checker pieces
                                 del star
                                 return 1
             
-            if top_left == 2:
-                star.set_pos((self.getx() - 120, self.gety() - 120))
-                star.draw()
-                if self.getx()-120 <= mouse_pos[0] <= self.getx()-60 and self.gety()-120 <= mouse_pos[1] <= self.gety()-60:
-                    if mouse_pressed[0] == 1:
-                        self.set_pos((self.getx()-120,self.gety()-120))
-                        self.draw()
-                        
-                        enemy.pop(enemy.index(enemy4))
-                        del enemy4
-                        del star
-                        return 1
-            if top_right == 2:
-                star.set_pos((self.getx() + 120, self.gety() - 120))
-                star.draw()
-                if self.getx()+120 <= mouse_pos[0] <= self.getx()+180 and self.gety()-120 <= mouse_pos[1] <= self.gety()-60:
-                    if mouse_pressed[0] == 1:
-                        self.set_pos((self.getx()+120,self.gety()-120))
-                        self.draw()
-                        
-                        enemy.pop(enemy.index(enemy3))
-                        del enemy3
-                        del star
-                        return 1
-            if self.crown == 1:
-                if bottom_left == 2:
-                    star.set_pos((self.getx() - 120, self.gety() + 120))
+                if top_left == 2:
+                    star.set_pos((self.getx() - 120, self.gety() - 120))
                     star.draw()
-                    if self.getx()-120 <= mouse_pos[0] <= self.getx()-60 and self.gety()+120 <= mouse_pos[1] <= self.gety()+180:
+                    if self.getx()-120 <= mouse_pos[0] <= self.getx()-60 and self.gety()-120 <= mouse_pos[1] <= self.gety()-60:
                         if mouse_pressed[0] == 1:
-                            self.set_pos((self.getx()-120,self.gety()+120))
+                            self.set_pos((self.getx()-120,self.gety()-120))
                             self.draw()
                             
-                            enemy.pop(enemy.index(enemy2))
-                            del enemy2
+                            enemy.pop(enemy.index(enemy4))
+                            del enemy4
                             del star
                             return 1
-                if bottom_right == 2:
-                    star.set_pos((self.getx() + 120, self.gety() + 120))
+                if top_right == 2:
+                    star.set_pos((self.getx() + 120, self.gety() - 120))
                     star.draw()
-                    if self.getx()+120 <= mouse_pos[0] <= self.getx()+180 and self.gety()+120 <= mouse_pos[1] <= self.gety()+180:
+                    if self.getx()+120 <= mouse_pos[0] <= self.getx()+180 and self.gety()-120 <= mouse_pos[1] <= self.gety()-60:
                         if mouse_pressed[0] == 1:
-                            self.set_pos((self.getx()+120,self.gety()+120))
+                            self.set_pos((self.getx()+120,self.gety()-120))
                             self.draw()
-                            enemy.pop(enemy.index(enemy1))
-                            del enemy1
+                            
+                            enemy.pop(enemy.index(enemy3))
+                            del enemy3
                             del star
                             return 1
-                    
+                if self.crown == 1:
+                    if bottom_left == 2:
+                        star.set_pos((self.getx() - 120, self.gety() + 120))
+                        star.draw()
+                        if self.getx()-120 <= mouse_pos[0] <= self.getx()-60 and self.gety()+120 <= mouse_pos[1] <= self.gety()+180:
+                            if mouse_pressed[0] == 1:
+                                self.set_pos((self.getx()-120,self.gety()+120))
+                                self.draw()
+                                
+                                enemy.pop(enemy.index(enemy2))
+                                del enemy2
+                                del star
+                                return 1
+                    if bottom_right == 2:
+                        star.set_pos((self.getx() + 120, self.gety() + 120))
+                        star.draw()
+                        if self.getx()+120 <= mouse_pos[0] <= self.getx()+180 and self.gety()+120 <= mouse_pos[1] <= self.gety()+180:
+                            if mouse_pressed[0] == 1:
+                                self.set_pos((self.getx()+120,self.gety()+120))
+                                self.draw()
+                                enemy.pop(enemy.index(enemy1))
+                                del enemy1
+                                del star
+                                return 1
+                        
         if color == 1:
             if self.gety() == 7*60:
                 self.crown = 1
@@ -349,55 +349,54 @@ class Checker(Objects):  # This is used to make the checker pieces
                             self.draw()
                             del star
                             return 1
-            if self.crown == 1:
-                if top_left == 2:
-                    star.set_pos((self.getx() - 120, self.gety() - 120))
-                    star.draw()
-                    if self.getx()-120 <= mouse_pos[0] <= self.getx()-60 and self.gety()-120 <= mouse_pos[1] <= self.gety()-60:
-                        if mouse_pressed[0] == 1:
-                            self.set_pos((self.getx()-120,self.gety()-120))
-                            self.draw()
-                            
-                            enemy.pop(enemy.index(enemy4))
-                            del enemy4
-                            del star
-                            return 1
-                if top_right == 2:
-                    star.set_pos((self.getx() + 120, self.gety() - 120))
-                    star.draw()
-                    if self.getx()+120 <= mouse_pos[0] <= self.getx()+180 and self.gety()-120 <= mouse_pos[1] <= self.gety()-60:
-                        if mouse_pressed[0] == 1:
-                            self.set_pos((self.getx()+120,self.gety()-120))
-                            self.draw()
-                            
-                            enemy.pop(enemy.index(enemy3))
-                            del enemy3
-                            del star
-                            return 1
+                if self.crown == 1:
+                    if top_left == 2:
+                        star.set_pos((self.getx() - 120, self.gety() - 120))
+                        star.draw()
+                        if self.getx()-120 <= mouse_pos[0] <= self.getx()-60 and self.gety()-120 <= mouse_pos[1] <= self.gety()-60:
+                            if mouse_pressed[0] == 1:
+                                self.set_pos((self.getx()-120,self.gety()-120))
+                                self.draw()
+                                
+                                enemy.pop(enemy.index(enemy4))
+                                del enemy4
+                                del star
+                                return 1
+                    if top_right == 2:
+                        star.set_pos((self.getx() + 120, self.gety() - 120))
+                        star.draw()
+                        if self.getx()+120 <= mouse_pos[0] <= self.getx()+180 and self.gety()-120 <= mouse_pos[1] <= self.gety()-60:
+                            if mouse_pressed[0] == 1:
+                                self.set_pos((self.getx()+120,self.gety()-120))
+                                self.draw()
+                                
+                                enemy.pop(enemy.index(enemy3))
+                                del enemy3
+                                del star
+                                return 1
 
-        if bottom_left == 2:
-            star.set_pos((self.getx() - 120, self.gety() + 120))
-            star.draw()
-            if self.getx()-120 <= mouse_pos[0] <= self.getx()-60 and self.gety()+120 <= mouse_pos[1] <= self.gety()+180:
-                if mouse_pressed[0] == 1:
-                    self.set_pos((self.getx()-120,self.gety()+120))
-                    self.draw()
-                    
-                    enemy.pop(enemy.index(enemy2))
-                    del enemy2
-                    del star
-                    return 1
-        if bottom_right == 2:
-            star.set_pos((self.getx() + 120, self.gety() + 120))
-            star.draw()
-            if self.getx()+120 <= mouse_pos[0] <= self.getx()+180 and self.gety()+120 <= mouse_pos[1] <= self.gety()+180:
-                if mouse_pressed[0] == 1:
-                    self.set_pos((self.getx()+120,self.gety()+120))
-                    self.draw()
-                    enemy.pop(enemy.index(enemy1))
-                    del enemy1
-                    del star
-                    return 1
+                if bottom_left == 2:
+                    star.set_pos((self.getx() - 120, self.gety() + 120))
+                    star.draw()
+                    if self.getx()-120 <= mouse_pos[0] <= self.getx()-60 and self.gety()+120 <= mouse_pos[1] <= self.gety()+180:
+                        if mouse_pressed[0] == 1:
+                            self.set_pos((self.getx()-120,self.gety()+120))
+                            self.draw()
+                            enemy.pop(enemy.index(enemy2))
+                            del enemy2
+                            del star
+                            return 1
+                if bottom_right == 2:
+                    star.set_pos((self.getx() + 120, self.gety() + 120))
+                    star.draw()
+                    if self.getx()+120 <= mouse_pos[0] <= self.getx()+180 and self.gety()+120 <= mouse_pos[1] <= self.gety()+180:
+                        if mouse_pressed[0] == 1:
+                            self.set_pos((self.getx()+120,self.gety()+120))
+                            self.draw()
+                            enemy.pop(enemy.index(enemy1))
+                            del enemy1
+                            del star
+                            return 1
         
 
 class Square(Objects):  # This is used to make the board
