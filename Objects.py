@@ -190,13 +190,13 @@ class Checker(Objects):  # This is used to make the checker pieces
             bottom_right = 1
         if self.gety()+120 >= 8*60 and bottom_right == 0:
             bottom_right = 3
-        if self.gety()-60 <= 0 and top_left == 0:
+        if self.gety()-60 < 0 and top_left == 0:
             top_left = 1
-        if self.gety()-120 <= 0 and top_left == 2:
+        if self.gety()-120 < 0 and top_left == 2:
             top_left = 3
-        if self.gety()-60 <= 0 and top_right == 0:
+        if self.gety()-60 < 0 and top_right == 0:
             top_right = 1
-        if self.gety()-120 <= 0 and top_right == 2:
+        if self.gety()-120 < 0 and top_right == 2:
             top_right = 3
         
         
