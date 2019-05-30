@@ -90,6 +90,7 @@ class Checker(Objects):  # This is used to make the checker pieces
             if item.gety() == self.gety() - 120 and testTR == 1:
                 if item.getx() == self.getx() + 120:
                     testTR = 0
+                    
         
         if (self.gety()+120 >= 8*60 or self.getx()+120 >=8*60) and testBR == 1:
             testBR = 0
