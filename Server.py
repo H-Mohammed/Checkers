@@ -19,10 +19,15 @@ def threaded_client(conn, player):
     while True:
         try:
             new_data = pickle.loads(conn.recv(2048))  # Get new positions made by the client
-            selection[player - 1] = new_data  # Update the selection of player
-            conn.sendall(pickle.dumps(selection[player % 2]))  # Send enemy info to client
+            # Update Selection of Current Player #
+            selection[player - 1][0] = new_data[0]
+            selection[player - 1][1] = new_data[1]
+            if not new_data[2] == '':
+                selection[player - 1][2].append(new_data[2])
+            # Send enemy info to client #
+            conn.sendall(pickle.dumps(selection[player % 2]))
             if not selection[player % 2][2] == []:
-                selection[player % 2][2] = []
+                selection[player % 2][2].pop(0)
         except socket.error:
             break
 

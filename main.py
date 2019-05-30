@@ -95,7 +95,7 @@ music = Music()
 music.set_sound('checker_sound_effect')
 
 # --- Code Starts Here --- #
-chat_to_send = []
+chat_to_send = ''
 iteration = 0
 action = ''
 run = True
@@ -112,7 +112,7 @@ while run:
     else:
         output = network.send_and_receive([local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()), chat_to_send])
 
-    chat_to_send = []
+    chat_to_send = ''
 
     if not output[0] == '':
         for item in enemy.get_list():
@@ -154,11 +154,11 @@ while run:
             input_box.reset_characters()
         action = ''
     else:
-        chat_to_send = []
+        chat_to_send = ''
 
-    if not output[2] == []:
+    if len(output[2]) > 0:
         chat_room.offset_all((0, -20))
-        chat_room.add(Text(output[2], window, (500, 500), (0, 0, 0), 20))
+        chat_room.add(Text(output[2][0], window, (500, 500), (0, 0, 0), 20))
 
     for index, word in enumerate(chat_room.get_list()):
         if word.get_pos()[1] <= 80:
