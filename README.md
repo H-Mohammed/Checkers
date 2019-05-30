@@ -63,6 +63,8 @@ You can play the game against a computer or another player.
     - Use this to make checker pieces
  - Container
     - Parent class for all objects that store other objects
+ - Menu
+    - Used to create the menu
  - Music
     - Plays sounds
  - Network

@@ -6,9 +6,9 @@ Date: 2019-04-08
 
 from Network import *
 from Containers import *
-from TextFile import *
 from Objects import *
 from Mixer import *
+from Menu import *
 
 pygame.init()  # Loads the pygame modules in the program
 
@@ -35,6 +35,12 @@ pygame.display.set_caption(TITLE)  # Updates the window title with TITLE
 window.fill(color[3])  # Fills the entire surface with the color
 clock = pygame.time.Clock()  # Starts a clock object to measure time
 
+
+# Menu #
+"""
+menu = Menu()
+menu.run_menu()
+"""
 
 # Network #
 network = Network()
