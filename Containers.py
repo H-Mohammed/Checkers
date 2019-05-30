@@ -50,29 +50,5 @@ class Player(Container):  # Stores pieces
     def set_selection(self, var):
         self.selection = var
 
-    def set_test(self,num):
+    def set_test(self, num):
         self.test = num
-
-
-# Class creates chat box #
-class Chat(Container):
-    def __init__(self):
-        super().__init__()
-        self.keys = pygame.key.get_pressed()
-        self.user_input = ''
-
-    def edit_characters(self, event):
-        if event.key == pygame.K_BACKSPACE:
-            self.user_input = self.user_input[:-1]
-            return False
-        elif event.key == pygame.K_RETURN:
-            return True
-        else:
-            self.user_input += event.unicode
-            return False
-
-    def reset_characters(self):
-        self.user_input = ''
-
-    def get_text(self):
-        return self.user_input

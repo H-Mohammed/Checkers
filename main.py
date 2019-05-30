@@ -35,14 +35,12 @@ pygame.display.set_caption(TITLE)  # Updates the window title with TITLE
 window.fill(color[3])  # Fills the entire surface with the color
 clock = pygame.time.Clock()  # Starts a clock object to measure time
 
-"""
 # Menu #
 menu = Menu()
-menu.run_menu()
-"""
+ipv4 = menu.run_menu()
 
 # Network #
-network = Network()
+network = Network(ipv4)
 player_id = network.make_connection()
 
 
@@ -72,12 +70,12 @@ for y in range(3):
 ui = Container()
 chat_room = Container()
 ui.add(Background((240, 240, 240), (320, 600), (480, 0), window))  # Add the main background for the user interface
-ui.add(Background((255, 255, 255), (300, 60), (490, 10), window))  # Displays turn
+ui.add(Background((255, 255, 255), (300, 60), (490, 10), window))  # Background for turn display
 ui.add(Background((255, 255, 255), (300, 450), (490, 80), window))  # Chat room
-ui.add(Background((255, 255, 255), (300, 50), (490, 540), window))  # Chat box
+ui.add(Background((255, 255, 255), (300, 50), (490, 540), window))  # Input box
     # Text #
-ui.add(Text('', window))
-ui.add(Text('', window))  # Displays chat in text box
+ui.add(Text('', window))  # Displays turn
+ui.add(Text('', window))  # Displays text in input box
 
 input_box = Chat()
 
