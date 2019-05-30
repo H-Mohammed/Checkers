@@ -44,7 +44,7 @@ class Checker(Objects):  # This is used to make the checker pieces
     def get_id(self):
         return self.id
     
-    def checkCapture(self,enemy):
+    def checkCapture(self,enemy,pieces):
         testBR = 0
         testBL = 0
         testTR = 0
@@ -62,6 +62,21 @@ class Checker(Objects):  # This is used to make the checker pieces
                 if item.getx() == self.getx() - 60:
                     testTL = 1
         for item in enemy:
+            if item.gety() == self.gety() + 120 and testBR == 1:
+                if item.getx() == self.getx() + 120:
+                    testBR = 0
+            
+            if item.gety() == self.gety() + 120 and testBL == 1:
+                if item.getx() == self.getx() - 120:
+                    testBL = 0
+            if item.gety() == self.gety() - 120 and testTL == 1:
+                if item.getx() == self.getx() - 120:
+                    testTL = 0
+            if item.gety() == self.gety() - 120 and testTR == 1:
+                if item.getx() == self.getx() + 120:
+                    testTR = 0
+        
+        for item in pieces:
             if item.gety() == self.gety() + 120 and testBR == 1:
                 if item.getx() == self.getx() + 120:
                     testBR = 0
@@ -161,7 +176,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                         top_right = 3
         
         for item in pieces:
-            if item.checkCapture(enemy):
+            if item.checkCapture(enemy,pieces):
                 capture = 1
                 break
             
@@ -293,7 +308,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                     
         if color == 1:
             if self.gety() == 7*60:
-                    self.crown = 1
+                self.crown = 1
             if not (top_left == 2 or top_right == 2 or bottom_left == 2 or bottom_right == 2) and capture == 0:
                 if self.crown == 1:
                     if top_left == 0:
