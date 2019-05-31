@@ -126,21 +126,23 @@ class Checker(Objects):  # This is used to make the checker pieces
                     top_left = 1
 
         for item in enemy:
-            if item.gety() == self.gety() + 60:
-                if item.getx() == self.getx() + 60:
-                    bottom_right = 2
-                    enemy1 = item
-                        
-                if item.getx() == self.getx() - 60:
-                    bottom_left = 2
-                    enemy2 = item
-            if item.gety() == self.gety() - 60:
-                if item.getx() == self.getx() + 60:
-                    top_right = 2
-                    enemy3 = item
-                if item.getx() == self.getx() - 60:
-                    top_left = 2
-                    enemy4 = item
+            if crown == 1 and not color == 1:
+                if item.gety() == self.gety() + 60:
+                    if item.getx() == self.getx() + 60:
+                        bottom_right = 2
+                        enemy1 = item
+                            
+                    if item.getx() == self.getx() - 60:
+                        bottom_left = 2
+                        enemy2 = item
+            if not color == 0:
+                if item.gety() == self.gety() - 60:
+                    if item.getx() == self.getx() + 60:
+                        top_right = 2
+                        enemy3 = item
+                    if item.getx() == self.getx() - 60:
+                        top_left = 2
+                        enemy4 = item
         for item in enemy:
             if bottom_right == 2:
                 if item.gety() == self.gety() + 120:
