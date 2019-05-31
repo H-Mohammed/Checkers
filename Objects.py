@@ -126,7 +126,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                     top_left = 1
 
         for item in enemy:
-            if crown == 1 and not color == 1:
+            if self.crown == 1 and not color == 1:
                 if item.gety() == self.gety() + 60:
                     if item.getx() == self.getx() + 60:
                         bottom_right = 2
