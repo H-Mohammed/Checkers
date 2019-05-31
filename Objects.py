@@ -219,8 +219,7 @@ class Checker(Objects):  # This is used to make the checker pieces
         
         
         if color == 0:
-            if self.gety() == 0:
-                self.crown = 1
+            
             if not (top_left == 2 or top_right == 2 or bottom_left == 2 or bottom_right == 2) and capture == 0:
                 if top_left == 0:
                     star.set_pos((self.getx() - 60, self.gety() - 60))
@@ -305,10 +304,11 @@ class Checker(Objects):  # This is used to make the checker pieces
                             del enemy1
                             del star
                             return 1
+            if self.gety() == 0:
+                self.crown = 1
                         
         if color == 1:
-            if self.gety() == 7*60:
-                self.crown = 1
+            
             if not (top_left == 2 or top_right == 2 or bottom_left == 2 or bottom_right == 2) and capture == 0:
                 if self.crown == 1:
                     if top_left == 0:
@@ -394,6 +394,8 @@ class Checker(Objects):  # This is used to make the checker pieces
                         del enemy1
                         del star
                         return 1
+            if self.gety() == 7*60:
+                self.crown = 1
         
 
 class Square(Objects):  # This is used to make the board
