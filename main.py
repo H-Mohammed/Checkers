@@ -108,17 +108,27 @@ while run:
             action = event
     # Network #
     if local.get_selection() == '':  # No selection
+        print('Player ' + str(player_id) + ' sent: ' + str(
+            ['', '', chat_to_send]))
         output = network.send_and_receive(['', '', chat_to_send])
     else:
+        print('Player ' + str(player_id) + ' sent: ' + str(
+            [local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()),
+             chat_to_send]))
         output = network.send_and_receive([local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()), chat_to_send])
 
     chat_to_send = ''
 
+    print('Player ' + str(player_id) + ' received: ' + str(output))
     if not output[0] == '':
+        print("Breakpoint 1")
         for item in enemy.get_list():
             if output[0] == item.get_id() and not output[1] == (420 - item.get_pos()[0], 420 - item.get_pos()[1]):
+                print("Breakpoint 2")
                 while True:
+                    print("Breakpoint 3")
                     if item.pos_movement(enemy.get_list(), local.get_list(), (420 - output[1][0], 420 - output[1][1]), (1, 0, 0),1):
+                        print("Breakpoint 4")
                         music.play()
                         item.draw()
                         turn = (turn * 2) % 3  # Switch turns
