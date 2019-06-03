@@ -1,5 +1,4 @@
 # This file is used to make the menu #
-import pygame
 from TextFile import *
 
 

@@ -1,6 +1,4 @@
 # This file contains objects that aggregate other objects #
-import pygame
-from Mixer import *
 
 
 # Class creates container objects
@@ -39,10 +37,10 @@ class Player(Container):  # Stores pieces
                 if mouse_pressed[0] == 1:
                     self.selection = item
                     self.test = 1
-                    return item.pos_movement(self.list, enemy.get_list(), mouse_pos, mouse_pressed,color)
+                    return item.pos_movement(self.list, enemy.get_list(), mouse_pos, mouse_pressed, color)
 
         if self.test == 1:
-            return self.selection.pos_movement(self.list, enemy.get_list(), mouse_pos, mouse_pressed,color)
+            return self.selection.pos_movement(self.list, enemy.get_list(), mouse_pos, mouse_pressed, color)
 
     def get_selection(self):
         return self.selection

@@ -1,4 +1,5 @@
-import socket, pickle
+import socket
+import pickle
 
 
 class Network:
