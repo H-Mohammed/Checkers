@@ -34,4 +34,3 @@ class Music:
     @staticmethod
     def set_volume(volume):
         pygame.mixer.music.set_volume(volume)
-

@@ -1,5 +1,5 @@
 # This file contains classes that make individual objects #
-import pygame
+from Mixer import *
 
 
 class Objects:  # This is the parent class used to make any objects
@@ -116,6 +116,8 @@ class Checker(Objects):  # This is used to make the checker pieces
 
     def pos_movement(self, pieces, enemy, mouse_pos, mouse_pressed,color):
         star = Star(self.surface, 'media/Star.png', (0, 0))  # Create the star
+        music = Music()
+        music.set_sound('checker_sound_effect')
         top_right = 0
         top_left = 0
         bottom_right = 0
@@ -243,6 +245,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                         if mouse_pressed[0] == 1:
                             self.set_pos((self.getx() - 60, self.gety() - 60))
                             self.draw()
+                            music.play()
                             del star
                             return 1
                 if top_right == 0:
@@ -253,6 +256,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                         if mouse_pressed[0] == 1:
                             self.set_pos((self.getx() + 60, self.gety() - 60))
                             self.draw()
+                            music.play()
                             del star
                             return 1
                 if self.crown == 1:
@@ -264,6 +268,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                             if mouse_pressed[0] == 1:
                                 self.set_pos((self.getx()-60,self.gety()+60))
                                 self.draw()
+                                music.play()
                                 del star
                                 return 1
                     if bottom_right == 0:
@@ -274,6 +279,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                             if mouse_pressed[0] == 1:
                                 self.set_pos((self.getx()+60,self.gety()+60))
                                 self.draw()
+                                music.play()
                                 del star
                                 return 1
             # Check if player can capture top left #
@@ -284,6 +290,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                     if mouse_pressed[0] == 1:
                         self.set_pos((self.getx()-120,self.gety()-120))
                         self.draw()
+                        music.play()
                         enemy.pop(enemy.index(enemy4))
                         del enemy4
                         del star
@@ -296,6 +303,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                     if mouse_pressed[0] == 1:
                         self.set_pos((self.getx()+120,self.gety()-120))
                         self.draw()
+                        music.play()
                         enemy.pop(enemy.index(enemy3))
                         del enemy3
                         del star
@@ -309,6 +317,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                         if mouse_pressed[0] == 1:
                             self.set_pos((self.getx()-120,self.gety()+120))
                             self.draw()
+                            music.play()
                             enemy.pop(enemy.index(enemy2))
                             del enemy2
                             del star
@@ -321,6 +330,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                         if mouse_pressed[0] == 1:
                             self.set_pos((self.getx()+120,self.gety()+120))
                             self.draw()
+                            music.play()
                             enemy.pop(enemy.index(enemy1))
                             del enemy1
                             del star
@@ -341,6 +351,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                             if mouse_pressed[0] == 1:
                                 self.set_pos((self.getx() - 60, self.gety() - 60))
                                 self.draw()
+                                music.play()
                                 del star
                                 return 1
 
@@ -352,6 +363,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                             if mouse_pressed[0] == 1:
                                 self.set_pos((self.getx() + 60, self.gety() - 60))
                                 self.draw()
+                                music.play()
                                 del star
                                 return 1
                 if bottom_left == 0:
@@ -362,6 +374,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                         if mouse_pressed[0] == 1:
                             self.set_pos((self.getx() - 60, self.gety() + 60))
                             self.draw()
+                            music.play()
                             del star
                             return 1
                 if bottom_right == 0:
@@ -372,6 +385,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                         if mouse_pressed[0] == 1:
                             self.set_pos((self.getx() + 60, self.gety() + 60))
                             self.draw()
+                            music.play()
                             del star
                             return 1
             if self.crown == 1:
@@ -383,6 +397,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                         if mouse_pressed[0] == 1:
                             self.set_pos((self.getx() - 120, self.gety() - 120))
                             self.draw()
+                            music.play()
                             enemy.pop(enemy.index(enemy4))
                             del enemy4
                             del star
@@ -395,6 +410,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                         if mouse_pressed[0] == 1:
                             self.set_pos((self.getx() + 120, self.gety() - 120))
                             self.draw()
+                            music.play()
                             enemy.pop(enemy.index(enemy3))
                             del enemy3
                             del star
@@ -408,6 +424,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                     if mouse_pressed[0] == 1:
                         self.set_pos((self.getx() - 120, self.gety() + 120))
                         self.draw()
+                        music.play()
                         enemy.pop(enemy.index(enemy2))
                         del enemy2
                         del star
@@ -420,6 +437,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                     if mouse_pressed[0] == 1:
                         self.set_pos((self.getx() + 120, self.gety() + 120))
                         self.draw()
+                        music.play()
                         enemy.pop(enemy.index(enemy1))
                         del enemy1
                         del star
