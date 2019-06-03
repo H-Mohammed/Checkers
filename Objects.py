@@ -50,7 +50,7 @@ class Checker(Objects):  # This is used to make the checker pieces
     def get_id(self):
         return self.id
     
-    def checkMovement(self,enemy,pieces)
+    def checkMovement(self,enemy,pieces,color)
         top_right = 0
         top_left = 0
         bottom_right = 0
