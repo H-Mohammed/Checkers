@@ -123,7 +123,6 @@ while run:
     if not output[0] == '':
         for item in enemy.get_list():
             if output[0] == item.get_id() and not output[1] == (420 - item.get_pos()[0], 420 - item.get_pos()[1]):
-                #TODO: pos_movement is supposed to return True somewhere
                 if item.pos_movement(enemy.get_list(), local.get_list(), (420 - output[1][0], 420 - output[1][1]), (1, 0, 0), 1):
                     music.play()
                     item.draw()
