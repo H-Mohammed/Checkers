@@ -49,6 +49,121 @@ class Checker(Objects):  # This is used to make the checker pieces
 
     def get_id(self):
         return self.id
+    
+    def checkMovement(self,enemy,pieces)
+        top_right = 0
+        top_left = 0
+        bottom_right = 0
+        bottom_left = 0
+        # --- Checks if diagonal is occupied by a friendly piece --- #
+        # 1 means diagonal is occupied #
+        for item in pieces:
+            if item.gety() == self.gety() + 60:
+                if item.getx() == self.getx() + 60:
+                    bottom_right = 1
+                if item.getx() == self.getx() - 60:
+                    bottom_left = 1
+            if item.gety() == self.gety() - 60:
+                if item.getx() == self.getx() + 60:
+                    top_right = 1
+                if item.getx() == self.getx() - 60:
+                    top_left = 1
+
+        # --- Checks if there is an enemy at each diagonal --- #
+        # 2 means there is an enemy piece at diagonal #
+        for item in enemy:
+            if self.crown == 1 or color == 1:
+                if item.gety() == self.gety() + 60:
+                    if item.getx() == self.getx() + 60:
+                        bottom_right = 2
+                        enemy1 = item
+                    if item.getx() == self.getx() - 60:
+                        bottom_left = 2
+                        enemy2 = item
+            if color == 0 or self.crown == 1:
+                if item.gety() == self.gety() - 60:
+                    if item.getx() == self.getx() + 60:
+                        top_right = 2
+                        enemy3 = item
+                    if item.getx() == self.getx() - 60:
+                        top_left = 2
+                        enemy4 = item
+        # --- Checks if enemy piece cannot be captured --- #
+        # 3 means it CANNOT be captured #
+        for item in enemy:
+            if bottom_right == 2:
+                if item.gety() == self.gety() + 120:
+                    if item.getx() == self.getx() + 120:
+                        bottom_right = 3
+            if bottom_left == 2:
+                if item.gety() == self.gety() + 120:
+                    if item.getx() == self.getx() - 120:
+                        bottom_left = 3
+            if top_left == 2:
+                if item.gety() == self.gety() - 120:
+                    if item.getx() == self.getx() - 120:
+                        top_left = 3
+            if top_right == 2:
+                if item.gety() == self.gety() - 120:
+                    if item.getx() == self.getx() + 120:
+                        top_right = 3
+        for item in pieces:
+            if bottom_right == 2:
+                if item.gety() == self.gety() + 120:
+                    if item.getx() == self.getx() + 120:
+                        bottom_right = 3
+            if bottom_left == 2:
+                if item.gety() == self.gety() + 120:
+                    if item.getx() == self.getx() - 120:
+                        bottom_left = 3
+            if top_left == 2:
+                if item.gety() == self.gety() - 120:
+                    if item.getx() == self.getx() - 120:
+                        top_left = 3
+            if top_right == 2:
+                if item.gety() == self.gety() - 120:
+                    if item.getx() == self.getx() + 120:
+                        top_right = 3
+        # --- Check if move is out of bounds --- #
+        # x-coordinate #
+        if self.getx() + 60 >= 480 and top_right == 0:
+            top_right = 1
+        if self.getx() + 120 >= 480 and top_right == 2:
+            top_right = 3
+        if self.getx() - 60 < 0 and top_left == 0:
+            top_left = 1
+        if self.getx() - 120 < 0 and top_left == 2:
+            top_left = 3
+        if self.getx() - 60 < 0 and bottom_left == 0:
+            bottom_left = 1
+        if self.getx() - 120 < 0 and bottom_left == 2:
+            bottom_left = 3
+        if self.getx() + 60 >= 480 and bottom_right == 0:
+            bottom_right = 1
+        if self.getx() + 120 >= 480 and bottom_right == 2:
+            bottom_right = 3
+        # y-coordinate #
+        if self.gety() + 60 >= 480 and bottom_left == 0:
+            bottom_left = 1
+        if self.gety() + 120 >= 480 and bottom_left == 2:
+            bottom_left = 3
+        if self.gety() + 60 >= 480 and bottom_right == 0:
+            bottom_right = 1
+        if self.gety() + 120 >= 480 and bottom_right == 2:
+            bottom_right = 3
+        if self.gety() - 60 < 0 and top_left == 0:
+            top_left = 1
+        if self.gety() - 120 < 0 and top_left == 2:
+            top_left = 3
+        if self.gety() - 60 < 0 and top_right == 0:
+            top_right = 1
+        if self.gety() - 120 < 0 and top_right == 2:
+            top_right = 3
+        
+        if top_right == 0 or top_right == 2 or top_left == 0 or top_left == 2 or bottom_right == 0 or bottom_right == 2 or bottom_left == 0 or bottom_left == 2:
+            return 1
+        else:
+            return 0
 
     def checkCapture(self, enemy, pieces):  # Checks if the piece can capture
         testBR = 0  # Tests if there is a piece on Bottom Right

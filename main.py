@@ -102,6 +102,7 @@ iteration = 0
 action = ''
 run = True
 turn = 1
+posMove = 0
 while run:
     for event in pygame.event.get():  # Returns all inputs and triggers into an array
         if event.type == pygame.QUIT:  # If the red X was clicked
@@ -178,6 +179,28 @@ while run:
         if word.get_pos()[1] <= 80:
             chat_room.get_list().pop(index)
             del word
+    
+    if len(local.get_list()) == 0:
+        print('You Lose')
+    if len(enemy.get_list()) == 0:
+        print('You Win')
+
+
+    for i in local.get_list():
+        if i.checkMovement(local.get_list(),enemy.get_list()):
+            break
+        else:
+            posMove = 1
+    
+    if posMove = 1:
+        for i in enemy.get_list():
+            if i.checkMovement(enemy.get_list(),local.get_list()):
+                print("You Lose")
+                break
+        print('Tie')
+
+
+
 
     ui.get_item(5).set_text(input_box.get_text())
     ui.get_item(5).set_size(20)
