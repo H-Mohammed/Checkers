@@ -14,3 +14,7 @@ class Endscreen:
             for event in pygame.event.get():  # Returns all inputs and triggers into an array
                 if event.type == pygame.QUIT:  # If the red X was clicked
                     run = False
+
+            self.display.fill((255, 255, 255))
+
+            pygame.display.update()

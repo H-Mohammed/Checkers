@@ -8,6 +8,7 @@ from Network import *
 from Containers import *
 from Objects import *
 from Menu import *
+from Endscreen import *
 
 pygame.init()  # Loads the pygame modules in the program
 
@@ -179,33 +180,43 @@ while run:
         if word.get_pos()[1] <= 80:
             chat_room.get_list().pop(index)
             del word
-    
-    if len(local.get_list()) == 0:
-        print('You Lose')
-    if len(enemy.get_list()) == 0:
-        print('You Win')
+
+    ui.get_item(5).set_text(input_box.get_text())
+    ui.get_item(5).set_size(20)
+    ui.get_item(5).set_pos((495, 540 + (ui.get_item(3).get_size()[1] - ui.get_item(5).get_size()[1]) / 2))
+    ui.draw()
+    chat_room.draw()
+
+    # Win/Lose Algorithm #
+    if len(local.get_list()) == 0:  # You lose
+        output = network.send_and_receive(
+            [local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()),
+             chat_to_send])
+        endscreen = Endscreen()
+        endscreen.run_endscreen()
+    if len(enemy.get_list()) == 0:  # You win
+        output = network.send_and_receive(
+            [local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()),
+             chat_to_send])
+        endscreen = Endscreen()
+        endscreen.run_endscreen()
 
     posMove = 1
     for i in local.get_list():
-        if i.checkMovement(local.get_list(),enemy.get_list(),0):
+        if i.checkMovement(local.get_list(), enemy.get_list(), 0):
             posMove = 0
     
     if posMove == 1:
         for i in enemy.get_list():
-            if i.checkMovement(enemy.get_list(),local.get_list(),1):
-                print("You Lose")
+            if i.checkMovement(enemy.get_list(), local.get_list(), 1):
+                output = network.send_and_receive(
+                    [local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()),
+                     chat_to_send])
+                endscreen = Endscreen
+                endscreen.run_endscreen()
                 break
         print('Tie')
 
-
-
-
-    ui.get_item(5).set_text(input_box.get_text())
-    ui.get_item(5).set_size(20)
-    ui.get_item(5).set_pos((495, 540 + (ui.get_item(3).get_size()[1] - ui.get_item(5).get_size()[1])/2))
-    ui.draw()
-    chat_room.draw()
-        
     clock.tick(FPS)  # Pause the game until the FPS time is reached
     pygame.display.update()  # Updates the display
 pygame.quit()
