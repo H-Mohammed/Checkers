@@ -190,7 +190,7 @@ while run:
         if i.checkMovement(local.get_list(),enemy.get_list(),0):
             posMove = 0
     
-    if posMove = 1:
+    if posMove == 1:
         for i in enemy.get_list():
             if i.checkMovement(enemy.get_list(),local.get_list(),1):
                 print("You Lose")
