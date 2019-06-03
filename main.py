@@ -7,7 +7,6 @@ Date: 2019-04-08
 from Network import *
 from Containers import *
 from Objects import *
-from Mixer import *
 from Menu import *
 
 pygame.init()  # Loads the pygame modules in the program
@@ -35,9 +34,15 @@ pygame.display.set_caption(TITLE)  # Updates the window title with TITLE
 window.fill(color[3])  # Fills the entire surface with the color
 clock = pygame.time.Clock()  # Starts a clock object to measure time
 
+music = Music()
+music.set_sound('lobby_music.mp3')
+music.play()
 connected = False
 connection_failed = False
 while not connected:
+    # Music #
+    if music.at_end():
+        music.play()
     # Menu #
     menu = Menu()
     ipv4 = menu.run_menu(connection_failed)
@@ -53,6 +58,7 @@ while not connected:
 
     except socket.error as e:
         connection_failed = True
+music.stop()
 
 
 # Build the Checker Board #

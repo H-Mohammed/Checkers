@@ -6,12 +6,12 @@ class Music:
     def __init__(self):
         self.music_directory = 'music'
         self.music = ""
-        pygame.mixer.music.set_endevent(444)
+        pygame.mixer.music.set_endevent()
 
     # Method gets the end of a song #
     @staticmethod
     def at_end():
-        end_of_song = pygame.mixer.music.get_endevent(444)
+        end_of_song = pygame.mixer.music.get_endevent()
         if end_of_song:
             return True
         return False
@@ -34,3 +34,7 @@ class Music:
     @staticmethod
     def set_volume(volume):
         pygame.mixer.music.set_volume(volume)
+
+    @staticmethod
+    def stop():
+        pygame.mixer.music.stop()
