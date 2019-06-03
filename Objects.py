@@ -44,11 +44,12 @@ class Checker(Objects):  # This is used to make the checker pieces
     def get_id(self):
         return self.id
     
-    def checkCapture(self,enemy,pieces):
-        testBR = 0
-        testBL = 0
-        testTR = 0
-        testTL = 0
+    def checkCapture(self, enemy, pieces):  # Checks if the piece can capture
+        testBR = 0  # Tests if there is a piece on Bottom Right
+        testBL = 0  # Tests if there is a piece on Bottom Left
+        testTR = 0  # Tests if there is a piece on Top Right
+        testTL = 0  # Tests if there is a piece on Top Left
+        # --- Tests if there is a piece 1 unit diagonally --- #
         for item in enemy:
             if self.crown == 1:
                 if item.gety() == self.gety() + 60:
@@ -61,6 +62,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                     testTR = 1
                 if item.getx() == self.getx() - 60:
                     testTL = 1
+        # --- Tests if there is a piece 2 units diagonally --- #
         for item in enemy:
             if item.gety() == self.gety() + 120 and testBR == 1:
                 if item.getx() == self.getx() + 120:
@@ -75,7 +77,7 @@ class Checker(Objects):  # This is used to make the checker pieces
             if item.gety() == self.gety() - 120 and testTR == 1:
                 if item.getx() == self.getx() + 120:
                     testTR = 0
-        
+
         for item in pieces:
             if item.gety() == self.gety() + 120 and testBR == 1:
                 if item.getx() == self.getx() + 120:
@@ -91,20 +93,19 @@ class Checker(Objects):  # This is used to make the checker pieces
                 if item.getx() == self.getx() + 120:
                     testTR = 0
 
-        
-        if (self.gety()+120 >= 8*60 or self.getx()+120 >=8*60) and testBR == 1:
+        # --- Checks if move is out of bounds --- #
+        if (self.gety() + 120 >= 480 or self.getx() + 120 >= 480) and testBR == 1:
             testBR = 0
-        if (self.gety()+120 >= 8*60 or self.getx()-120 <= 0) and testBL == 1:
+        if (self.gety() + 120 >= 480 or self.getx() - 120 <= 0) and testBL == 1:
             testBL = 0
-        if (self.gety()-120 <= 0 or self.getx()+120 >= 8*60) and testTR == 1:
+        if (self.gety() - 120 <= 0 or self.getx() + 120 >= 480) and testTR == 1:
             testTR = 0
-        if (self.gety()-120 <= 0 or self.getx()-120 <= 0) and testTL == 1:
+        if (self.gety() - 120 <= 0 or self.getx() - 120 <= 0) and testTL == 1:
             testTL = 0
         if testBL == 1 or testBR == 1 or testTL == 1 or testTR == 1:
             return True
         else:
             return False
-
 
     def pos_movement(self, pieces, enemy, mouse_pos, mouse_pressed,color):
         star = Star(self.surface, 'media/Star.png', (0, 0))  # Create the star
