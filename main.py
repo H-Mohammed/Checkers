@@ -122,16 +122,22 @@ while run:
     #print('Player ' + str(player_id) + ' received: ' + str(output))
     if not output[0] == '':
         for item in enemy.get_list():
+            item.check_crown(1)
             if output[0] == item.get_id() and not output[1] == (420 - item.get_pos()[0], 420 - item.get_pos()[1]):
                 if item.pos_movement(enemy.get_list(), local.get_list(), (420 - output[1][0], 420 - output[1][1]), (1, 0, 0), 1):
+                    print(item.get_pos())
                     music.play()
                     item.draw()
                     turn = (turn * 2) % 3  # Switch turns
                     break
                 break
 
+
     # Checker Board #
     mousePressed = pygame.mouse.get_pressed()
+
+    for x in local.get_list():
+        x.check_crown(0)
 
     window.fill(color[3])
     checkerBoard.draw()

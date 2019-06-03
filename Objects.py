@@ -31,9 +31,15 @@ class Checker(Objects):  # This is used to make the checker pieces
         self.radius = 30
         self.crown = 0
         self.id = num
+        if self.color == (0, 0, 0):
+            self.sprite = pygame.image.load('media/whiteking.png')
+        else:
+            self.sprite = pygame.image.load('media/blackking.png')
 
     def draw(self):
         pygame.draw.circle(self.surface, self.color, (self.x + 30, self.y + 30), self.radius)
+        if self.crown == 1:
+            self.surface.blit(self.sprite, (self.x, self.y))
 
     def get_height(self):
         return self.radius*2
@@ -102,7 +108,7 @@ class Checker(Objects):  # This is used to make the checker pieces
             testTR = 0
         if (self.gety() - 120 <= 0 or self.getx() - 120 <= 0) and testTL == 1:
             testTL = 0
-        print('Test: ' + str(testTL), str(testTR), str(testBL), str(testBR))
+        #print('Test: ' + str(testTL), str(testTR), str(testBL), str(testBR))
         if testBL == 1 or testBR == 1 or testTL == 1 or testTR == 1:
             return True
         else:
@@ -420,6 +426,14 @@ class Checker(Objects):  # This is used to make the checker pieces
                         return 1
             if self.gety() == 420:
                 self.crown = 1
+
+    def check_crown(self, color_id):
+        n = {
+            0: 0,
+            1: 420
+        }
+        if self.get_pos()[1] == n[color_id]:
+            self.crown = 1
         
 
 class Square(Objects):  # This is used to make the board
