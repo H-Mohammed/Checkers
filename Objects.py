@@ -102,6 +102,7 @@ class Checker(Objects):  # This is used to make the checker pieces
             testTR = 0
         if (self.gety() - 120 <= 0 or self.getx() - 120 <= 0) and testTL == 1:
             testTL = 0
+        print('Test: ' + str(testTL), str(testTR), str(testBL), str(testBR))
         if testBL == 1 or testBR == 1 or testTL == 1 or testTR == 1:
             return True
         else:
@@ -183,7 +184,6 @@ class Checker(Objects):  # This is used to make the checker pieces
                 if item.gety() == self.gety() - 120:
                     if item.getx() == self.getx() + 120:
                         top_right = 3
-
         # --- Check if an enemy can be captured --- #
         for item in pieces:
             if item.checkCapture(enemy, pieces):
@@ -224,7 +224,7 @@ class Checker(Objects):  # This is used to make the checker pieces
             top_right = 1
         if self.gety() - 120 < 0 and top_right == 2:
             top_right = 3
-
+        print(top_left, top_right, bottom_left, bottom_right)
         # --- Display where the player can MOVE a piece --- #
         if color == 0:  # Bottom Player
             # Check if player cannot capture #
@@ -325,7 +325,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                         
         if color == 1:  # Top Player
             # Check if player cannot capture #
-            if not (top_left == 2 or top_right == 2 or bottom_left == 2 or bottom_right == 2) and capture == 0:
+            if not (top_left == 2 or top_right == 2 or bottom_left == 2 or bottom_right == 2):
                 if self.crown == 1:
                     if top_left == 0:
                         star.set_pos((self.getx() - 60, self.gety() - 60))
@@ -352,7 +352,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                     star.set_pos((self.getx() - 60, self.gety() + 60))
                     star.draw()
                     # Move piece when mouse click event is detected #
-                    if self.getx()-60 <= mouse_pos[0] <= self.getx() and self.gety()+60 <= mouse_pos[1] <= self.gety()+120:
+                    if self.getx() - 60 <= mouse_pos[0] <= self.getx() and self.gety() + 60 <= mouse_pos[1] <= self.gety() + 120:
                         if mouse_pressed[0] == 1:
                             self.set_pos((self.getx() - 60, self.gety() + 60))
                             self.draw()
