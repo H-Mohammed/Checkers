@@ -31,25 +31,19 @@ class Checker(Objects):  # This is used to make the checker pieces
         self.radius = 30
         self.crown = 0
         self.id = num
-        if self.color == (0, 0, 0):
-            self.sprite = pygame.image.load('media/whiteking.png')
-        else:
-            self.sprite = pygame.image.load('media/blackking.png')
 
     def draw(self):
         pygame.draw.circle(self.surface, self.color, (self.x + 30, self.y + 30), self.radius)
-        if self.crown == 1:
-            self.surface.blit(self.sprite, (self.x + 30, self.y + 30))
-    
+
     def get_height(self):
         return self.radius*2
-    
+
     def get_width(self):
         return self.radius*2
-    
+
     def get_id(self):
         return self.id
-    
+
     def checkCapture(self, enemy, pieces):  # Checks if the piece can capture
         testBR = 0  # Tests if there is a piece on Bottom Right
         testBL = 0  # Tests if there is a piece on Bottom Left
@@ -73,7 +67,7 @@ class Checker(Objects):  # This is used to make the checker pieces
             if item.gety() == self.gety() + 120 and testBR == 1:
                 if item.getx() == self.getx() + 120:
                     testBR = 0
-            
+
             if item.gety() == self.gety() + 120 and testBL == 1:
                 if item.getx() == self.getx() - 120:
                     testBL = 0
@@ -88,7 +82,7 @@ class Checker(Objects):  # This is used to make the checker pieces
             if item.gety() == self.gety() + 120 and testBR == 1:
                 if item.getx() == self.getx() + 120:
                     testBR = 0
-            
+
             if item.gety() == self.gety() + 120 and testBL == 1:
                 if item.getx() == self.getx() - 120:
                     testBL = 0
@@ -108,7 +102,7 @@ class Checker(Objects):  # This is used to make the checker pieces
             testTR = 0
         if (self.gety() - 120 <= 0 or self.getx() - 120 <= 0) and testTL == 1:
             testTL = 0
-        #print('Test: ' + str(testTL), str(testTR), str(testBL), str(testBR))
+        print('Test: ' + str(testTL), str(testTR), str(testBL), str(testBR))
         if testBL == 1 or testBR == 1 or testTL == 1 or testTR == 1:
             return True
         else:
@@ -241,7 +235,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                     # Move piece when mouse click event is detected #
                     if self.getx() - 60 <= mouse_pos[0] <= self.getx() and self.gety() - 60 <= mouse_pos[1] <= self.gety():
                         if mouse_pressed[0] == 1:
-                            self.pos = (self.x - 60, self.y - 60)
+                            self.set_pos((self.getx() - 60, self.gety() - 60))
                             self.draw()
                             del star
                             return 1
@@ -251,7 +245,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                     # Move piece when mouse click event is detected #
                     if self.getx() + 60 <= mouse_pos[0] <= self.getx() + 120 and self.gety() - 60 <= mouse_pos[1] <= self.gety():
                         if mouse_pressed[0] == 1:
-                            self.pos = (self.x + 60, self.y - 60)
+                            self.set_pos((self.getx() + 60, self.gety() - 60))
                             self.draw()
                             del star
                             return 1
@@ -262,7 +256,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                         # Move piece when mouse click event is detected #
                         if self.getx()-60 <= mouse_pos[0] <= self.getx() and self.gety()+60 <= mouse_pos[1] <= self.gety()+120:
                             if mouse_pressed[0] == 1:
-                                self.pos = (self.x - 60, self.y + 60)
+                                self.set_pos((self.getx()-60,self.gety()+60))
                                 self.draw()
                                 del star
                                 return 1
@@ -272,7 +266,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                         # Move piece when mouse click event is detected #
                         if self.getx()+60 <= mouse_pos[0] <= self.getx()+120 and self.gety()+60 <= mouse_pos[1] <= self.gety()+120:
                             if mouse_pressed[0] == 1:
-                                self.pos = (self.x + 60, self.y + 60)
+                                self.set_pos((self.getx()+60,self.gety()+60))
                                 self.draw()
                                 del star
                                 return 1
@@ -282,7 +276,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                 star.draw()
                 if self.getx()-120 <= mouse_pos[0] <= self.getx()-60 and self.gety()-120 <= mouse_pos[1] <= self.gety()-60:
                     if mouse_pressed[0] == 1:
-                        self.pos = (self.x - 120, self.y - 120)
+                        self.set_pos((self.getx()-120,self.gety()-120))
                         self.draw()
                         enemy.pop(enemy.index(enemy4))
                         del enemy4
@@ -292,9 +286,9 @@ class Checker(Objects):  # This is used to make the checker pieces
             if top_right == 2:
                 star.set_pos((self.getx() + 120, self.gety() - 120))
                 star.draw()
-                if self.getx()+120 <= mouse_pos[0] <= self.getx() + 180 and self.gety() - 120 <= mouse_pos[1] <= self.gety() - 60:
+                if self.getx()+120 <= mouse_pos[0] <= self.getx()+180 and self.gety()-120 <= mouse_pos[1] <= self.gety()-60:
                     if mouse_pressed[0] == 1:
-                        self.pos = (self.x + 120, self.y - 120)
+                        self.set_pos((self.getx()+120,self.gety()-120))
                         self.draw()
                         enemy.pop(enemy.index(enemy3))
                         del enemy3
@@ -305,9 +299,9 @@ class Checker(Objects):  # This is used to make the checker pieces
                 if bottom_left == 2:
                     star.set_pos((self.getx() - 120, self.gety() + 120))
                     star.draw()
-                    if self.getx() - 120 <= mouse_pos[0] <= self.getx() - 60 and self.gety() + 120 <= mouse_pos[1] <= self.gety() + 180:
+                    if self.getx()-120 <= mouse_pos[0] <= self.getx()-60 and self.gety()+120 <= mouse_pos[1] <= self.gety()+180:
                         if mouse_pressed[0] == 1:
-                            self.pos = (self.x - 120, self.y + 120)
+                            self.set_pos((self.getx()-120,self.gety()+120))
                             self.draw()
                             enemy.pop(enemy.index(enemy2))
                             del enemy2
@@ -317,20 +311,18 @@ class Checker(Objects):  # This is used to make the checker pieces
                 if bottom_right == 2:
                     star.set_pos((self.getx() + 120, self.gety() + 120))
                     star.draw()
-                    if self.getx() + 120 <= mouse_pos[0] <= self.getx() + 180 and self.gety() + 120 <= mouse_pos[1] <= self.gety() + 180:
+                    if self.getx()+120 <= mouse_pos[0] <= self.getx()+180 and self.gety()+120 <= mouse_pos[1] <= self.gety()+180:
                         if mouse_pressed[0] == 1:
-                            self.pos = (self.x + 120, self.y + 120)
+                            self.set_pos((self.getx()+120,self.gety()+120))
                             self.draw()
                             enemy.pop(enemy.index(enemy1))
                             del enemy1
                             del star
                             return 1
             # Check if piece made it to the top of the board #
-            print(self.get_pos()[1])
-            if self.get_pos()[1] == 0:
-                print("It crowns")
+            if self.gety() == 0:
                 self.crown = 1
-                        
+
         if color == 1:  # Top Player
             # Check if player cannot capture #
             if not (top_left == 2 or top_right == 2 or bottom_left == 2 or bottom_right == 2):
@@ -341,18 +333,18 @@ class Checker(Objects):  # This is used to make the checker pieces
                         # Move piece when mouse click event is detected #
                         if self.getx() - 60 <= mouse_pos[0] <= self.getx() and self.gety() - 60 <= mouse_pos[1] <= self.gety():
                             if mouse_pressed[0] == 1:
-                                self.pos = (self.x - 60, self.y - 60)
+                                self.set_pos((self.getx() - 60, self.gety() - 60))
                                 self.draw()
                                 del star
                                 return 1
-                    
+
                     if top_right == 0:
                         star.set_pos((self.getx() + 60, self.gety() - 60))
                         star.draw()
                         # Move piece when mouse click event is detected #
                         if self.getx()+60 <= mouse_pos[0] <= self.getx()+120 and self.gety()-60 <= mouse_pos[1] <= self.gety():
                             if mouse_pressed[0] == 1:
-                                self.pos = (self.x + 60, self.y - 60)
+                                self.set_pos((self.getx() + 60, self.gety() - 60))
                                 self.draw()
                                 del star
                                 return 1
@@ -362,7 +354,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                     # Move piece when mouse click event is detected #
                     if self.getx() - 60 <= mouse_pos[0] <= self.getx() and self.gety() + 60 <= mouse_pos[1] <= self.gety() + 120:
                         if mouse_pressed[0] == 1:
-                            self.pos = (self.x - 60, self.y + 60)
+                            self.set_pos((self.getx() - 60, self.gety() + 60))
                             self.draw()
                             del star
                             return 1
@@ -372,7 +364,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                     # Move piece when mouse click event is detected #
                     if self.getx() + 60 <= mouse_pos[0] <= self.getx() + 120 and self.gety() + 60 <= mouse_pos[1] <= self.gety() + 120:
                         if mouse_pressed[0] == 1:
-                            self.pos = (self.x + 60, self.y + 60)
+                            self.set_pos((self.getx() + 60, self.gety() + 60))
                             self.draw()
                             del star
                             return 1
@@ -383,7 +375,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                     # Move piece when mouse click event is detected #
                     if self.getx() - 120 <= mouse_pos[0] <= self.getx() - 60 and self.gety() - 120 <= mouse_pos[1] <= self.gety() - 60:
                         if mouse_pressed[0] == 1:
-                            self.pos = (self.x - 120, self.y - 120)
+                            self.set_pos((self.getx() - 120, self.gety() - 120))
                             self.draw()
                             enemy.pop(enemy.index(enemy4))
                             del enemy4
@@ -395,7 +387,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                     # Move piece when mouse click event is detected #
                     if self.getx() + 120 <= mouse_pos[0] <= self.getx() + 180 and self.gety() - 120 <= mouse_pos[1] <= self.gety() - 60:
                         if mouse_pressed[0] == 1:
-                            self.pos = (self.x + 120, self.y - 120)
+                            self.set_pos((self.getx() + 120, self.gety() - 120))
                             self.draw()
                             enemy.pop(enemy.index(enemy3))
                             del enemy3
@@ -408,7 +400,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                 # Move piece when mouse click event is detected #
                 if self.getx() - 120 <= mouse_pos[0] <= self.getx() - 60 and self.gety() + 120 <= mouse_pos[1] <= self.gety() + 180:
                     if mouse_pressed[0] == 1:
-                        self.pos = (self.x - 120, self.y + 120)
+                        self.set_pos((self.getx() - 120, self.gety() + 120))
                         self.draw()
                         enemy.pop(enemy.index(enemy2))
                         del enemy2
@@ -420,16 +412,13 @@ class Checker(Objects):  # This is used to make the checker pieces
                 # Move piece when mouse click event is detected #
                 if self.getx() + 120 <= mouse_pos[0] <= self.getx() + 180 and self.gety() + 120 <= mouse_pos[1] <= self.gety() + 180:
                     if mouse_pressed[0] == 1:
-                        self.pos = (self.x + 120, self.y + 120)
+                        self.set_pos((self.getx() + 120, self.gety() + 120))
                         self.draw()
                         enemy.pop(enemy.index(enemy1))
                         del enemy1
                         del star
                         return 1
-            # Check if piece made it to the top of the board #
-            print(self.get_pos())
-            if self.get_pos()[1] == 420:
-                print("It crowns")
+            if self.gety() == 420:
                 self.crown = 1
         
 
