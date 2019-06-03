@@ -35,7 +35,7 @@ window.fill(color[3])  # Fills the entire surface with the color
 clock = pygame.time.Clock()  # Starts a clock object to measure time
 
 music = Music()
-music.set_sound('lobby_music.mp3')
+music.set_sound('lobby_music')
 music.play()
 connected = False
 connection_failed = False
