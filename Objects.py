@@ -409,6 +409,8 @@ class Checker(Objects):  # This is used to make the checker pieces
                         enemy.pop(enemy.index(enemy4))
                         del enemy4
                         del star
+                        if self.checkCapture() == 1:
+                            return self.pos_movement(pieces,enemy,mouse_pos)
                         return 1
             # Check if player can capture top right #
             if top_right == 2:
@@ -422,6 +424,8 @@ class Checker(Objects):  # This is used to make the checker pieces
                         enemy.pop(enemy.index(enemy3))
                         del enemy3
                         del star
+                        if self.checkCapture() == 1:
+                            return self.pos_movement(pieces,enemy,mouse_pos)
                         return 1
             if self.crown == 1:
                 # Check if player can capture bottom left #
@@ -436,6 +440,8 @@ class Checker(Objects):  # This is used to make the checker pieces
                             enemy.pop(enemy.index(enemy2))
                             del enemy2
                             del star
+                            if self.checkCapture() == 1:
+                                return self.pos_movement(pieces,enemy,mouse_pos)
                             return 1
                 # Check if player can capture bottom right
                 if bottom_right == 2:
@@ -449,6 +455,8 @@ class Checker(Objects):  # This is used to make the checker pieces
                             enemy.pop(enemy.index(enemy1))
                             del enemy1
                             del star
+                            if self.checkCapture() == 1:
+                                return self.pos_movement(pieces,enemy,mouse_pos)
                             return 1
             # Check if piece made it to the top of the board #
             if self.gety() == 0:
