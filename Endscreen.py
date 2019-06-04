@@ -1,14 +1,18 @@
 # This file creates the endscreen #
-import pygame
+from Mixer import *
 
 
 class Endscreen:
-    def __init__(self):
+    def __init__(self, song):
         self.screen_dim = (800, 600)
         self.display = pygame.display.set_mode(self.screen_dim)
+        self.song_name = song
+        self.music = Music()
+        self.music.set_sound(self.song_name)
 
     def run_endscreen(self):
         pygame.init()
+        self.music.play(-1)
         run = True
         while run:
             for event in pygame.event.get():  # Returns all inputs and triggers into an array
