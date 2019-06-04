@@ -184,6 +184,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                 if item.getx() == self.getx() - 60:
                     testTL = 1
         # --- Tests if there is a piece 2 units diagonally --- #
+        print(testBR,testBL,testTR,testTL)
         for item in enemy:
             if item.gety() == self.gety() + 120 and testBR == 1:
                 if item.getx() == self.getx() + 120:
@@ -198,7 +199,7 @@ class Checker(Objects):  # This is used to make the checker pieces
             if item.gety() == self.gety() - 120 and testTR == 1:
                 if item.getx() == self.getx() + 120:
                     testTR = 0
-
+        print(testBR, testBL, testTR, testTL)
         for item in pieces:
             if item.gety() == self.gety() + 120 and testBR == 1:
                 if item.getx() == self.getx() + 120:
@@ -213,16 +214,17 @@ class Checker(Objects):  # This is used to make the checker pieces
             if item.gety() == self.gety() - 120 and testTR == 1:
                 if item.getx() == self.getx() + 120:
                     testTR = 0
-
+        print(testBR, testBL, testTR, testTL)
         # --- Checks if move is out of bounds --- #
         if (self.gety() + 120 >= 480 or self.getx() + 120 >= 480) and testBR == 1:
             testBR = 0
-        if (self.gety() + 120 >= 480 or self.getx() - 120 <= 0) and testBL == 1:
+        if (self.gety() + 120 >= 480 or self.getx() - 120 < 0) and testBL == 1:
             testBL = 0
-        if (self.gety() - 120 <= 0 or self.getx() + 120 >= 480) and testTR == 1:
+        if (self.gety() - 120 < 0 or self.getx() + 120 >= 480) and testTR == 1:
             testTR = 0
-        if (self.gety() - 120 <= 0 or self.getx() - 120 <= 0) and testTL == 1:
+        if (self.gety() - 120 < 0 or self.getx() - 120 < 0) and testTL == 1:
             testTL = 0
+        print(testBR, testBL, testTR, testTL)
         #print('Test: ' + str(testTL), str(testTR), str(testBL), str(testBR))
         if testBL == 1 or testBR == 1 or testTL == 1 or testTR == 1:
             return True
@@ -409,8 +411,9 @@ class Checker(Objects):  # This is used to make the checker pieces
                         enemy.pop(enemy.index(enemy4))
                         del enemy4
                         del star
-                        if self.checkCapture() == 1:
-                            return self.pos_movement(pieces,enemy,mouse_pos)
+                        while self.checkCapture(enemy, pieces):
+                            print("It goes here")
+                            return self.pos_movement(pieces,enemy,pygame.mouse.get_pos(), pygame.mouse.get_pressed(), color)
                         return 1
             # Check if player can capture top right #
             if top_right == 2:
@@ -424,8 +427,9 @@ class Checker(Objects):  # This is used to make the checker pieces
                         enemy.pop(enemy.index(enemy3))
                         del enemy3
                         del star
-                        if self.checkCapture() == 1:
-                            return self.pos_movement(pieces,enemy,mouse_pos)
+                        if self.checkCapture(enemy, pieces):
+                            print("It goes here")
+                            return self.pos_movement(pieces,enemy,mouse_pos, mouse_pressed, color)
                         return 1
             if self.crown == 1:
                 # Check if player can capture bottom left #
@@ -440,8 +444,9 @@ class Checker(Objects):  # This is used to make the checker pieces
                             enemy.pop(enemy.index(enemy2))
                             del enemy2
                             del star
-                            if self.checkCapture() == 1:
-                                return self.pos_movement(pieces,enemy,mouse_pos)
+                            if self.checkCapture(enemy, pieces):
+                                print("It goes here")
+                                return self.pos_movement(pieces,enemy,mouse_pos, mouse_pressed, color)
                             return 1
                 # Check if player can capture bottom right
                 if bottom_right == 2:
@@ -455,8 +460,9 @@ class Checker(Objects):  # This is used to make the checker pieces
                             enemy.pop(enemy.index(enemy1))
                             del enemy1
                             del star
-                            if self.checkCapture() == 1:
-                                return self.pos_movement(pieces,enemy,mouse_pos)
+                            if self.checkCapture(enemy, pieces):
+                                print("It goes here")
+                                return self.pos_movement(pieces,enemy,mouse_pos, mouse_pressed, color)
                             return 1
             # Check if piece made it to the top of the board #
             if self.gety() == 0:

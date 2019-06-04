@@ -37,10 +37,11 @@ class Player(Container):  # Stores pieces
                 if mouse_pressed[0] == 1:
                     self.selection = item
                     self.test = 1
-                    return item.pos_movement(self.list, enemy.get_list(), mouse_pos, mouse_pressed, color)
+                    return (item.pos_movement(self.list, enemy.get_list(), mouse_pos, mouse_pressed, color), self.selection)
 
         if self.test == 1:
-            return self.selection.pos_movement(self.list, enemy.get_list(), mouse_pos, mouse_pressed, color)
+            return (self.selection.pos_movement(self.list, enemy.get_list(), mouse_pos, mouse_pressed, color), self.selection)
+        return (0,0)
 
     def get_selection(self):
         return self.selection
