@@ -37,13 +37,10 @@ clock = pygame.time.Clock()  # Starts a clock object to measure time
 
 music = Music()
 music.set_sound('lobby_music')
-music.play()
+music.play(-1)
 connected = False
 connection_failed = False
 while not connected:
-    # Music #
-    if music.at_end():
-        music.play()
     # Menu #
     menu = Menu()
     ipv4 = menu.run_menu(connection_failed)

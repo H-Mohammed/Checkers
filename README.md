@@ -84,6 +84,7 @@ You can play the game against a computer or another player.
  - Text
     - Use this to make text
 ## Credits
+
 Checker sound:
 - https://www.youtube.com/watch?v=rjzRCyn3ZRU
 

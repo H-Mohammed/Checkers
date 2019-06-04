@@ -22,9 +22,9 @@ class Music:
         return pygame.mixer.music.get_busy()
 
     # Method plays a music #
-    def play(self):
+    def play(self, loop=0):
         pygame.mixer.music.load(self.music)
-        pygame.mixer.music.play(0)
+        pygame.mixer.music.play(loop)
 
     # Method sets music to be played
     def set_sound(self, name):
