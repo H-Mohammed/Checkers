@@ -41,6 +41,7 @@ music.set_sound('lobby_music')
 music.play(-1)
 connected = False
 connection_failed = False
+undo = []
 while not connected:
     # Menu #
     menu = Menu()
@@ -102,6 +103,7 @@ action = ''
 run = True
 turn = 1
 posMove = 0
+
 while run:
     for event in pygame.event.get():  # Returns all inputs and triggers into an array
         if event.type == pygame.QUIT:  # If the red X was clicked
