@@ -105,6 +105,7 @@ run = True
 turn = 1
 posMove = 0
 undo = []
+iteration2 = 0
 while run:
     for event in pygame.event.get():  # Returns all inputs and triggers into an array
         if event.type == pygame.QUIT:  # If the red X was clicked
@@ -112,10 +113,7 @@ while run:
         elif event.type == pygame.KEYDOWN:
             action = event
     
-    if 5 <= pygame.mouse.get_pos()[0] <= 55 and 545 <= pygame.mouse.get_pos()[1] <= 595:
-        if pygame.mouse.get_pressed()[0]:
-            if len(undo) != 0:
-                local,enemy = undo.pop(-1)[0],undo.pop(-1)[1]
+
 
 
 
@@ -141,7 +139,7 @@ while run:
                 if move in [1, 2]:
                     item.draw()
                     undo.append([local.get_list(),enemy.get_list()])
-                    print(move)
+                    #print(move)
                     if item.check_capture_flipped(local.get_list(), enemy.get_list()) and move == 2:
                         pass
                     else:
@@ -162,6 +160,14 @@ while run:
     checkerBoard.draw()
     local.draw()
     enemy.draw()
+    if 5 <= pygame.mouse.get_pos()[0] <= 55 and 545 <= pygame.mouse.get_pos()[1] <= 595 and iteration2 == 0:
+        if pygame.mouse.get_pressed()[0]:
+            print(undo)
+            if len(undo) > 0:
+                local.set_list(undo[-1][0])
+                enemy.set_list(undo[-1][1])
+                undo.pop(len(undo) - 1)
+                iteration2 += 1
     if turn == player_id:
         ui.get_item(4).set_text('YOUR TURN')
         ui.get_item(1).set_color((0, 255, 0))
@@ -169,8 +175,10 @@ while run:
                 (ui.get_item(1).get_size()[0] - ui.get_item(4).get_size()[0]) / 2), ui.get_item(1).get_pos()[1] + (
                                         (ui.get_item(1).get_size()[1] - ui.get_item(4).get_size()[1]) / 2)))
         temp = local.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, enemy, 0)
+        if temp[0] == 1 or temp[0] == 2:
+            undo.append([local.get_list(), enemy.get_list()])
+            iteration2 = 0
         if temp[0] == 2:
-            undo.append([local.get_list(),enemy.get_list()])
             while temp[1].checkCapture(enemy.get_list(), local.get_list()):
                 if temp[1].pos_movement(enemy.get_list(), local.get_list(), pygame.mouse.get_pos(), pygame.mouse.get_pressed(), 0) == 2:
                     undo.append([local.get_list(),enemy.get_list()])
