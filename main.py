@@ -124,9 +124,13 @@ while run:
     if not output[0] == '':
         for item in enemy.get_list():
             if output[0] == item.get_id() and not output[1] == (420 - item.get_pos()[0], 420 - item.get_pos()[1]):
-                if item.pos_movement(enemy.get_list(), local.get_list(), (420 - output[1][0], 420 - output[1][1]), (1, 0, 0), 1):
+                move = item.pos_movement(enemy.get_list(), local.get_list(), (420 - output[1][0], 420 - output[1][1]), (1, 0, 0), 1)
+                if move in [1, 2]:
                     item.draw()
-                    if not item.checkCapture(local.get_list(), enemy.get_list()):
+                    print(move)
+                    if item.check_capture_flipped(local.get_list(), enemy.get_list()) and move == 2:
+                        pass
+                    else:
                         turn = (turn * 2) % 3  # Switch turns
                     break
                 break
