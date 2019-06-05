@@ -580,7 +580,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                             enemy.pop(enemy.index(enemy4))
                             del enemy4
                             del star
-                            return 1
+                            return 2
                 if top_right == 2:
                     star.set_pos((self.getx() + 120, self.gety() - 120))
                     star.draw()
@@ -593,7 +593,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                             enemy.pop(enemy.index(enemy3))
                             del enemy3
                             del star
-                            return 1
+                            return 2
 
             if bottom_left == 2:
                 star.set_pos((self.getx() - 120, self.gety() + 120))
@@ -607,7 +607,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                         enemy.pop(enemy.index(enemy2))
                         del enemy2
                         del star
-                        return 1
+                        return 2
             if bottom_right == 2:
                 star.set_pos((self.getx() + 120, self.gety() + 120))
                 star.draw()
@@ -620,7 +620,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                         enemy.pop(enemy.index(enemy1))
                         del enemy1
                         del star
-                        return 1
+                        return 2
             if self.gety() == 420:
                 self.crown = 1
 
