@@ -31,7 +31,6 @@ color = {
 
 # Create the window
 window = pygame.display.set_mode(SCREEN_DIMENSION)  # Creates the main surface where all other assets are placed on top
-intermediate_surface = pygame.Surface((400, 400))
 pygame.display.set_caption(TITLE)  # Updates the window title with TITLE
 window.fill(color[3])  # Fills the entire surface with the color
 clock = pygame.time.Clock()  # Starts a clock object to measure time
@@ -93,6 +92,8 @@ ui.add(Background((239, 229, 217), (300, 50), (490, 540), window))  # Input box
     # Text #
 ui.add(Text('', window))  # Displays turn
 ui.add(Text('', window))  # Displays text in input box
+
+temporary_button = Background((0, 0, 0), (50, 50), (5, 545), window)
 
 input_box = Chat()
 
@@ -233,7 +234,7 @@ while run:
                 break
         print('Tie')
 
-    #window.blit(intermediate_surface, (0, 0))
+    temporary_button.draw()
 
     clock.tick(FPS)  # Pause the game until the FPS time is reached
     pygame.display.update()  # Updates the display
