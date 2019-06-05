@@ -31,10 +31,7 @@ class Checker(Objects):  # This is used to make the checker pieces
         self.radius = 30
         self.crown = 0
         self.id = num
-        if self.color == (0, 0, 0):
-            self.sprite = pygame.image.load('media/whiteking.png')
-        else:
-            self.sprite = pygame.image.load('media/blackking.png')
+        self.sprite = pygame.image.load("media/crown.png")
 
     def draw(self):
         pygame.draw.circle(self.surface, self.color, (self.x + 30, self.y + 30), self.radius)
