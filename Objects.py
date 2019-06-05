@@ -50,7 +50,7 @@ class Checker(Objects):  # This is used to make the checker pieces
     def get_id(self):
         return self.id
     
-    def checkMovement(self,enemy,pieces,color):
+    def checkMovement(self, enemy, pieces, color):
         top_right = 0
         top_left = 0
         bottom_right = 0
@@ -184,7 +184,6 @@ class Checker(Objects):  # This is used to make the checker pieces
                 if item.getx() == self.getx() - 60:
                     testTL = 1
         # --- Tests if there is a piece 2 units diagonally --- #
-        print(testBR,testBL,testTR,testTL)
         for item in enemy:
             if item.gety() == self.gety() + 120 and testBR == 1:
                 if item.getx() == self.getx() + 120:
@@ -199,7 +198,6 @@ class Checker(Objects):  # This is used to make the checker pieces
             if item.gety() == self.gety() - 120 and testTR == 1:
                 if item.getx() == self.getx() + 120:
                     testTR = 0
-        print(testBR, testBL, testTR, testTL)
         for item in pieces:
             if item.gety() == self.gety() + 120 and testBR == 1:
                 if item.getx() == self.getx() + 120:
@@ -214,7 +212,6 @@ class Checker(Objects):  # This is used to make the checker pieces
             if item.gety() == self.gety() - 120 and testTR == 1:
                 if item.getx() == self.getx() + 120:
                     testTR = 0
-        print(testBR, testBL, testTR, testTL)
         # --- Checks if move is out of bounds --- #
         if (self.gety() + 120 >= 480 or self.getx() + 120 >= 480) and testBR == 1:
             testBR = 0
@@ -224,7 +221,6 @@ class Checker(Objects):  # This is used to make the checker pieces
             testTR = 0
         if (self.gety() - 120 < 0 or self.getx() - 120 < 0) and testTL == 1:
             testTL = 0
-        print(testBR, testBL, testTR, testTL)
         #print('Test: ' + str(testTL), str(testTR), str(testBL), str(testBR))
         if testBL == 1 or testBR == 1 or testTL == 1 or testTR == 1:
             return True
@@ -383,7 +379,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                         # Move piece when mouse click event is detected #
                         if self.getx()-60 <= mouse_pos[0] <= self.getx() and self.gety()+60 <= mouse_pos[1] <= self.gety()+120:
                             if mouse_pressed[0] == 1:
-                                self.set_pos((self.getx()-60,self.gety()+60))
+                                self.set_pos((self.getx()-60, self.gety()+60))
                                 self.draw()
                                 music.play()
                                 del star
@@ -394,7 +390,7 @@ class Checker(Objects):  # This is used to make the checker pieces
                         # Move piece when mouse click event is detected #
                         if self.getx()+60 <= mouse_pos[0] <= self.getx()+120 and self.gety()+60 <= mouse_pos[1] <= self.gety()+120:
                             if mouse_pressed[0] == 1:
-                                self.set_pos((self.getx()+60,self.gety()+60))
+                                self.set_pos((self.getx()+60, self.gety()+60))
                                 self.draw()
                                 music.play()
                                 del star
@@ -405,32 +401,30 @@ class Checker(Objects):  # This is used to make the checker pieces
                 star.draw()
                 if self.getx()-120 <= mouse_pos[0] <= self.getx()-60 and self.gety()-120 <= mouse_pos[1] <= self.gety()-60:
                     if mouse_pressed[0] == 1:
-                        self.set_pos((self.getx()-120,self.gety()-120))
+                        self.set_pos((self.getx()-120, self.gety()-120))
                         self.draw()
                         music.play()
                         enemy.pop(enemy.index(enemy4))
                         del enemy4
                         del star
                         while self.checkCapture(enemy, pieces):
-                            print("It goes here")
-                            return self.pos_movement(pieces,enemy,pygame.mouse.get_pos(), pygame.mouse.get_pressed(), color)
-                        return 1
+                            return self.pos_movement(pieces, enemy, pygame.mouse.get_pos(), pygame.mouse.get_pressed(), color)
+                        return 2  # Return piece has captured
             # Check if player can capture top right #
             if top_right == 2:
                 star.set_pos((self.getx() + 120, self.gety() - 120))
                 star.draw()
                 if self.getx()+120 <= mouse_pos[0] <= self.getx()+180 and self.gety()-120 <= mouse_pos[1] <= self.gety()-60:
                     if mouse_pressed[0] == 1:
-                        self.set_pos((self.getx()+120,self.gety()-120))
+                        self.set_pos((self.getx()+120, self.gety()-120))
                         self.draw()
                         music.play()
                         enemy.pop(enemy.index(enemy3))
                         del enemy3
                         del star
                         if self.checkCapture(enemy, pieces):
-                            print("It goes here")
-                            return self.pos_movement(pieces,enemy,mouse_pos, mouse_pressed, color)
-                        return 1
+                            return self.pos_movement(pieces, enemy, mouse_pos, mouse_pressed, color)
+                        return 2  # Return piece has captured
             if self.crown == 1:
                 # Check if player can capture bottom left #
                 if bottom_left == 2:
@@ -445,9 +439,8 @@ class Checker(Objects):  # This is used to make the checker pieces
                             del enemy2
                             del star
                             if self.checkCapture(enemy, pieces):
-                                print("It goes here")
-                                return self.pos_movement(pieces,enemy,mouse_pos, mouse_pressed, color)
-                            return 1
+                                return self.pos_movement(pieces, enemy, mouse_pos, mouse_pressed, color)
+                            return 2  # Return piece has captured
                 # Check if player can capture bottom right
                 if bottom_right == 2:
                     star.set_pos((self.getx() + 120, self.gety() + 120))
@@ -461,9 +454,8 @@ class Checker(Objects):  # This is used to make the checker pieces
                             del enemy1
                             del star
                             if self.checkCapture(enemy, pieces):
-                                print("It goes here")
-                                return self.pos_movement(pieces,enemy,mouse_pos, mouse_pressed, color)
-                            return 1
+                                return self.pos_movement(pieces, enemy, mouse_pos, mouse_pressed, color)
+                            return 2  # Return piece has captured
             # Check if piece made it to the top of the board #
             if self.gety() == 0:
                 self.crown = 1

@@ -123,14 +123,19 @@ while run:
     #print('Player ' + str(player_id) + ' received: ' + str(output))
     if not output[0] == '':
         for item in enemy.get_list():
-            item.check_crown(1)
             if output[0] == item.get_id() and not output[1] == (420 - item.get_pos()[0], 420 - item.get_pos()[1]):
                 if item.pos_movement(enemy.get_list(), local.get_list(), (420 - output[1][0], 420 - output[1][1]), (1, 0, 0), 1):
                     item.draw()
-                    turn = (turn * 2) % 3  # Switch turns
+                    print(item.checkCapture(enemy.get_list(), local.get_list()))
+                    if item.checkCapture(local.get_list(), enemy.get_list()):
+                        pass
+                    else:
+                        turn = (turn * 2) % 3  # Switch turns
                     break
                 break
-
+    # Check if enemy piece is crowned #
+    for item in enemy.get_list():
+        item.check_crown(1)
 
     # Checker Board #
     mousePressed = pygame.mouse.get_pressed()
@@ -149,16 +154,18 @@ while run:
                 (ui.get_item(1).get_size()[0] - ui.get_item(4).get_size()[0]) / 2), ui.get_item(1).get_pos()[1] + (
                                         (ui.get_item(1).get_size()[1] - ui.get_item(4).get_size()[1]) / 2)))
         temp = local.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, enemy, 0)
-        if temp[0] == 1:
-            print("it didnt work")
-            print(temp[1].get_pos())
-            print(temp[1].checkCapture(enemy.get_list(),local.get_list()))
-            while temp[1].checkCapture(enemy.get_list(),local.get_list()):
-                print("It worked")
-                if temp[1].pos_movement(enemy.get_list(),local.get_list(),pygame.mouse.get_pos(),pygame.mouse.get_pressed(),0):
+        if temp[0] == 2:
+            while temp[1].checkCapture(enemy.get_list(), local.get_list()):
+                if temp[1].pos_movement(enemy.get_list(), local.get_list(), pygame.mouse.get_pos(), pygame.mouse.get_pressed(), 0) == 2:
+                    pass
+                else:
                     break
             turn = (turn * 2) % 3  # Switch turns
             local.set_test(0)
+        elif temp[0] == 1:
+            turn = (turn * 2) % 3  # Switch turns
+            local.set_test(0)
+
     else:
         ui.get_item(4).set_text('OPPONENT TURN')
         ui.get_item(1).set_color((255, 0, 0))
