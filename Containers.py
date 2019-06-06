@@ -23,8 +23,6 @@ class Container:  # Parent class for all objects that aggregate other objects
         for item in self.list:
             item.set_pos((item.get_pos()[0] + offset[0], item.get_pos()[1] + offset[1]))
 
-    def set_list(self,list):
-        self.list = list
 
 
 # Class creates player objects

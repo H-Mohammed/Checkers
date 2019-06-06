@@ -106,17 +106,19 @@ turn = 1
 posMove = 0
 undo = []
 iteration2 = 0
+temp_local_list = []
+for i in local.get_list():
+    temp_local_list.append(i)
+temp_enemy_list = []
+for j in enemy.get_list():
+    temp_enemy_list.append(j)
+undo.append([temp_local_list, temp_enemy_list])
 while run:
     for event in pygame.event.get():  # Returns all inputs and triggers into an array
         if event.type == pygame.QUIT:  # If the red X was clicked
             run = False
         elif event.type == pygame.KEYDOWN:
             action = event
-    
-
-
-
-
 
     # Network #
     if local.get_selection() == '':  # No selection
@@ -136,9 +138,11 @@ while run:
         for item in enemy.get_list():
             if output[0] == item.get_id() and not output[1] == (420 - item.get_pos()[0], 420 - item.get_pos()[1]):
                 move = item.pos_movement(enemy.get_list(), local.get_list(), (420 - output[1][0], 420 - output[1][1]), (1, 0, 0), 1)
-                if move in [1, 2]:
+                if move[0][0] in [1, 2]:
                     item.draw()
-                    undo.append([local.get_list(),enemy.get_list()])
+                    undo.append([[x.get_pos() for x in local.get_list()], [x.get_pos() for x in enemy.get_list()]])
+                    if move[0][0] == 2:
+                        undo[-1][1].append(move[0][1])
                     #print(move)
                     if item.check_capture_flipped(local.get_list(), enemy.get_list()) and move == 2:
                         pass
@@ -163,10 +167,13 @@ while run:
     if 5 <= pygame.mouse.get_pos()[0] <= 55 and 545 <= pygame.mouse.get_pos()[1] <= 595 and iteration2 == 0:
         if pygame.mouse.get_pressed()[0]:
             print(undo)
-            if len(undo) > 0:
-                local.set_list(undo[-1][0])
-                enemy.set_list(undo[-1][1])
-                undo.pop(len(undo) - 1)
+            if len(undo) > 1:
+                print("Local before: " + str([x.get_pos() for x in local.get_list()]))
+                print("Undo is this: " + str([x.get_pos() for x in undo[-1][0]]))
+                local.set_list(undo[-2][0])
+                enemy.set_list(undo[-2][1])
+                print("Local after : " + str([x.get_pos() for x in local.get_list()]))
+                undo.pop(len(undo) - 2)
                 iteration2 += 1
     if turn == player_id:
         ui.get_item(4).set_text('YOUR TURN')
@@ -175,19 +182,20 @@ while run:
                 (ui.get_item(1).get_size()[0] - ui.get_item(4).get_size()[0]) / 2), ui.get_item(1).get_pos()[1] + (
                                         (ui.get_item(1).get_size()[1] - ui.get_item(4).get_size()[1]) / 2)))
         temp = local.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, enemy, 0)
-        if temp[0] == 1 or temp[0] == 2:
-            undo.append([local.get_list(), enemy.get_list()])
+        if temp[0][0] == 1 or temp[0][0] == 2:
+            undo.append([[x.get_pos() for x in local.get_list()], [x.get_pos() for x in enemy.get_list()]])
             iteration2 = 0
-        if temp[0] == 2:
+        if temp[0][0] == 2:
+            undo[-1][1].append(temp[0][1])
             while temp[1].checkCapture(enemy.get_list(), local.get_list()):
                 if temp[1].pos_movement(enemy.get_list(), local.get_list(), pygame.mouse.get_pos(), pygame.mouse.get_pressed(), 0) == 2:
-                    undo.append([local.get_list(),enemy.get_list()])
-                    pass
+                    undo.append([[x.get_pos() for x in local.get_list()], [x.get_pos() for x in enemy.get_list()]])
+                    undo[-1][1].append(temp[0][1])
                 else:
                     break
             turn = (turn * 2) % 3  # Switch turns
             local.set_test(0)
-        elif temp[0] == 1:
+        elif temp[0][0] == 1:
             turn = (turn * 2) % 3  # Switch turns
             local.set_test(0)
 
