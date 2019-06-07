@@ -138,13 +138,13 @@ while run:
         for item in enemy.get_list():
             if output[0] == item.get_id() and not output[1] == (420 - item.get_pos()[0], 420 - item.get_pos()[1]):
                 move = item.pos_movement(enemy.get_list(), local.get_list(), (420 - output[1][0], 420 - output[1][1]), (1, 0, 0), 1)
-                if move[0][0] in [1, 2]:
+                if move[0] in [1, 2]:
                     item.draw()
                     undo.append([[x.get_pos() for x in local.get_list()], [x.get_pos() for x in enemy.get_list()]])
-                    if move[0][0] == 2:
-                        undo[-1][1].append(move[0][1])
+                    if move[0] == 2:
+                        undo[-1][1].append(move[1])
                     #print(move)
-                    if item.check_capture_flipped(local.get_list(), enemy.get_list()) and move == 2:
+                    if item.check_capture_flipped(local.get_list(), enemy.get_list()) and move[0] == 2:
                         pass
                     else:
                         turn = (turn * 2) % 3  # Switch turns
@@ -168,11 +168,10 @@ while run:
         if pygame.mouse.get_pressed()[0]:
             print(undo)
             if len(undo) > 1:
-                print("Local before: " + str([x.get_pos() for x in local.get_list()]))
-                print("Undo is this: " + str([x.get_pos() for x in undo[-1][0]]))
-                local.set_list(undo[-2][0])
-                enemy.set_list(undo[-2][1])
-                print("Local after : " + str([x.get_pos() for x in local.get_list()]))
+                for i in range(len(local.get_list())):
+                    local.get_list()[i].set_pos(undo[-2][0][i])
+                for i in range(len(enemy.get_list())):
+                    enemy.get_list()[i].set_pos(undo[-2][0][i])
                 undo.pop(len(undo) - 2)
                 iteration2 += 1
     if turn == player_id:
@@ -182,6 +181,7 @@ while run:
                 (ui.get_item(1).get_size()[0] - ui.get_item(4).get_size()[0]) / 2), ui.get_item(1).get_pos()[1] + (
                                         (ui.get_item(1).get_size()[1] - ui.get_item(4).get_size()[1]) / 2)))
         temp = local.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, enemy, 0)
+        print(temp)
         if temp[0][0] == 1 or temp[0][0] == 2:
             undo.append([[x.get_pos() for x in local.get_list()], [x.get_pos() for x in enemy.get_list()]])
             iteration2 = 0
