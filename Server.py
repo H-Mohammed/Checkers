@@ -10,7 +10,7 @@ except socket.error as e:
 
 s.listen(2)
 
-selection = [['', '', []], ['', '', []]]  # Stores the selected piece information of each client
+selection = [['', '', [], False], ['', '', [], False]]  # Stores the selected piece information of each client
 
 
 # functions #
@@ -26,8 +26,11 @@ def threaded_client(conn, player):
             if not new_data[2] == '':
                 selection[player - 1][2].append(new_data[2])  # Queues text to be sent
             # Send enemy info to client #
+            selection[player - 1][3] = new_data[3]
             print('player ' + str((player % 2) + 1) + ' sent: ' + str(selection[player % 2]))
             conn.sendall(pickle.dumps(selection[player % 2]))
+            if selection[(player % 2)][3] in [1, 2]:
+                selection[(player % 2)][3] = 0
             if len(selection[player % 2][2]) > 0:
                 selection[player % 2][2].pop(0)
         except Exception as n:
