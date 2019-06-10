@@ -10,7 +10,7 @@ except socket.error as e:
 
 s.listen(2)
 
-selection = [['', '', [], False], ['', '', [], False]]  # Stores the selected piece information of each client
+selection = [['', '', [], 0], ['', '', [], 0]]  # Stores the selected piece information of each client
 
 
 # functions #
