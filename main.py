@@ -95,6 +95,18 @@ ui.add(Text('', window))  # Displays turn
 ui.add(Text('', window))  # Displays text in input box
 
 temporary_button = Background((0, 0, 0), (50, 50), (5, 545), window)
+emoji_button_cool = Button(window, (125, 485), (50, 50), 'media/cool.png')
+emoji_button_dying_of_laughter = Button(window, (125, 545), (50, 50), 'media/dying_of_laughter.png')
+emoji_button_laugh = Button(window, (185, 485), (50, 50), 'media/laugh.png')
+emoji_button_nerd = Button(window, (185, 545), (50, 50), 'media/nerd.png')
+emoji_button_neutral = Button(window, (245, 485), (50, 50), 'media/neutral.png')
+emoji_button_sad = Button(window, (245, 545), (50, 50), 'media/sad.png')
+emoji_button_smile = Button(window, (305, 485), (50, 50), 'media/smile.png')
+emoji_button_sneaky = Button(window, (305, 545), (50, 50), 'media/sneaky.png')
+emoji_button_surprise = Button(window, (365, 485), (50, 50), 'media/surprise.png')
+emoji_button_whistle = Button(window, (365, 545), (50, 50), 'media/whistle.png')
+emoji_button_wink = Button(window, (425, 485), (50, 50), 'media/wink.png')
+emoji_button_wrath = Button(window, (425, 545), (50, 50), 'media/wrath.png')
 
 input_box = Chat()
 
@@ -286,6 +298,18 @@ while run:
         print('Tie')
 
     temporary_button.draw()
+    emoji_button_cool.draw()
+    emoji_button_dying_of_laughter.draw()
+    emoji_button_laugh.draw()
+    emoji_button_nerd.draw()
+    emoji_button_neutral.draw()
+    emoji_button_sad.draw()
+    emoji_button_smile.draw()
+    emoji_button_sneaky.draw()
+    emoji_button_surprise.draw()
+    emoji_button_whistle.draw()
+    emoji_button_wink.draw()
+    emoji_button_wrath.draw()
 
     clock.tick(FPS)  # Pause the game until the FPS time is reached
     pygame.display.update()  # Updates the display

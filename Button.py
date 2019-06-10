@@ -3,7 +3,7 @@ import pygame
 
 
 class Button:
-    def __init__(self, surface, pos, size, color=(0, 0, 0), img=''):
+    def __init__(self, surface, pos, size, img='', color=(0, 0, 0)):
         self.color = color
         self.pos = pos
         self.size = size
