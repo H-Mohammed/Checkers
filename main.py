@@ -202,35 +202,24 @@ while run:
         if (5 <= pygame.mouse.get_pos()[0] <= 55 and 545 <= pygame.mouse.get_pos()[1] <= 595 and iteration2 == 0) or output[3] == 2:
             if (pygame.mouse.get_pressed()[0] == 1) or output[3] == 2:
                 if len(undo) > 1:
-                    print(temparray)
-                    print(undo)
                     if temparray[-1] == 1:  # Yes or no value that specifies if piece got removed in enemy or local
-                        print("It goes here 2")
-                        print(undo[-1][0][-1].get_id())
                         for i in range(len(local.get_list())):
                             if local.get_list()[len(local.get_list())-i-1].get_id() < undo[-1][0][-1].get_id():
                                 local.get_list().insert(len(local.get_list())-i, undo[-1][0].pop(-1))
                                 break
 
                     if temparray[-1] == 2:
-                        print("It goes here 3")
-                        print(undo[-1][1][-1])
                         for i in range(len(enemy.get_list())):
                             if enemy.get_list()[len(enemy.get_list())-i-1].get_id() < undo[-1][1][-1].get_id():
                                 enemy.get_list().insert(len(enemy.get_list())-i, undo[-1][1].pop(-1))
                                 break
-                        print(enemy.get_list())
 
-                    #print("This undo: " + undo[-2][0][i].get_id())
-                    #print([x.get_id() for x in undo[-2][0]])
                     for i in range(len(local_pieces)):
                         local_pieces[i].set_pos(undo[-1][0][i])
-                    #print("Enemy Undo: " + str(undo))
-                    #print([x.get_id() for x in undo[-2][1]])
-                    print(len(undo[-2][1]))
-                    print(len(enemy.get_list()))
+
                     for i in range(len(enemy_pieces)):
                         enemy_pieces[i].set_pos(undo[-1][1][i])
+                    
                     undo.pop(len(undo) - 1)
                     temparray.pop(-1)
                     iteration2 += 1
