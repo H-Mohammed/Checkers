@@ -173,7 +173,7 @@ while run:
                 player_hit_undo = 1
     if output[3] in [1, 2]:
         if (5 <= pygame.mouse.get_pos()[0] <= 55 and 545 <= pygame.mouse.get_pos()[1] <= 595 and iteration2 == 0) or output[3] == 2:
-            if (pygame.mouse.get_pressed()[0]) or output[3] == 2:
+            if (pygame.mouse.get_pressed()[0] == 1) or output[3] == 2:
                 if len(undo) > 1:
                     print(undo)
                     if temparray[-2] == 1:  # Yes or no value that specifies if piece got removed in enemy or local
@@ -188,7 +188,7 @@ while run:
                         local.get_list()[i].set_pos(undo[-2][0][i])
                     for i in range(len(enemy.get_list())):
                         enemy.get_list()[i].set_pos(undo[-2][1][i])
-                    undo.pop(len(undo) - 2)
+                    undo.pop(len(undo) - 1)
                     temparray.pop(-2)
                     iteration2 += 1
                     player_hit_undo = 2
