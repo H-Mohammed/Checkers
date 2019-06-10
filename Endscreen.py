@@ -7,7 +7,10 @@ class Endscreen:
     def __init__(self, song, status):
         color = {
             "You Win": (0, 255, 0),
-            "You Suck": (255, 0, 0)
+            "You Lose": (255, 0, 0)
+        }
+        background = {
+            "You Win": 'media/'
         }
         self.screen_dim = (800, 600)
         self.display = pygame.display.set_mode(self.screen_dim)
