@@ -175,7 +175,6 @@ while run:
         if (5 <= pygame.mouse.get_pos()[0] <= 55 and 545 <= pygame.mouse.get_pos()[1] <= 595 and iteration2 == 0) or output[3] == 2:
             if (pygame.mouse.get_pressed()[0]) or output[3] == 2:
                 if len(undo) > 1:
-                    print(undo)
                     if temparray[-2] == 1:  # Yes or no value that specifies if piece got removed in enemy or local
                         for i in range(len(local.get_list())):
                             if local.get_list()[i].get_id() < undo[-2][0][-1].getid():
@@ -185,6 +184,7 @@ while run:
                             if enemy.get_list()[i].get_id() < undo[-2][1][-1].getid():
                                 enemy.get_list().insert(i, undo[-2][1].pop(-1))
                     for i in range(len(local.get_list())):
+                        print("This undo: " + str(undo))
                         local.get_list()[i].set_pos(undo[-2][0][i])
                     for i in range(len(enemy.get_list())):
                         enemy.get_list()[i].set_pos(undo[-2][1][i])
@@ -192,6 +192,8 @@ while run:
                     temparray.pop(-2)
                     iteration2 += 1
                     player_hit_undo = 2
+
+
     if turn == player_id:
         ui.get_item(4).set_text('YOUR TURN')
         ui.get_item(1).set_color((0, 255, 0))
