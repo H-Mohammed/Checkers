@@ -9,6 +9,7 @@ from Containers import *
 from Objects import *
 from Menu import *
 from Endscreen import *
+from Button import *
 
 pygame.init()  # Loads the pygame modules in the program
 
@@ -94,6 +95,19 @@ ui.add(Text('', window))  # Displays turn
 ui.add(Text('', window))  # Displays text in input box
 
 temporary_button = Background((0, 0, 0), (50, 50), (5, 545), window)
+emoji_background = Background((239, 229, 217), (480, 120), (0, 480), window)
+emoji_button = [Button(window, (125, 485), (50, 50), 1, 'media/cool.png'),
+         Button(window, (125, 545), (50, 50), 2, 'media/dying_of_laughter.png'),
+         Button(window, (185, 485), (50, 50), 3, 'media/laugh.png'),
+         Button(window, (185, 545), (50, 50), 4, 'media/nerd.png'),
+         Button(window, (245, 485), (50, 50), 5, 'media/neutral.png'),
+         Button(window, (245, 545), (50, 50), 6, 'media/sad.png'),
+         Button(window, (305, 485), (50, 50), 7, 'media/smile.png'),
+         Button(window, (305, 545), (50, 50), 8, 'media/sneaky.png'),
+         Button(window, (365, 485), (50, 50), 9, 'media/surprise.png'),
+         Button(window, (365, 545), (50, 50), 10, 'media/whistle.png'),
+         Button(window, (425, 485), (50, 50), 11, 'media/wink.png'),
+         Button(window, (425, 545), (50, 50), 12, 'media/wrath.png')]
 
 input_box = Chat()
 
@@ -109,6 +123,7 @@ iteration2 = 0
 temp_local_list = []
 temparray = [0]
 player_hit_undo = 0
+mouse_down = False
 for i in local.get_list():
     temp_local_list.append(i)
 temp_enemy_list = []
@@ -121,20 +136,22 @@ while run:
             run = False
         elif event.type == pygame.KEYDOWN:
             action = event
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_down = True
     # Network #
     if local.get_selection() == '':  # No selection
-        #print('Player ' + str(player_id) + ' sent: ' + str(
-            #['', '', chat_to_send]))
+        print('Player ' + str(player_id) + ' sent: ' + str(
+            ['', '', chat_to_send]))
         output = network.send_and_receive(['', '', chat_to_send, player_hit_undo])
     else:
-        #print('Player ' + str(player_id) + ' sent: ' + str(
-            #[local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()),
-             #chat_to_send]))
+        print('Player ' + str(player_id) + ' sent: ' + str(
+            [local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()),
+             chat_to_send]))
         output = network.send_and_receive([local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()), chat_to_send, player_hit_undo])
 
     chat_to_send = ''
 
-    #print('Player ' + str(player_id) + ' received: ' + str(output))
+    print('Player ' + str(player_id) + ' received: ' + str(output))
     if not output[0] == '':
         for item in enemy.get_list():
             if output[0] == item.get_id() and not output[1] == (420 - item.get_pos()[0], 420 - item.get_pos()[1]):
@@ -175,7 +192,6 @@ while run:
         if (5 <= pygame.mouse.get_pos()[0] <= 55 and 545 <= pygame.mouse.get_pos()[1] <= 595 and iteration2 == 0) or output[3] == 2:
             if (pygame.mouse.get_pressed()[0] == 1) or output[3] == 2:
                 if len(undo) > 1:
-                    print(undo)
                     if temparray[-2] == 1:  # Yes or no value that specifies if piece got removed in enemy or local
                         for i in range(len(local.get_list())):
                             if local.get_list()[i].get_id() < undo[-2][0][-1].getid():
@@ -185,6 +201,7 @@ while run:
                             if enemy.get_list()[i].get_id() < undo[-2][1][-1].getid():
                                 enemy.get_list().insert(i, undo[-2][1].pop(-1))
                     for i in range(len(local.get_list())):
+                        print("This undo: " + str(undo))
                         local.get_list()[i].set_pos(undo[-2][0][i])
                     for i in range(len(enemy.get_list())):
                         enemy.get_list()[i].set_pos(undo[-2][1][i])
@@ -192,6 +209,8 @@ while run:
                     temparray.pop(-2)
                     iteration2 += 1
                     player_hit_undo = 2
+
+
     if turn == player_id:
         ui.get_item(4).set_text('YOUR TURN')
         ui.get_item(1).set_color((0, 255, 0))
@@ -237,9 +256,50 @@ while run:
     else:
         chat_to_send = ''
 
+    if mouse_down:
+        for x in emoji_button:
+            if x.get_click():
+                chat_to_send = x.get_id()
+                chat_room.offset_all((0, -60))
+                image = {
+                    1: 'media/cool.png',
+                    2: 'media/dying_of_laughter.png',
+                    3: 'media/laugh.png',
+                    4: 'media/nerd.png',
+                    5: 'media/neutral.png',
+                    6: 'media/sad.png',
+                    7: 'media/smile.png',
+                    8: 'media/sneaky.png',
+                    9: 'media/surprise.png',
+                    10: 'media/whistle.png',
+                    11: 'media/wink.png',
+                    12: 'media/wrath.png'
+                }
+                chat_room.add(Emoji(image[x.get_id()], (0, 0, 0), (500, 470), window))
+    mouse_down = False
+
     if len(output[2]) > 0:
-        chat_room.offset_all((0, -20))
-        chat_room.add(Text(output[2][0], window, (500, 500), (0, 0, 0), 20))
+        print(type(output[2][0]).__name__)
+        if type(output[2][0]).__name__ == 'str':
+            chat_room.offset_all((0, -20))
+            chat_room.add(Text(output[2][0], window, (500, 500), (0, 0, 0), 20))
+        elif type(output[2][0]).__name__ == 'int':
+            image = {
+                1: 'media/cool.png',
+                2: 'media/dying_of_laughter.png',
+                3: 'media/laugh.png',
+                4: 'media/nerd.png',
+                5: 'media/neutral.png',
+                6: 'media/sad.png',
+                7: 'media/smile.png',
+                8: 'media/sneaky.png',
+                9: 'media/surprise.png',
+                10: 'media/whistle.png',
+                11: 'media/wink.png',
+                12: 'media/wrath.png'
+            }
+            chat_room.offset_all((0, -60))
+            chat_room.add(Emoji(image[output[2][0]], (0, 0, 0), (500, 470), window))
 
     for index, word in enumerate(chat_room.get_list()):
         if word.get_pos()[1] <= 80:
@@ -257,7 +317,7 @@ while run:
         output = network.send_and_receive(
             [local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()),
              chat_to_send])
-        endscreen = Endscreen('boo', "You Suck")
+        endscreen = Endscreen('boo', "You Lose")
         endscreen.run_endscreen()
     if len(enemy.get_list()) == 0:  # You win
         output = network.send_and_receive(
@@ -281,8 +341,12 @@ while run:
                 endscreen.run_endscreen()
                 break
         print('Tie')
+    emoji_background.draw()
 
     temporary_button.draw()
+
+    for x in emoji_button:
+        x.draw()
 
     clock.tick(FPS)  # Pause the game until the FPS time is reached
     pygame.display.update()  # Updates the display

@@ -1,7 +1,7 @@
 import pygame
 
 
-# This is used to create text objects #
+# This is used to create text and emoji objects #
 class Parent:
     def __init__(self, color, pos, window):
         self.color = color
@@ -17,6 +17,15 @@ class Parent:
         self.x = pos[0]
         self.y = pos[1]
         self.pos = pos
+
+
+class Emoji(Parent):
+    def __init__(self, img, color, pos, window):
+        super().__init__(color, pos, window)
+        self.img = pygame.image.load(img)
+
+    def draw(self):
+        self.window.blit(self.img, self.pos)
 
 
 # Method creates text objects #

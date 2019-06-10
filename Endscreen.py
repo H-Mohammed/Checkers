@@ -7,7 +7,11 @@ class Endscreen:
     def __init__(self, song, status):
         color = {
             "You Win": (0, 255, 0),
-            "You Suck": (255, 0, 0)
+            "You Lose": (255, 0, 0)
+        }
+        background = {
+            "You Win": 'media/applause_background.jpg',
+            "You Lose": 'media/boo_background.jpg'
         }
         self.screen_dim = (800, 600)
         self.display = pygame.display.set_mode(self.screen_dim)
@@ -18,6 +22,7 @@ class Endscreen:
         self.status.set_size(80)
         self.status.set_pos((400 - (self.status.get_size()[0])/2, 300 - (self.status.get_size()[1])/2))
         self.text_back = Background(color[status], (self.status.get_size()[0] + 30, self.status.get_size()[1] + 30), (400 - (self.status.get_size()[0] + 30)/2, 300 - (self.status.get_size()[1] + 30)/2), self.display)
+        self.background = pygame.image.load(background[status])
 
     def run_endscreen(self):
         pygame.init()
@@ -28,9 +33,9 @@ class Endscreen:
                 if event.type == pygame.QUIT:  # If the red X was clicked
                     run = False
 
-            self.display.fill((255, 255, 255))
 
             # Draw Sprites #
+            self.display.blit(self.background, (0, 0))
             self.text_back.draw()
             self.status.draw()
 

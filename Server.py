@@ -24,7 +24,7 @@ def threaded_client(conn, player):
             selection[player - 1][0] = new_data[0]
             selection[player - 1][1] = new_data[1]
             if not new_data[2] == '':
-                selection[player - 1][2].append(new_data[2])  # Queues text to be sent
+                selection[player - 1][2].append(new_data[2])  # Queues text/emoji to be sent
             # Send enemy info to client #
             selection[player - 1][3] = new_data[3]
             print('player ' + str((player % 2) + 1) + ' sent: ' + str(selection[player % 2]))
