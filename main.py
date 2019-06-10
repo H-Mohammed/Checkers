@@ -82,11 +82,12 @@ for y in range(3):
     for x in range(4):
         enemy.add(Checker(window, color[(player_id * 2) % 3], ((((y + 1) % 2) * 60) + x * 120, 60 * y), (y*4+x)+1))
 
-OBJECTS = []
+enemy_pieces = []
+local_pieces = []
 for i in range(len(enemy.get_list())):
-    OBJECTS.append(enemy.get_list()[i])
+    enemy_pieces.append(enemy.get_list()[i])
 for i in range(len(local.get_list())):
-    OBJECTS.append(local.get_list()[i])
+    local_pieces.append(local.get_list()[i])
 # User Interface #
     # Backgrounds #
 ui = Container()
@@ -165,10 +166,10 @@ while run:
                 move = item.pos_movement(enemy.get_list(), local.get_list(), (420 - output[1][0], 420 - output[1][1]), (1, 0, 0), 1)
                 if move[0] in [1, 2]:
                     item.draw()
-                    undo.append([[x.get_pos() for x in local.get_list()], [x.get_pos() for x in enemy.get_list()]])
+                    undo.append([[x.get_pos() for x in local_pieces], [x.get_pos() for x in enemy_pieces]])
                     temparray.append(0)
                     if move[0] == 2:
-                        undo[-1][1].append(move[1])
+                        undo[-1][0].append(move[1])
                         temparray[-1]=1
                     #print(move)
                     if item.check_capture_flipped(local.get_list(), enemy.get_list()) and move[0] == 2:
@@ -222,14 +223,14 @@ while run:
 
                     #print("This undo: " + undo[-2][0][i].get_id())
                     #print([x.get_id() for x in undo[-2][0]])
-                    for i in range(len(local.get_list())):
-                        local.get_list()[i].set_pos(undo[-1][0][i])
+                    for i in range(len(local_pieces)):
+                        local_pieces[i].set_pos(undo[-1][0][i])
                     #print("Enemy Undo: " + str(undo))
                     #print([x.get_id() for x in undo[-2][1]])
-                    print(len(undo[-1][1]))
+                    print(len(undo[-2][1]))
                     print(len(enemy.get_list()))
-                    for i in range(len(enemy.get_list())):
-                        enemy.get_list()[i].set_pos(undo[-1][1][i])
+                    for i in range(len(enemy_pieces)):
+                        enemy_pieces[i].set_pos(undo[-1][1][i])
                     undo.pop(len(undo) - 1)
                     temparray.pop(-1)
                     iteration2 += 1
@@ -246,7 +247,7 @@ while run:
                                         (ui.get_item(1).get_size()[1] - ui.get_item(4).get_size()[1]) / 2)))
         temp = local.check_mouse_pos(pygame.mouse.get_pos(), mousePressed, enemy, 0)
         if temp[0][0] == 1 or temp[0][0] == 2:
-            undo.append([[x.get_pos() for x in local.get_list()], [x.get_pos() for x in enemy.get_list()]])
+            undo.append([[x.get_pos() for x in local_pieces], [x.get_pos() for x in enemy_pieces]])
             temparray.append(0)
 
         if temp[0][0] == 2:
@@ -254,7 +255,7 @@ while run:
             temparray[-1] = 2
             while temp[1].checkCapture(enemy.get_list(), local.get_list()):
                 if temp[1].pos_movement(enemy.get_list(), local.get_list(), pygame.mouse.get_pos(), pygame.mouse.get_pressed(), 0) == 2:
-                    undo.append([[x.get_pos() for x in local.get_list()], [x.get_pos() for x in enemy.get_list()]])
+                    undo.append([[x.get_pos() for x in local_pieces], [x.get_pos() for x in enemy_pieces]])
                     undo[-1][1].append(temp[0][1])
                     temparray.append(2)
                 else:
