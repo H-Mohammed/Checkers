@@ -9,6 +9,7 @@ from Containers import *
 from Objects import *
 from Menu import *
 from Endscreen import *
+from Button import *
 
 pygame.init()  # Loads the pygame modules in the program
 
