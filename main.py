@@ -220,7 +220,7 @@ while run:
                     for i in range(len(enemy_pieces)):
                         enemy_pieces[i].set_pos(undo[-1][1][i])
                     
-                    undo.pop(len(undo) - 1)
+                    undo.pop(-1)
                     temparray.pop(-1)
                     iteration2 += 1
                     player_hit_undo += 1
