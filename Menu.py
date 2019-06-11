@@ -67,7 +67,6 @@ class Menu:
                 self.connection_failed_text.set_size(24)
                 self.connection_failed_text.set_pos((400 - (self.connection_failed_text.get_size()[0]/2), 270))
                 self.connection_failed_text.draw()
-
             self.clock.tick(28)
             pygame.display.update()
         pygame.quit()

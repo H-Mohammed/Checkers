@@ -40,3 +40,4 @@ class Endscreen:
             self.status.draw()
 
             pygame.display.update()
+        pygame.quit()
