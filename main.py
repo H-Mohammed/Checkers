@@ -336,13 +336,13 @@ while run:
     if len(local.get_list()) == 0:  # You lose
         output = network.send_and_receive(
             [local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()),
-             chat_to_send])
+             chat_to_send, 0])
         endscreen = Endscreen('boo', "You Lose")
         endscreen.run_endscreen()
     if len(enemy.get_list()) == 0:  # You win
         output = network.send_and_receive(
             [local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()),
-             chat_to_send])
+             chat_to_send, 0])
         endscreen = Endscreen('applause', "You Win")
         endscreen.run_endscreen()
 
