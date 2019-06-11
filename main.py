@@ -100,7 +100,6 @@ ui.add(Background((239, 229, 217), (300, 50), (490, 540), window))  # Input box
 ui.add(Text('', window))  # Displays turn
 ui.add(Text('', window))  # Displays text in input box
 
-temporary_button = Background((0, 0, 0), (50, 50), (5, 545), window)
 emoji_background = Background((239, 229, 217), (480, 120), (0, 480), window)
 emoji_button = [Button(window, (125, 485), (50, 50), 1, 'media/cool.png'),
          Button(window, (125, 545), (50, 50), 2, 'media/dying_of_laughter.png'),
@@ -198,6 +197,7 @@ while run:
             if turn == player_id:
                 player_hit_undo = 1
                 print("It goes here 314")
+    '''
     if output[3] in [1, 2]:
         if (5 <= pygame.mouse.get_pos()[0] <= 55 and 545 <= pygame.mouse.get_pos()[1] <= 595 and iteration2 == 0) or output[3] == 2:
             if (pygame.mouse.get_pressed()[0] == 1) or output[3] == 2:
@@ -230,6 +230,7 @@ while run:
 
     if pygame.mouse.get_pressed()[0] == 0:
         iteration2 = 0
+    '''
 
     if turn == player_id:
         ui.get_item(4).set_text('YOUR TURN')
@@ -362,8 +363,6 @@ while run:
                 break
         print('Tie')
     emoji_background.draw()
-
-    temporary_button.draw()
 
     for x in emoji_button:
         x.draw()

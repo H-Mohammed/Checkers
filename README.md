@@ -4,6 +4,10 @@ This game of checkers is based off of the English version, as such it will be us
 
 You can play the game against a computer or another player.
 
+# Setup
+1. Download the folder from the link below:
+https://www.dropbox.com/sh/yyc8zrolk0l021o/AACmInhzU_2H_eFlz3ADURGba?dl=0
+
 ### How to play:
  - You can only move diagonally one step forwards, never backwards (with the exception of the king).
  - You can only move onto black spaces.
