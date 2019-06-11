@@ -35,6 +35,7 @@ class Menu:
             # User Interface #
             if not action == '':
                 if self.input_box.edit_characters(action):
+                    self.music.stop()
                     return self.input_box.get_text()
                 action = ''
             self.input_text.set_text(self.input_box.get_text())

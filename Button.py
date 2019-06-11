@@ -31,3 +31,15 @@ class Button:
 
     def get_id(self):
         return self.id
+
+    def get_pos(self):
+        return self.pos
+
+    def get_size(self):
+        return self.size
+
+    def set_color(self, color):
+        self.color = color
+
+    def set_img(self, img):
+        self.sprite = pygame.image.load(img)

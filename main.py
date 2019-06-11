@@ -55,7 +55,6 @@ while not connected:
 
     except socket.error as e:
         connection_failed = True
-music.stop()
 
 
 # Build the Checker Board #
@@ -111,6 +110,11 @@ emoji_button = [Button(window, (125, 485), (50, 50), 1, 'media/cool.png'),
          Button(window, (425, 485), (50, 50), 11, 'media/wink.png'),
          Button(window, (425, 545), (50, 50), 12, 'media/wrath.png')]
 
+resign_button = Button(window, (5, 485), (110, 110), 666)
+resign_button.set_color((255, 0, 0))
+resign_text = Text('RESIGN', window)
+resign_text.set_pos((resign_button.get_pos()[0] + (resign_button.get_size()[0] - resign_text.get_size()[0])/2, resign_button.get_pos()[1] + (resign_button.get_size()[1] - resign_text.get_size()[1])/2))
+
 input_box = Chat()
 
 # --- Code Starts Here --- #
@@ -124,7 +128,7 @@ undo = []
 iteration2 = 0
 temp_local_list = []
 temparray = [0]
-player_hit_undo = 0
+player_resigned = False
 mouse_down = False
 for i in local.get_list():
     temp_local_list.append(i)
@@ -144,16 +148,19 @@ while run:
     if local.get_selection() == '':  # No selection
         #print('Player ' + str(player_id) + ' sent: ' + str(
             #['', '', chat_to_send]))
-        output = network.send_and_receive(['', '', chat_to_send, player_hit_undo])
+        output = network.send_and_receive(['', '', chat_to_send, player_resigned])
     else:
         #print('Player ' + str(player_id) + ' sent: ' + str(
             #[local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()),
              #chat_to_send]))
-        output = network.send_and_receive([local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()), chat_to_send, player_hit_undo])
+        output = network.send_and_receive([local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()), chat_to_send, player_resigned])
 
     chat_to_send = ''
-    if player_hit_undo >= 2:
-        player_hit_undo = output[3]
+
+    # Player Resigned #
+    if player_resigned is True:
+        endscreen = Endscreen("boo", "You Lose")
+        endscreen.run_endscreen()
 
     #print('Player ' + str(player_id) + ' received: ' + str(output))
     if not output[0] == '':
@@ -291,7 +298,15 @@ while run:
     ui.draw()
     chat_room.draw()
 
+    # Resign Button #
+    if resign_button.get_click():
+        player_resigned = True
+
     # Win/Lose Algorithm #
+    if output[3] is True:
+        endscreen = Endscreen('applause', "You Win")
+        endscreen.run_endscreen()
+
     if len(local.get_list()) == 0:  # You lose
         output = network.send_and_receive(
             [local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()),
@@ -319,11 +334,13 @@ while run:
                 endscreen = Endscreen('applause', "You Win")
                 endscreen.run_endscreen()
                 break
-        print('Tie')
     emoji_background.draw()
 
     for x in emoji_button:
         x.draw()
+
+    resign_button.draw()
+    resign_text.draw()
 
     clock.tick(FPS)  # Pause the game until the FPS time is reached
     pygame.display.update()  # Updates the display
