@@ -157,7 +157,7 @@ while run:
 
     chat_to_send = ''
     if player_hit_undo >= 2:
-        player_hit_undo = 0
+        player_hit_undo = output[3]
 
     #print('Player ' + str(player_id) + ' received: ' + str(output))
     if not output[0] == '':
@@ -197,7 +197,7 @@ while run:
         if pygame.mouse.get_pressed()[0]:
             if turn == player_id:
                 player_hit_undo = 1
-                #print("It goes here")
+                print("It goes here 314")
     if output[3] in [1, 2]:
         if (5 <= pygame.mouse.get_pos()[0] <= 55 and 545 <= pygame.mouse.get_pos()[1] <= 595 and iteration2 == 0) or output[3] == 2:
             if (pygame.mouse.get_pressed()[0] == 1) or output[3] == 2:
@@ -223,7 +223,10 @@ while run:
                     undo.pop(-1)
                     temparray.pop(-1)
                     iteration2 += 1
+                    player_hit_undo = output[3]
                     player_hit_undo += 1
+                    print("It goes here 666")
+                    print(player_hit_undo)
 
     if pygame.mouse.get_pressed()[0] == 0:
         iteration2 = 0

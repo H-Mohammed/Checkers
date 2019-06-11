@@ -26,6 +26,8 @@ def threaded_client(conn, player):
             if not new_data[2] == '':
                 selection[player - 1][2].append(new_data[2])  # Queues text/emoji to be sent
             # Send enemy info to client #
+            if new_data[3] == 2:
+                print("2 gets received")
             selection[player - 1][3] = new_data[3]
             print('player ' + str((player % 2) + 1) + ' sent: ' + str(selection[player % 2]))
             conn.sendall(pickle.dumps(selection[player % 2]))
