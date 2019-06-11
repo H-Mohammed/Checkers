@@ -170,7 +170,7 @@ while run:
                     temparray.append(0)
                     if move[0] == 2:
                         undo[-1][0].append(move[1])
-                        temparray[-1]=1
+                        temparray[-1] = 1
                     #print(move)
                     if item.check_capture_flipped(local.get_list(), enemy.get_list()) and move[0] == 2:
                         pass
@@ -197,7 +197,7 @@ while run:
         if pygame.mouse.get_pressed()[0]:
             if turn == player_id:
                 player_hit_undo = 1
-                print("It goes here")
+                #print("It goes here")
     if output[3] in [1, 2]:
         if (5 <= pygame.mouse.get_pos()[0] <= 55 and 545 <= pygame.mouse.get_pos()[1] <= 595 and iteration2 == 0) or output[3] == 2:
             if (pygame.mouse.get_pressed()[0] == 1) or output[3] == 2:
@@ -219,14 +219,14 @@ while run:
 
                     for i in range(len(enemy_pieces)):
                         enemy_pieces[i].set_pos(undo[-1][1][i])
-                    
+
                     undo.pop(-1)
                     temparray.pop(-1)
                     iteration2 += 1
                     player_hit_undo += 1
+
     if pygame.mouse.get_pressed()[0] == 0:
         iteration2 = 0
-
 
     if turn == player_id:
         ui.get_item(4).set_text('YOUR TURN')
