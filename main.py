@@ -100,7 +100,6 @@ ui.add(Background((239, 229, 217), (300, 50), (490, 540), window))  # Input box
 ui.add(Text('', window))  # Displays turn
 ui.add(Text('', window))  # Displays text in input box
 
-temporary_button = Background((0, 0, 0), (50, 50), (5, 545), window)
 emoji_background = Background((239, 229, 217), (480, 120), (0, 480), window)
 emoji_button = [Button(window, (125, 485), (50, 50), 1, 'media/cool.png'),
          Button(window, (125, 545), (50, 50), 2, 'media/dying_of_laughter.png'),
@@ -157,7 +156,7 @@ while run:
 
     chat_to_send = ''
     if player_hit_undo >= 2:
-        player_hit_undo = 0
+        player_hit_undo = output[3]
 
     #print('Player ' + str(player_id) + ' received: ' + str(output))
     if not output[0] == '':
@@ -170,7 +169,7 @@ while run:
                     temparray.append(0)
                     if move[0] == 2:
                         undo[-1][0].append(move[1])
-                        temparray[-1]=1
+                        temparray[-1] = 1
                     #print(move)
                     if item.check_capture_flipped(local.get_list(), enemy.get_list()) and move[0] == 2:
                         pass
@@ -197,7 +196,8 @@ while run:
         if pygame.mouse.get_pressed()[0]:
             if turn == player_id:
                 player_hit_undo = 1
-                print("It goes here")
+                print("It goes here 314")
+    '''
     if output[3] in [1, 2]:
         if (5 <= pygame.mouse.get_pos()[0] <= 55 and 545 <= pygame.mouse.get_pos()[1] <= 595 and iteration2 == 0) or output[3] == 2:
             if (pygame.mouse.get_pressed()[0] == 1) or output[3] == 2:
@@ -219,14 +219,18 @@ while run:
 
                     for i in range(len(enemy_pieces)):
                         enemy_pieces[i].set_pos(undo[-1][1][i])
-                    
+
                     undo.pop(-1)
                     temparray.pop(-1)
                     iteration2 += 1
+                    player_hit_undo = output[3]
                     player_hit_undo += 1
+                    print("It goes here 666")
+                    print(player_hit_undo)
+
     if pygame.mouse.get_pressed()[0] == 0:
         iteration2 = 0
-
+    '''
 
     if turn == player_id:
         ui.get_item(4).set_text('YOUR TURN')
@@ -333,13 +337,13 @@ while run:
     if len(local.get_list()) == 0:  # You lose
         output = network.send_and_receive(
             [local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()),
-             chat_to_send])
+             chat_to_send, 0])
         endscreen = Endscreen('boo', "You Lose")
         endscreen.run_endscreen()
     if len(enemy.get_list()) == 0:  # You win
         output = network.send_and_receive(
             [local.get_selection().get_id(), (local.get_selection().getx(), local.get_selection().gety()),
-             chat_to_send])
+             chat_to_send, 0])
         endscreen = Endscreen('applause', "You Win")
         endscreen.run_endscreen()
 
@@ -359,8 +363,6 @@ while run:
                 break
         print('Tie')
     emoji_background.draw()
-
-    temporary_button.draw()
 
     for x in emoji_button:
         x.draw()

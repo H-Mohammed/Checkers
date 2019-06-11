@@ -13,10 +13,12 @@ class Menu:
         self.input_box = Chat()
         self.input_text = Text('', self.display)
         self.connection_failed_text = Text('', self.display)
+        self.background = ''
 
     def run_menu(self, connection_failed):
         pygame.init()
         action = ''  # Stores the event
+        img = 1
         run = True
         while run:
             for event in pygame.event.get():  # Returns all inputs and triggers into an array
@@ -34,7 +36,18 @@ class Menu:
             self.input_text.set_size(28)
             self.input_text.set_pos((400 - (self.input_text.get_size()[0])/2, 160 + self.instruction.get_size()[1] + (55 - self.input_text.get_size()[1])/2))
 
-            self.display.fill((255, 255, 255))
+            if 1 <= img <= 9:
+                unicode = '0000' + str(img)
+            elif 10 <= img <= 99:
+                unicode = '000' + str(img)
+            elif 100 <= img <= 999:
+                unicode = '00' + str(img)
+            elif 1000 <= img <= 9999:
+                unicode = '0' + str(img)
+            self.display.blit(pygame.image.load('lobby_playback/scene' + unicode + '.png'), (0, 0))
+            img += 1
+            if img > 2552:
+                img = 1
 
             self.instruction.draw()
             self.input_box_back.draw()
