@@ -36,9 +36,6 @@ pygame.display.set_caption(TITLE)  # Updates the window title with TITLE
 window.fill(color[3])  # Fills the entire surface with the color
 clock = pygame.time.Clock()  # Starts a clock object to measure time
 
-music = Music()
-music.set_sound('lobby_music')
-music.play(-1)
 connected = False
 connection_failed = False
 
@@ -192,45 +189,6 @@ while run:
     local.draw()
     enemy.draw()
     enemy.draw()
-    if 5 <= pygame.mouse.get_pos()[0] <= 55 and 545 <= pygame.mouse.get_pos()[1] <= 595 and iteration2 == 0:
-        if pygame.mouse.get_pressed()[0]:
-            if turn == player_id:
-                player_hit_undo = 1
-                print("It goes here 314")
-    '''
-    if output[3] in [1, 2]:
-        if (5 <= pygame.mouse.get_pos()[0] <= 55 and 545 <= pygame.mouse.get_pos()[1] <= 595 and iteration2 == 0) or output[3] == 2:
-            if (pygame.mouse.get_pressed()[0] == 1) or output[3] == 2:
-                if len(undo) > 1:
-                    if temparray[-1] == 1:  # Yes or no value that specifies if piece got removed in enemy or local
-                        for i in range(len(local.get_list())):
-                            if local.get_list()[len(local.get_list())-i-1].get_id() < undo[-1][0][-1].get_id():
-                                local.get_list().insert(len(local.get_list())-i, undo[-1][0].pop(-1))
-                                break
-
-                    if temparray[-1] == 2:
-                        for i in range(len(enemy.get_list())):
-                            if enemy.get_list()[len(enemy.get_list())-i-1].get_id() < undo[-1][1][-1].get_id():
-                                enemy.get_list().insert(len(enemy.get_list())-i, undo[-1][1].pop(-1))
-                                break
-
-                    for i in range(len(local_pieces)):
-                        local_pieces[i].set_pos(undo[-1][0][i])
-
-                    for i in range(len(enemy_pieces)):
-                        enemy_pieces[i].set_pos(undo[-1][1][i])
-
-                    undo.pop(-1)
-                    temparray.pop(-1)
-                    iteration2 += 1
-                    player_hit_undo = output[3]
-                    player_hit_undo += 1
-                    print("It goes here 666")
-                    print(player_hit_undo)
-
-    if pygame.mouse.get_pressed()[0] == 0:
-        iteration2 = 0
-    '''
 
     if turn == player_id:
         ui.get_item(4).set_text('YOUR TURN')
