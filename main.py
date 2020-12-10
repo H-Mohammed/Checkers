@@ -1,6 +1,6 @@
 """
 Title: Pygame Template
-Author: John Yu
+Authors: Haamid Mohammed and John Yu
 Date: 2019-04-08
 """
 
